@@ -1,6 +1,36 @@
-
+@import url(https://fonts.googleapis.com/earlyaccess/opensanshebrew.css);
 /* LANDING - big image */
 
-.landing .box{
+/*body {   
+    font-family: 'Open Sans Hebrew';
+}*/
+
+
+.landing .box {
     text-align: right;
+}
+
+#send-to-calendar {
+    position: absolute;
+    top: 50%;
+    left: 55px;
+    margin-top: -18px;
+    font-size: 36px;
+}
+
+
+.icalendar_compact{
+    border: none;
+}
+
+.icalendar_compact li{
+    width: 25px;
+    height: 25px;
+    margin: 5px;
+}
+
+.icalendar_list span{
+    width: 25px;
+    height: 25px;
+    
 }

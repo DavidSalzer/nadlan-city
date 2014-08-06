@@ -37,6 +37,5 @@ $ef_options = EF_Event_Options::get_theme_options();
 
 <!-- backdrop -->
 <div id="backdrop"></div>
-
 </body>
 </html>

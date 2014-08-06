@@ -93,10 +93,13 @@ function tyler_enqueue_scripts() {
     wp_enqueue_style('tyler-bootstrap', get_template_directory_uri() . '/css/bootstrap.min.css');
     wp_enqueue_style('tyler-blueimp-gallery', get_template_directory_uri() . '/css/blueimp-gallery.min.css');
     wp_enqueue_style('tyler-jquery-scrollpane', get_template_directory_uri() . '/css/jquery.scrollpane.css');
+    wp_enqueue_style('jquery-icalendar', get_stylesheet_directory_uri() . '/css/jquery.icalendar.css');
     wp_enqueue_style('tyler-icons', get_template_directory_uri() . '/css/icon.css');
     wp_enqueue_style('tyler-layout', get_stylesheet_directory_uri() . '/css/layout.css');
     wp_enqueue_style('tyler-nadlan-city', get_stylesheet_directory_uri() . '/css/nadlan-city.css');
     wp_enqueue_style('tyler-layout-mobile', get_stylesheet_directory_uri() . '/css/layout-mobile.css');
+    wp_enqueue_style('tyler-nadlan-city-mobile', get_stylesheet_directory_uri() . '/css/nadlan-city-mobile.css');
+   
     
     // Color Schemes
     $color_scheme = empty( $ef_options['ef_color_palette'] ) ? 'basic' : $ef_options['ef_color_palette'];
@@ -120,7 +123,10 @@ function tyler_enqueue_scripts() {
     // home
     if ( is_home() || is_front_page() ) {
         wp_enqueue_script('tyler-home', get_template_directory_uri() . '/js/home.js', array('jquery'), false, true);
+        wp_enqueue_script('jquery-icalendar', get_template_directory_uri() . '/js/jquery.icalendar.js', array('jquery'), false, true);
+        wp_enqueue_script('nadlan-home', get_template_directory_uri() . '/js/nadlan-home.js', array('jquery'), false, true);        
         wp_enqueue_script('jquery-tweet-machine', get_template_directory_uri() . '/js/tweetMachine.min.js', array('jquery'), false, true);
+        
     }
 
     // single

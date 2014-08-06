@@ -188,3 +188,5 @@ jQuery(function() {
     });
     
 });
+
+var $ = jQuery;

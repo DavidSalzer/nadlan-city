@@ -24,9 +24,11 @@ $ef_options = EF_Event_Options::get_theme_options();
 			}
 		} ?>
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-6" id="event-calendar">
                 <div class="box">
-                    <i class="icon-calendar"></i>
+                    <!--<i class="icon-calendar"></i>-->
+                    <!--<div class="icon-calendar"></div>-->
+                    <div id="send-to-calendar"></div>
                     <div class="box-inner">
                         <div>
                             <span class="sub"><?php _e('WHEN', 'tyler') ?></span>
