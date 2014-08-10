@@ -10,6 +10,43 @@
     text-align: right;
 }
 
+.col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11{
+    float: right;
+}
+
+/* register form*/
+#nadlan-register-form label{
+color: #6d6d6d;
+}
+
+#nadlan-register-form button{
+    width: 100%;
+}
+select{
+     font-size: 18px;
+    background: #f1f1f1;
+    border: none;
+    box-sizing: border-box;
+    padding: 0.9em;
+    border-radius: 2px;
+    outline: none;
+    margin: 0 0 1em;
+    color: #6d6d6d;
+    /*min-width: 213px;*/
+}
+
+#nadlan-register-form input[type=text],select {
+width: 100%;
+}
+
+.qpp-style{
+    text-align: right;
+    display: none;
+}
+
+
+
+
 #send-to-calendar {
     position: absolute;
     top: 50%;

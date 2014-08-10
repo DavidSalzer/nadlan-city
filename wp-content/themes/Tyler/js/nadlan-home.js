@@ -79,6 +79,6 @@ jQuery(document).ready(function () {
     }
 
     date = date[0] + " " + month + " " + date[2];
-    $("#send-to-calendar").icalendar({ start: new Date("17 november 2014"),end: new Date("20 november 2014"), target: '_blank', title: 'עיר הנדל"ן של ישראל', location: 'אילת',compact:true,iconSize:25,sites: ['google','outlook'],icons:"wp-content/themes/Tyler/images/icalendar.png"});
+    $("#send-to-calendar").icalendar({ start: new Date("17 november 2014"),end: new Date("20 november 2014"), target: '_blank', title: 'עיר הנדל"ן של ישראל', location: 'אילת',compact:true,iconSize:25,sites: ['google','outlook'],icons:"wp-content/themes/Tyler/images/outlook_calendar.png"});
      
 });

@@ -203,7 +203,8 @@ function tyler_ajax_get_tweets() {
 
 add_action('wp_ajax_nopriv_get_schedule', array( 'EF_Session_Helper', 'fudge_ajax_get_schedule' ) );
 add_action('wp_ajax_get_schedule', array( 'EF_Session_Helper', 'fudge_ajax_get_schedule' ) );
-
+add_action( 'wp_ajax_payOnPaypal', 'payOnPaypal' );
+add_action( 'wp_ajax_nopriv_payOnPaypal', 'payOnPaypal' ); 
 
 // ******************* Misc ****************** //
 
@@ -678,4 +679,11 @@ function tyler_adjacent_post_link_plus( $args = '', $format = '%link &raquo;', $
 	echo apply_filters( "{$adjacent}_post_link_plus", $output, $r );
 
 	return true;
+}
+
+function payOnPaypal(){
+        $product=$_REQUEST['product'];
+$price=$_REQUEST['price'];
+ echo do_shortcode('[qpp form="register" id="'.$product.'" amount="'.$price.'"  labels="off"]');
+return;
 }

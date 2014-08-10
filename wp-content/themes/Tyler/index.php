@@ -23,6 +23,8 @@ $ef_options = EF_Event_Options::get_theme_options();
         	<?php 
 			}
 		} ?>
+        <!--contact button-->
+        <a href="<?php echo home_url( '/' ); ?>#tile_contact" class="btn btn-lg btn-secondary">צור קשר</a>        
         <div class="row">
             <div class="col-md-6" id="event-calendar">
                 <div class="box">
