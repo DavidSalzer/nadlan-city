@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Event Framework\n"
 "POT-Creation-Date: 2014-05-13 14:01+0200\n"
-"PO-Revision-Date: 2014-08-06 10:35+0200\n"
+"PO-Revision-Date: 2014-08-13 11:52+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -1275,7 +1275,7 @@ msgstr ""
 
 #: /var/www/html/tyler/event-framework/helpers/cpt/sessions.php:105
 msgid "More info"
-msgstr ""
+msgstr "פרטים נוספים"
 
 #: /var/www/html/tyler/event-framework/lib/taxonomy-meta.php:124
 #: /var/www/html/tyler/event-framework/lib/taxonomy-meta.php:465

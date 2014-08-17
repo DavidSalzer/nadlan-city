@@ -2,7 +2,9 @@
  * Small devices - Tablets (≥768px)
 */
 @media (max-width: 991px) {
-   
+   #send-to-calendar{
+    left: 36px;
+}
 }
 
 /*
@@ -12,6 +14,10 @@
     .landing .box {
         padding: 5px 25px 0 70px;
     }
+
+#send-to-calendar{
+    left: 22px;
+}
 }
 
    

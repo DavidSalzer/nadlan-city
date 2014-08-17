@@ -7,7 +7,7 @@ $(document).ready(function () {
     daysNum = 0;
     sum = $("#register-sum");
 
-    updatePrice();
+   // updatePrice();
 
     $("#nadlan-register-form").on("change", "#register-start-day,#register-end-day,#register-room-type", updatePrice);
 
@@ -16,6 +16,9 @@ $(document).ready(function () {
 });
 
 function checkIfCountIsValid() {
+    if (daysNum == null) {
+         return false;
+    }
     if (daysNum < 0) {
         alert("הכנסת בחירה לא אפשרית");
         return false;
@@ -24,25 +27,48 @@ function checkIfCountIsValid() {
 }
 
 function updatePrice() {
-    daysNum = endDay.val() - startDay.val();
+    if ((endDay.val() != "") && (startDay.val() != "")) {
+        daysNum = endDay.val() - startDay.val();
+    }else{
+    daysNum = null;
+    }
+
 
 
     if (checkIfCountIsValid()) {
-        if (roomType.val() == "0") {
-            sum.val(priceArr[roomType.val()] * daysNum);
+        roomTypeVal = roomType.val();
+        
+        if (roomTypeVal == "0") {
+            sum.val(priceArr[roomTypeVal] * daysNum);
         }
         else if (daysNum == 0) {
-            sum.val(priceArr[0] * roomType.val());
+            sum.val(priceArr[0] * roomTypeVal);
         }
         else {
-            sum.val(priceArr[roomType.val()][daysNum - 1]);
+            sum.val(priceArr[roomTypeVal][daysNum - 1]);
         }
 
-        var product = daysNum + "  ימים עבור " + roomType.val() + " אנשים";
+        var product = daysNum + "  ימים עבור " + roomTypeVal + " אנשים";
         var price = sum.val();
         $("#frmPayment .input:nth-child(1)").html(product);
         $("#frmPayment .input:nth-child(3)").html(price);
         $("#frmPayment input[name=amount]").val(price);
+
+        //show and hide details
+        if (roomTypeVal == "2") {
+            $("#details2").show();
+            $("#details3").hide();
+        }
+        else if (roomTypeVal == "3") {
+            $("#details2").show();
+            $("#details3").show();
+        }
+        else {// 0/1
+            $("#details2").hide();
+            $("#details3").hide();
+        }
+
+
         return;
 
     }

@@ -47,12 +47,16 @@
 
     </head>
     <body <?php body_class(); ?>>
+
+        
+
         <form id="nadlan-register-form" class="container">
             <div class="row">
                 <label> [במידה והנך בוחר בחדר זוגי/טריפל יהיה עלייך לשלם עבור כל החדר [ספירה לפי לילות] </label><br>
                 <div class="col-sm-3">
                     <label>תאריך כניסה</label><br>
                     <select id="register-start-day">
+                        <option value="">בחר תאריך</option>
                         <option value="17">17/11/2014</option>
                         <option value="18">18/11/2014</option>
                         <option value="19">19/11/2014</option>
@@ -62,6 +66,7 @@
                 <div class="col-sm-3">
                     <label>תאריך יציאה</label><br>
                     <select id="register-end-day">
+                        <option value="">בחר תאריך</option>
                         <option value="17">17/11/2014</option>
                         <option value="18">18/11/2014</option>
                         <option value="19">19/11/2014</option>
@@ -88,59 +93,131 @@
             <label>פרטי תשלום</label><br>
             <div class="row">
                 <div class="col-sm-5">
-                    <input type="text" value="" placeholder="שם העסק להפקת חשבונית">
+                    <input id="invoiceN1" type="text" value="" placeholder="שם העסק להפקת חשבונית">
                 </div>
                 <div class="col-sm-5">
-                    <input type="text" value="" placeholder=" מס עוסק מורשה / ח.פ">
+                    <input id="registrationNo" type="text" value="" placeholder=" מס עוסק מורשה / ח.פ">
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-5">
-                    <input type="text" value="" placeholder="כתובת למשלוח החשבונית">
+                    <input id="registrationAddress" type="text" value="" placeholder="כתובת למשלוח החשבונית">
                 </div>
                 <div class="col-sm-5">
-                    <input type="text" value="" placeholder="טלפון לבירורים בענייני התשלום והפקת החשבונית">
+                    <input id="registrationPhone" type="text" value="" placeholder="טלפון לבירורים בענייני התשלום והפקת החשבונית">
                 </div>
             </div>
 
 
             <label>פרטי המבקרים</label><br>
-            <div class="row">
-                <div class="col-sm-5">
-
-                    <input type="text" value="" placeholder="שם פרטי">
+            <div id="details1">
+                <label>מבקר ראשון:</label><br>
+                <div class="row">
+                    <div class="col-sm-5">
+                        <input id="Fname1" type="text" value="" placeholder="שם פרטי">
+                    </div>
+                    <div class="col-sm-5">
+                        <input id="Lname1" type="text" value="" placeholder="שם משפחה">
+                    </div>
                 </div>
-                <div class="col-sm-5">
-                    <input type="text" value="" placeholder="שם משפחה">
+                <div class="row">
+                    <div class="col-sm-5">
+                        <input id="title1" type="text" value="" placeholder='תואר: (עו" ד , רו"ח, ד"ר ...)'>
+                    </div>
+                    <div class="col-sm-5">
+                        <input id="id1" type="text" value="" placeholder=" ת.ז">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-5">
+                        <input id="companyName1" type="text" value="" placeholder="שם חברה / עסק מטעמו המשתתף מגיע">
+                    </div>
+                    <div class="col-sm-5">
+                        <input id="companyJob1" type="text" value="" placeholder="תפקיד">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-5">
+                        <input id="Phone_Mobile1" type="text" value="" placeholder="טל' נייד לקבלת עדכונים במהלך הוועידה:">
+                    </div>
+                    <div class="col-sm-5">
+                        <input id="Email1" type="text" value="" placeholder="אימייל">
+                    </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-sm-5">
-                    <input type="text" value="" placeholder='תואר: (עו" ד , רו"ח, ד"ר ...)'>
+            <div id="details2">
+                 <label>מבקר שני:</label><br>
+                <div class="row">
+                    <div class="col-sm-5">
+                        <input id="Fname2" type="text" value="" placeholder="שם פרטי">
+                    </div>
+                    <div class="col-sm-5">
+                        <input id="Lname2" type="text" value="" placeholder="שם משפחה">
+                    </div>
                 </div>
-                <div class="col-sm-5">
-                    <input type="text" value="" placeholder=" ת.ז">
+                <div class="row">
+                    <div class="col-sm-5">
+                        <input id="title2" type="text" value="" placeholder='תואר: (עו" ד , רו"ח, ד"ר ...)'>
+                    </div>
+                    <div class="col-sm-5">
+                        <input id="id2" type="text" value="" placeholder=" ת.ז">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-5">
+                        <input id="companyName2" type="text" value="" placeholder="שם חברה / עסק מטעמו המשתתף מגיע">
+                    </div>
+                    <div class="col-sm-5">
+                        <input id="companyJob2" type="text" value="" placeholder="תפקיד">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-5">
+                        <input id="Phone_Mobile2" type="text" value="" placeholder="טל' נייד לקבלת עדכונים במהלך הוועידה:">
+                    </div>
+                    <div class="col-sm-5">
+                        <input id="Email2" type="text" value="" placeholder="אימייל">
+                    </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-sm-5">
-                    <input type="text" value="" placeholder="שם חברה / עסק מטעמו המשתתף מגיע">
+            <div id="details3">
+                 <label>מבקר שלישי:</label><br>
+                <div class="row">
+                    <div class="col-sm-5">
+                        <input id="Fname3" type="text" value="" placeholder="שם פרטי">
+                    </div>
+                    <div class="col-sm-5">
+                        <input id="Lname3" type="text" value="" placeholder="שם משפחה">
+                    </div>
                 </div>
-                <div class="col-sm-5">
-                    <input type="text" value="" placeholder="תפקיד">
+                <div class="row">
+                    <div class="col-sm-5">
+                        <input id="title3" type="text" value="" placeholder='תואר: (עו" ד , רו"ח, ד"ר ...)'>
+                    </div>
+                    <div class="col-sm-5">
+                        <input id="id3" type="text" value="" placeholder=" ת.ז">
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-5">
-                    <input type="text" value="" placeholder="טל' נייד לקבלת עדכונים במהלך הוועידה:">
+                <div class="row">
+                    <div class="col-sm-5">
+                        <input id="companyName3" type="text" value="" placeholder="שם חברה / עסק מטעמו המשתתף מגיע">
+                    </div>
+                    <div class="col-sm-5">
+                        <input id="companyJob3" type="text" value="" placeholder="תפקיד">
+                    </div>
                 </div>
-                <div class="col-sm-5">
-                    <input type="text" value="" placeholder="אימייל">
+                <div class="row">
+                    <div class="col-sm-5">
+                        <input id="Phone_Mobile3" type="text" value="" placeholder="טל' נייד לקבלת עדכונים במהלך הוועידה:">
+                    </div>
+                    <div class="col-sm-5">
+                        <input id="Email3" type="text" value="" placeholder="אימייל">
+                    </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-6 col-md-8">
-                <button class="btn btn-secondary">הירשם</button>
+                <button id="siugnUp" class="btn btn-secondary">הירשם</button>
                     </div>
             </div>
 
@@ -150,7 +227,7 @@
    
 
         <?php
-             echo do_shortcode('[qpp form="register" id="כניסה לועידה" amount="0"  labels="off"]');
+             echo do_shortcode('[qpp form="register" id="ss" amount="0"  labels="off"]');
              wp_footer(); ?>
 
     </body>

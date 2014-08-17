@@ -73,40 +73,45 @@ function updateSchedule(timestamp, location, track){
             'data-location': location,
             'data-track': track
         },
-        success: function(data) {
-        	
-            if(data.sessions && data.sessions.length > 0){
+        success: function (data) {
+            //for filter by days
+            if(timestamp){
+                window.location.hash=timestamp
+            }
+            console.log(timestamp + " " + location + " " + track);
+           // alert(0);
+            if (data.sessions && data.sessions.length > 0) {
                 var cur_time = 0;
                 var cur_date = 0;
                 var html = '';
-                    
-                jQuery.each(data.sessions, function(index, session) {
+
+                jQuery.each(data.sessions, function (index, session) {
                     var concurrent = '';
                     var speakers = '';
                     var color = (session.color != '' ? ' style="color:' + session.color + '"' : '');
 
-                    if(cur_date != session.date){
+                    if (cur_date != session.date) {
                         html += '<div class="day-floating"><span>' + session.date + '</span></div>';
                         cur_date = session.date;
                     }
-                    
-                    if(cur_time != session.time){
+
+                    if (cur_time != session.time) {
                         cur_time = session.time
                     } else {
                         concurrent = ' concurrent';
                     }
-                    
-                    if(session.speakers)
-                        jQuery.each(session.speakers, function(index, speaker) {
+
+                    if (session.speakers)
+                        jQuery.each(session.speakers, function (index, speaker) {
                             var featured = speaker.featured ? ' featured' : '';
                             speakers += '<a href=" ' + speaker.url + '" class="speaker' + featured + '"> \
                                                         ' + speaker.post_image + ' \
                                                         <span class="name"><span class="text-fit">' + speaker.post_title + '</span></span> \
                                                     </a>';
                         });
-                        
+
                     html += '<div class="session' + concurrent + '"> \
-                                            <span class="time">' + session.time +' - '+ session.end_time + '</span> \
+                                            <span class="time">' + session.time + ' - ' + session.end_time + '</span> \
                                             <div class="session-inner"> \
                                                 <a href="' + session.url + '" class="title"' + color + '><span>' + session.post_title + '</span></a> \
                                                 <span class="location">' + session.location + '</span> \
@@ -121,29 +126,35 @@ function updateSchedule(timestamp, location, track){
                 });
                 jQuery('.schedule .sessions.list').html(html);
             }
-            
+
             var newStickies = new stickyTitles(jQuery(".day-floating"));
             newStickies.load();
 
             jQuery(window).on("resize", newStickies.load);
             jQuery(window).on("scroll", newStickies.scroll);
-            
+
         }
     });
 }
 
-jQuery(document).ready(function(){
+jQuery(document).ready(function () {
 
     var newStickies = new stickyTitles(jQuery(".day-floating"));
     newStickies.load();
 
     jQuery(window).on("resize", newStickies.load);
     jQuery(window).on("scroll", newStickies.scroll);
-    	
-    jQuery(document).on('click', '.schedule a[data-timestamp], .schedule a[data-location], .schedule a[data-track]', function(e){
+
+    jQuery(document).on('click', '.schedule a[data-timestamp], .schedule a[data-location], .schedule a[data-track]', function (e) {
         e.preventDefault();
         updateSchedule(jQuery(this).attr('data-timestamp'), jQuery(this).attr('data-location'), jQuery(this).attr('data-track'));
     });
-    
-    updateSchedule(null, null, null);    
+
+    //for filter by days
+    if (window.location.hash && window.location.hash != 0) {
+        updateSchedule(window.location.hash.slice(1), null, null);
+    }
+    else {
+        updateSchedule(null, null, null);
+    }
 });

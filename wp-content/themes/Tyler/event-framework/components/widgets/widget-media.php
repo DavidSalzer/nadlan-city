@@ -61,7 +61,8 @@ class Ef_Media_Grid_Widget extends WP_Widget {
 	                $media_types = get_terms('media-type');
 	                if (count($media_types) > 0) {
 	                    ?>
-	                    <a class="btn btn-check btn-primary active" data-id="0"><?php _e('ALL', 'dxef'); ?></a>
+	                    <!--<a class="btn btn-check btn-primary active" data-id="0"><?php _e('ALL', 'dxef'); ?></a>-->
+                        <a class="btn btn-check btn-primary active" data-id="0">הכל</a>
 	                    <?php
 	                    foreach ($media_types as $media_type) {
 	                        ?>

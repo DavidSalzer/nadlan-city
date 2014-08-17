@@ -19,7 +19,7 @@ $ef_options = EF_Event_Options::get_theme_options();
         if (is_active_widget(false, false, 'ef_registration') && is_array( $widget_ef_registration ) ) {
 			$reg_widget = reset( $widget_ef_registration );
 			if( $reg_widget['registrationshowcalltoaction'] == 1 ) { ?>
-            	<a href="<?php echo home_url( '/' ); ?>#tile_registration" class="btn btn-lg btn-secondary"><?php _e('REGISTER NOW', 'tyler') ?></a>
+            	<a href="<?php echo home_url( '/' ); ?>#tile_registration" class="btn btn-lg btn-secondary">הירשם און ליין</a>
         	<?php 
 			}
 		} ?>
