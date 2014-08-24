@@ -9,17 +9,24 @@ $ef_options = EF_Event_Options::get_theme_options();
 <div class="container widget">
     <div class="landing">
         <div class="bg"<?php if ( isset( $ef_options['ef_hero'] ) ) { ?> style="background-image: url('<?php echo $ef_options['ef_hero']; ?>')"<?php } ?>></div>
-        <h1><span class="text-fit" <?php if ( isset( $ef_options['ef_title_color']) ) echo 'style="color:' . $ef_options['ef_title_color'] . '"'; ?>><?php if ( isset( $ef_options['ef_herotitle'] ) ) { echo stripslashes( $ef_options['ef_herotitle'] ); } ?></span></h1>
-        <p class="lead text-fit" <?php if (!empty($ef_options['ef_subtitle_color'])) echo 'style="color:' . $ef_options['ef_subtitle_color'] . '"'; ?>>
-            <?php if ( isset( $ef_options['ef_herotagline'] ) ) { echo esc_attr( stripslashes( $ef_options['ef_herotagline'] ) ); } ?>
-        </p>
+        <h1 style="position: relative;">
+            <span class="first-title" <?php if ( isset( $ef_options['ef_title_color']) ) echo 'style="color:' . $ef_options['ef_title_color'] . '"'; ?>><?php if ( isset( $ef_options['ef_herotitle'] ) ) { echo stripslashes( $ef_options['ef_herotitle'] ); } ?>
+                
+            </span>    
+            <p class="lead text-fit second-title" <?php if (!empty($ef_options['ef_subtitle_color'])) echo 'style="color:' . $ef_options['ef_subtitle_color'] . '"'; ?>>
+                <?php if ( isset( $ef_options['ef_herotagline'] ) ) { echo esc_attr( stripslashes( $ef_options['ef_herotagline'] ) ); } ?>
+                </p>                
+                <span class="text-img"></span>        
+                <span class="palne-nadlan"></span>
+        </h1>        
+        
         <?php 
         $widget_ef_registration = get_option('widget_ef_registration');
         
         if (is_active_widget(false, false, 'ef_registration') && is_array( $widget_ef_registration ) ) {
 			$reg_widget = reset( $widget_ef_registration );
 			if( $reg_widget['registrationshowcalltoaction'] == 1 ) { ?>
-            	<a href="<?php echo home_url( '/' ); ?>#tile_registration" class="btn btn-lg btn-secondary">הירשם און ליין</a>
+            	<a href="<?php echo home_url( '/' ); ?>#tile_registration" class="btn btn-lg btn-secondary sign-up-btn">הירשם און ליין</a>
         	<?php 
 			}
 		} ?>

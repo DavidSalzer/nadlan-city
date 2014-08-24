@@ -15,7 +15,9 @@
     </div>
     <div class="container" style="height: 500px">
         
-                <iframe width="100%" height="100%" src="http://nadlancity.cambium-team.com/slideshow.pdf"></iframe>
+                <!--<iframe width="100%" height="100%" src="http://nadlancity.cambium-team.com/slideshow.pdf"></iframe>-->
+
+      <?php do_action('slideshow_deploy', '49'); ?>
            
         
     </div>

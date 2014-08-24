@@ -34,7 +34,7 @@
             <?php the_content(); ?>
             <hr/>
             <?php if (!empty($full_schedule_url)) { ?>
-                <a href="<?php echo $full_schedule_url; ?>" class="btn btn-primary btn-header pull-right hidden-xs"><?php _e('View full schedule', 'dxef'); ?></a>
+                <a href="<?php echo $full_schedule_url; ?>" class="to-schedule-btn btn btn-primary btn-header pull-right hidden-xs"><?php _e('View full schedule', 'dxef'); ?></a>
             <?php } ?>
             <h2><?php _e('Related Sessions', 'dxef'); ?></h2>
             <div class="sessions condensed">

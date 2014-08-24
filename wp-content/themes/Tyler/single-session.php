@@ -69,7 +69,7 @@ $ef_options = EF_Event_Options::get_theme_options();
 						?>
 						
                         <?php foreach ($tracks as $track) { ?>
-							<a href="#" data-track="<?php echo $track->term_id; ?>" class="single-session-link btn btn-primary" <?php if (!empty($track->color)) echo "style='background-color: $track->color;'"; ?>><?php echo $track->name; ?></a>
+							<a href="#" style="display: none;" data-track="<?php echo $track->term_id; ?>" class="single-session-link btn btn-primary" <?php if (!empty($track->color)) echo "style='background-color: $track->color;'"; ?>><?php echo $track->name; ?></a>
                         <?php } ?>
                     </div>
                 </div>

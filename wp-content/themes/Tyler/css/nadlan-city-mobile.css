@@ -1,9 +1,47 @@
+@media (min-width: 1200px) {
+    header {
+        position: relative;
+    }
+
+    header #logo {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        margin: 0;
+        margin-bottom: 12px;
+    }
+}
+
+@media (max-width: 1200px) {
+
+    .palne-nadlan {
+        margin: auto;
+        position: relative;
+        top: 0;
+        left: 0;
+        margin-top: 0;
+        display: inline-block;
+        width: 100px;
+        height: 100px;
+    }
+}
+
 /*
  * Small devices - Tablets (≥768px)
 */
 @media (max-width: 991px) {
-   #send-to-calendar{
-    left: 36px;
+    #send-to-calendar {
+        left: 36px;
+    }
+
+    .landing .lead {
+        font-weight: bold;
+        font-size: 27px !important;
+        letter-spacing: 5px;
+    }
+
+.sessions.single .session > span{
+    float: right;
 }
 }
 
@@ -15,16 +53,79 @@
         padding: 5px 25px 0 70px;
     }
 
-#send-to-calendar{
-    left: 22px;
-}
+    #send-to-calendar {
+        left: 22px;
+    }
+
+    .landing .btn-secondary {
+        min-width: 162px;
+        max-width: 162px;
+        padding: 17px 20px;
+    }
+
+    .landing h1 > span {
+        height: 50px;
+    }
+
+    .second-title {
+        font-size: 22px !important;
+        letter-spacing: 4px;
+    }
+
+    .landing .lead {
+        height: 50px;
+        font-size: 19px !important;
+        letter-spacing: 4px;
+    }
+
+    .palne-nadlan {
+        display: block !important;
+        width: 50px;
+    }
+
+    .landing .btn {
+        margin: 53px 0;
+    }
+
+    .text-img {
+        width: 270px;
+    }
+
+    #nadlan-description .speakers .speaker .speaker-inner .name {
+        font-size: 15px;
+    }
+
+    .first-title {
+        font-size: 37px;
+    }
+
+    .sessions.condensed .session .session-inner {
+        text-align: center;
+    }
 }
 
-   
+
 
 
 @media only screen and (max-width: 500px) {
+    .landing .btn {
+        margin: 10px 0;
+    }
 
-	
-	
+    .landing h1 > span {
+        height: 38px;
+    }
+
+    .first-title {
+        letter-spacing: 3px;
+        font-size: 22px;
+    }
+
+    .landing .lead {
+        letter-spacing: 0;
+    }
+
+    .text-img {
+        width: 200px;
+    }
 }
