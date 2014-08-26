@@ -37,6 +37,8 @@ error_reporting(E_ALL | E_STRICT);
                    $arrRooms = array();
                    $clientid  = $_GET['ClientID'];
                    $arrRooms = $_GET['Room'];
+                   print_r($arrRooms);
+                   exit;
                    $arrPayment = $_GET['Payment'];
                    //$arr[] = $_GET;
                    $result = $client->fnSetRegistration($token,$clientid, $arrRooms, $arrPayment); 

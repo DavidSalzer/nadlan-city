@@ -40,9 +40,9 @@
         letter-spacing: 5px;
     }
 
-.sessions.single .session > span{
-    float: right;
-}
+    .sessions.single .session > span {
+        float: right;
+    }
 }
 
 /*
@@ -127,5 +127,9 @@
 
     .text-img {
         width: 200px;
+    }
+
+    #nadlan-register-form .col-sm-6 {
+        width: 100%;
     }
 }
