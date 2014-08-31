@@ -12,11 +12,12 @@ footer {
     bottom: 0;
 }*/
 
-body.home footer{
+body.home footer {
     position: relative;
     width: auto;
     bottom: auto;
 }
+
 html, body {
     font-family: 'Open Sans Hebrew';
 }
@@ -333,21 +334,52 @@ select {
     width: 100%;
 }
 
-#register-paypment-area{
+#register-paypment-area {
     margin-top: 70px;
 }
 
-#nadlan-register-form .col-sm-6{
+#nadlan-register-form .col-sm-6 {
     width: 50%;
 }
 
-#nadlan-register-form .alert{
+#nadlan-register-form .alert {
     border: 1px solid rgb(221, 11, 11);
 }
 
-#nadlan-register-form .remark{
+#nadlan-register-form .remark {
     font-size: 14px;
-margin-right: 6px;
+    margin-right: 6px;
+}
+
+.upload-imag-icon {
+    background: url("../images/user.png") no-repeat;
+    width: 115px;
+    height: 115px;
+    margin: auto;
+    background-size: contain;
+    background-position: center;
+    position: relative;
+    cursor: pointer;
+}
+
+.upload-imag-icon input {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    z-index: 1;
+    cursor: pointer;
+}
+
+#discount-text {
+    font-weight: normal;
+    margin: auto;
+    width: 100%;
+    text-align: center;
+    font-size: 14px;
 }
 /********************session********************/
 
@@ -436,7 +468,7 @@ margin-right: 6px;
     font-size: 26px;
 }
 
-.carousel-indicators{
+.carousel-indicators {
     padding-right: 0;
     direction: ltr;
 }

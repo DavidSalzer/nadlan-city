@@ -1,11 +1,11 @@
 var priceArr, startDay, endDay, roomType, bedType, daysCount, sum;
 var dataObj = {
-    //client: [Fname, Lname, Phone_Mobile, Email, CitizenId],
+    //client: [Fname1, Lname1, Phone_Mobile1, Email1, title1,id1,companyName1,companyJob1,uploadImag1]
     //arrRooms:[HouseType,BedType,RoomType],
     //arrPayment:[nvoiceN1,RegistrationNo1,Charge1,Reference,PriceIncVat,Price],
     Participant: [
-    //    [Fname, Lname, Phone_Mobile, Email, CitizenId],
-    //    [Fname, Lname, Phone_Mobile, Email, CitizenId]
+    //    [Fname1, Lname1, Phone_Mobile1, Email1, title1,id1,companyName1,companyJob1,uploadImag1];
+    //    [Fname1, Lname1, Phone_Mobile1, Email1, title1,id1,companyName1,companyJob1,uploadImag1];
     ]
 };
 
@@ -21,15 +21,19 @@ $(document).ready(function () {
     daysNum = 0;
     sum = $("#register-sum");
 
-    // updatePrice();
+    //attach events
+    window.onhashchange = changeHash;
 
-    //$("#nadlan-register-form").on("change", "#register-start-day,#register-end-day,#register-room-type", updatePrice);
     $("#nadlan-register-form").on("change", "#register-room-type", updateRoom);
-    $("#siugnUp").on("click", payOnPaypal);
+    $(".upload-imag-icon").on("change", "input", uploaduserImage);
+
 
     $("#next-to-step-2").on("click", goToStep2);
     $("#next-to-step-3").on("click", goToStep3);
-    window.onhashchange = changeHash;
+
+    $("#siugnUp").on("click", saveUser);
+    $("#siugnUpWithPay").on("click", saveUser);
+
 
     init();
 
@@ -55,16 +59,23 @@ function changeHash() {
     $(window.location.hash).show();
 }
 
+function uploaduserImage() {
+    $this = $(this);
+    uploadImage($this, function (url) {
+        $this.parents(".upload-imag-icon").css("background-image", "url(" + url + ")");
+    });
+}
+
 function goToStep2() {
     //validate : if there are enter date and exit date
     if ((isValid(startDay)) && (isValid(endDay))) {
         daysNum = endDay.val() - startDay.val();
         if (checkIfDateIsValid()) {
+            updateRoom();
             registerNavigation("#step-2");
         }
     }
     return false;
-
 }
 
 function goToStep3() {
@@ -75,14 +86,15 @@ function goToStep3() {
     var Lname1 = isValid($("#Lname1"));
     var Phone_Mobile1 = isValid($("#Phone_Mobile1"));
     var Email1 = isValidEmail($("#Email1"));
-    //var title1 = isValid($("#title1"));
+    var title1 = isValid($("#title1"));
     var id1 = isValid($("#id1"));
-    //var companyName1 = isValid($("#companyName1"));
-    //var companyJob1 = isValid($("#companyJob1"));
+    var companyName1 = isValid($("#companyName1"));
+    var companyJob1 = isValid($("#companyJob1"));
+    var uploadImag1 = $("#upload-imag1").val();
 
     if (Fname1 && Lname1 && Phone_Mobile1 && Email1 && title1 && id1 && companyName1 && companyJob1) {
         //create bamby object
-        dataObj.client = [Fname1, Lname1, Phone_Mobile1, Email1, id1];
+        dataObj.client = [Fname1, Lname1, Phone_Mobile1, Email1, title1, id1, companyName1, companyJob1, uploadImag1];
     }
     else {
         valid = false;
@@ -94,14 +106,15 @@ function goToStep3() {
         var Lname2 = isValid($("#Lname2"));
         var Phone_Mobile2 = isValid($("#Phone_Mobile2"));
         var Email2 = isValidEmail($("#Email2"));
-       // var title2 = isValid($("#title2"));
+        var title2 = isValid($("#title2"));
         var id2 = isValid($("#id2"));
-        //var companyName2 = isValid($("#companyName2"));
-        //var companyJob2 = isValid($("#companyJob2"));
+        var companyName2 = isValid($("#companyName2"));
+        var companyJob2 = isValid($("#companyJob2"));
+        var uploadImag2 = $("#upload-imag1").val();
 
         if (Fname2 && Lname2 && Phone_Mobile2 && Email2 && title2 && id2 && companyName2 && companyJob2) {
             //create bamby object           
-            dataObj.Participant[0] = [Fname2, Lname2, Phone_Mobile2, Email2, id2];
+            dataObj.Participant[0] = [Fname2, Lname2, Phone_Mobile2, Email2, title2, id2, companyName2, companyJob2, uploadImag2];
         }
         else {
             valid = false;
@@ -113,14 +126,15 @@ function goToStep3() {
         var Lname3 = isValid($("#Lname3"));
         var Phone_Mobile3 = isValid($("#Phone_Mobile3"));
         var Email3 = isValidEmail($("#Email3"));
-        //var title3 = isValid($("#title3"));
+        var title3 = isValid($("#title3"));
         var id3 = isValid($("#id3"));
-        //var companyName3 = isValid($("#companyName3"));
-        //var companyJob3 = isValid($("#companyJob3"));
+        var companyName3 = isValid($("#companyName3"));
+        var companyJob3 = isValid($("#companyJob3"));
+        var uploadImag3 = $("#upload-imag1").val();
 
         if (Fname3 && Lname3 && Phone_Mobile3 && Email3 && title3 && id3 && companyName3 && companyJob3) {
             //create bamby object
-            dataObj.Participant[1] = [Fname3, Lname3, Phone_Mobile3, Email3, id3];
+            dataObj.Participant[1] = [Fname3, Lname3, Phone_Mobile3, Email3, title3, id3, companyName3, companyJob3, uploadImag3];
         }
         else {
             valid = false;
@@ -136,19 +150,14 @@ function goToStep3() {
 }
 
 function checkIfDateIsValid() {
-    if (daysNum == null) {
-        return false;
-    }
-    if (daysNum < 0) {
-        $("#register-start-day,#register-end-day").addClass("alert");
-        alert("הכנסת בחירה לא אפשרית");
-
-        return false;
-    }
-    else {
+    if ((daysNum != null) && (daysNum >= 0)) {
         $("#register-start-day,#register-end-day").removeClass("alert");
         return true;
     }
+
+    $("#register-start-day,#register-end-day").addClass("alert");
+    alert("הכנסת בחירה לא אפשרית");
+    return false;
 }
 
 //update how many participate 
@@ -162,10 +171,10 @@ function updateRoom() {
         //HouseType
         //if without night
         if (roomTypeVal == "0") {
-            dataObj.arrRooms[i][0] = "Z" + (startDay.val() + i);
+            dataObj.arrRooms[i][0] = "Z" + ( parseInt(startDay.val(),10) + i);
         }
         else {
-            dataObj.arrRooms[i][0] = "A" + (startDay.val() + i);
+            dataObj.arrRooms[i][0] = "A" + (parseInt(startDay.val(),10) + i);
         }
         //BedType
         dataObj.arrRooms[i][1] = bedTypeVal;
@@ -173,7 +182,7 @@ function updateRoom() {
         dataObj.arrRooms[i][2] = roomTypeVal;
     }
 
-   
+
     //show and hide details
     if (roomTypeVal == "2") {
         $("#details2").show();
@@ -198,8 +207,9 @@ function updatePrice() {
     if (checkIfDateIsValid()) {
         roomTypeVal = roomType.val();
 
+        //if without night
         if (roomTypeVal == "0") {
-            sum.val(priceArr[roomTypeVal] * (daysNum+1));
+            sum.val(priceArr[roomTypeVal] * (daysNum + 1));
         }
         else if (daysNum == 0) {
             sum.val(priceArr[0] * roomTypeVal);
@@ -207,12 +217,6 @@ function updatePrice() {
         else {
             sum.val(priceArr[roomTypeVal][daysNum - 1]);
         }
-
-        //var product = daysNum + "  ימים עבור " + roomTypeVal + " אנשים";
-        var price = sum.val();
-
-        $("#formPay [name='amount']").val(price);
-
 
         return;
 
@@ -224,25 +228,44 @@ function updatePrice() {
 }
 
 
-function payOnPaypal() {
+function saveUser() {
+    var toPay = false;
+    if ($(this).attr("id") == "siugnUpWithPay") {
+        toPay = true;
+    }
     if (sum.val() > 0) {
         //validate 
         var invoiceN1 = isValid($("#invoiceN1"));
         var registrationNo = isValid($("#registrationNo"));
-        var registrationAddress = isValid($("#registrationAddress"));
-        // var registrationPhone = isValid($("#registrationPhone"));
+        var registrationAddressCity = isValid($("#registrationAddressCity"));
+        var registrationAddressStreet = isValid($("#registrationAddressStreet"));
+        var registrationAddressZip = isValid($("#registrationAddressZip"));
+         var registrationPhone = isValid($("#registrationPhone"));
 
         //To do: add paypal and referance
-        dataObj.arrPayment = [invoiceN1, registrationNo, registrationAddress, "", "", sum.val()],
+         dataObj.arrPayment = [invoiceN1, registrationNo, "", sum.val() * 1.18, sum.val(), registrationPhone, registrationAddressCity, registrationAddressStreet, registrationAddressZip],
 
-        //if valid save post in db
+         //if valid save post in db
         $.post('wp-admin/admin-ajax.php', {
             data: encodeURI(JSON.stringify(dataObj)),
             action: 'addSystemUser'
         },
         function (data) {
+            if ((data) && (data != "")) {
+                console.log(data);
 
-            console.log(data);
+                alert("your contractID: " + data);
+                //if need to pay
+                if (toPay) {
+
+                }
+                else {
+
+                }
+                //$("#formPay [name='amount']").val(sum.val());
+                //$("#formPay [name='item_number']").val(data);
+                //$("#formPay").submit();
+            }
 
         });
     }

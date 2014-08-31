@@ -132,4 +132,8 @@
     #nadlan-register-form .col-sm-6 {
         width: 100%;
     }
+
+    #nadlan-description .speakers .speaker .speaker-inner .name {
+        font-size: 14px;
+    }
 }

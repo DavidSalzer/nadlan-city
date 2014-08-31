@@ -11,7 +11,7 @@
             <div>
                 <?php the_post_thumbnail(null, array('class' => 'img-rounded')); ?>
                 <?php the_content(); ?>
-                <?php comments_template('', true); ?>
+               
             </div>
         </div>
     </div>

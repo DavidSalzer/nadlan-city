@@ -176,7 +176,7 @@ function ef_wp_nav_menu_items( $items, $args ) {
 		$reg_widget = reset( $widget_ef_registration );
 		if( $reg_widget['registrationshowtopmenu'] == 1 ) {
 			 $items .= '<li class="menu-item"><a href="' . home_url( '/' ) . '#tile_contact">' . 'צור קשר</a></li>';//for contact in menu
-            $items .= '<li class="menu-item register"><a href="' . home_url( '/' ) . '#tile_registration">' . __('Register', 'dxef') . '</a></li>';            
+            $items .= '<li class="menu-item register"><a href="' . home_url( '/' ) . '?page_id=48">' . __('Register', 'dxef') . '</a></li>';            
 		}
 	}
 	

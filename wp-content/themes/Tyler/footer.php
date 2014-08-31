@@ -5,7 +5,7 @@ $ef_options = EF_Event_Options::get_theme_options();
 <footer>
     <div class="container">
         <div class="row row-sm">
-            <a id="cambium-logo" href="http://cambium.co.il/"></a>
+            <a id="cambium-logo" href="http://cambium.co.il/" target="_blank"></a>
             <?php dynamic_sidebar('footer'); ?>
         </div>
     </div>

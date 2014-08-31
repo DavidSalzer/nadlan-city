@@ -16,13 +16,13 @@ error_reporting(E_ALL | E_STRICT);
                                         array("trace" => 1, "exception" => 0, 'soap_version' => SOAP_1_1)
                                         );   
 
-               var_dump($client->__getFunctions());
+               //var_dump($client->__getFunctions());
                
                
               
                $token = $client->fnAuthenticate('4909','test1234');
               
-             
+            
             
                echo "<pre>";
                print_r($_GET['Participant']);
