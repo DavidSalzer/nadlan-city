@@ -12,7 +12,7 @@ var dataObj = {
 
 $(document).ready(function () {
     //without staying to night | single(1 night,2 nights,3 nights) | double (1 night,2 nights,3 nights)| triple (1 night,2 nights,3 nights)
-    priceArr = [[1000], [4000, 5500, 7500], [5600, 7200, 9000], [6000, 8400, 10500]];
+    priceArr = [[3540], [4720, 6490, 8850], [6608, 8496, 10620], [7080, 9912, 12390]];
     startDay = $("#register-start-day");
     endDay = $("#register-end-day");
     roomType = $("#register-room-type");
@@ -46,9 +46,29 @@ function init() {
     else {
         registerNavigation("#step-1");
     }
+    sortSelect(document.getElementById('registrationAddressCity'));
+
 }
 
-//navigation and validation
+function sortSelect(selElem) {
+    var tmpAry = new Array();
+    for (var i=0;i<selElem.options.length;i++) {
+        tmpAry[i] = new Array();
+        tmpAry[i][0] = selElem.options[i].text;
+        tmpAry[i][1] = selElem.options[i].value;
+    }
+    tmpAry.sort();
+    while (selElem.options.length > 0) {
+        selElem.options[0] = null;
+    }
+    for (var i=0;i<tmpAry.length;i++) {
+        var op = new Option(tmpAry[i][0], tmpAry[i][1]);
+        selElem.options[i] = op;
+    }
+    return;
+}
+
+//*************************navigation and validation************************
 function registerNavigation(step) {
     window.location.hash = step;
 
@@ -84,13 +104,18 @@ function goToStep3() {
     //client & first participant
     var Fname1 = isValid($("#Fname1"));
     var Lname1 = isValid($("#Lname1"));
-    var Phone_Mobile1 = isValid($("#Phone_Mobile1"));
+    var Phone_Mobile1 = isNumeric($("#Phone_Mobile1"));
     var Email1 = isValidEmail($("#Email1"));
     var title1 = isValid($("#title1"));
-    var id1 = isValid($("#id1"));
+    var id1 = isNumeric($("#id1"));
     var companyName1 = isValid($("#companyName1"));
     var companyJob1 = isValid($("#companyJob1"));
-    var uploadImag1 = $("#upload-imag1").val();
+    var uploadImag1 = $("#upload-imag1")[0].files[0];
+
+    if (uploadImag1) {
+        uploadImag1 = [uploadImag1.name, uploadImag1.size, uploadImag1.type]
+
+    }
 
     if (Fname1 && Lname1 && Phone_Mobile1 && Email1 && title1 && id1 && companyName1 && companyJob1) {
         //create bamby object
@@ -104,13 +129,13 @@ function goToStep3() {
     if (roomTypeVal >= "2") {
         var Fname2 = isValid($("#Fname2"));
         var Lname2 = isValid($("#Lname2"));
-        var Phone_Mobile2 = isValid($("#Phone_Mobile2"));
+        var Phone_Mobile2 = isNumeric($("#Phone_Mobile2"));
         var Email2 = isValidEmail($("#Email2"));
         var title2 = isValid($("#title2"));
-        var id2 = isValid($("#id2"));
+        var id2 = isNumeric($("#id2"));
         var companyName2 = isValid($("#companyName2"));
         var companyJob2 = isValid($("#companyJob2"));
-        var uploadImag2 = $("#upload-imag1").val();
+        var uploadImag2 = $("#upload-imag2")[0].files[0];
 
         if (Fname2 && Lname2 && Phone_Mobile2 && Email2 && title2 && id2 && companyName2 && companyJob2) {
             //create bamby object           
@@ -124,13 +149,13 @@ function goToStep3() {
     if (roomTypeVal >= "3") {
         var Fname3 = isValid($("#Fname3"));
         var Lname3 = isValid($("#Lname3"));
-        var Phone_Mobile3 = isValid($("#Phone_Mobile3"));
+        var Phone_Mobile3 = isNumeric($("#Phone_Mobile3"));
         var Email3 = isValidEmail($("#Email3"));
         var title3 = isValid($("#title3"));
-        var id3 = isValid($("#id3"));
+        var id3 = isNumeric($("#id3"));
         var companyName3 = isValid($("#companyName3"));
         var companyJob3 = isValid($("#companyJob3"));
-        var uploadImag3 = $("#upload-imag1").val();
+        var uploadImag3 = $("#upload-imag3")[0].files[0];
 
         if (Fname3 && Lname3 && Phone_Mobile3 && Email3 && title3 && id3 && companyName3 && companyJob3) {
             //create bamby object
@@ -152,6 +177,11 @@ function goToStep3() {
 function checkIfDateIsValid() {
     if ((daysNum != null) && (daysNum >= 0)) {
         $("#register-start-day,#register-end-day").removeClass("alert");
+        //if one day -> check user choose without night
+        if ((daysNum == 0) && (roomType.val() != 0)) {
+            roomType.addClass("alert");
+            return false;
+        }
         return true;
     }
 
@@ -160,6 +190,8 @@ function checkIfDateIsValid() {
     return false;
 }
 
+
+//*************************update details************************
 //update how many participate 
 function updateRoom() {
     dataObj.arrRooms = [];
@@ -171,10 +203,10 @@ function updateRoom() {
         //HouseType
         //if without night
         if (roomTypeVal == "0") {
-            dataObj.arrRooms[i][0] = "Z" + ( parseInt(startDay.val(),10) + i);
+            dataObj.arrRooms[i][0] = "Z" + (parseInt(startDay.val(), 10) + i);
         }
         else {
-            dataObj.arrRooms[i][0] = "A" + (parseInt(startDay.val(),10) + i);
+            dataObj.arrRooms[i][0] = "A" + (parseInt(startDay.val(), 10) + i);
         }
         //BedType
         dataObj.arrRooms[i][1] = bedTypeVal;
@@ -207,13 +239,13 @@ function updatePrice() {
     if (checkIfDateIsValid()) {
         roomTypeVal = roomType.val();
 
-        //if without night
+        //if without night -> no check how mach days
         if (roomTypeVal == "0") {
-            sum.val(priceArr[roomTypeVal] * (daysNum + 1));
+            sum.val(priceArr[roomTypeVal]);
         }
-        else if (daysNum == 0) {
-            sum.val(priceArr[0] * roomTypeVal);
-        }
+        //else if (daysNum == 0) {
+        //    sum.val(priceArr[0] * roomTypeVal);
+        //}
         else {
             sum.val(priceArr[roomTypeVal][daysNum - 1]);
         }
@@ -228,43 +260,66 @@ function updatePrice() {
 }
 
 
+//*************************save and pay************************
 function saveUser() {
-    var toPay = false;
+    // var toPay = false;
+    dataObj.toPAy = false;
     if ($(this).attr("id") == "siugnUpWithPay") {
-        toPay = true;
+        dataObj.toPAy = true;
+    }
+    else{
+        dataObj.toPAy = false;
     }
     if (sum.val() > 0) {
         //validate 
         var invoiceN1 = isValid($("#invoiceN1"));
-        var registrationNo = isValid($("#registrationNo"));
+        var registrationNo = isNumeric($("#registrationNo"));
         var registrationAddressCity = isValid($("#registrationAddressCity"));
         var registrationAddressStreet = isValid($("#registrationAddressStreet"));
-        var registrationAddressZip = isValid($("#registrationAddressZip"));
-         var registrationPhone = isValid($("#registrationPhone"));
+        var registrationAddressZip = isNumeric($("#registrationAddressZip"));
+        var registrationPhone = isNumeric($("#registrationPhone"));
 
         //To do: add paypal and referance
-         dataObj.arrPayment = [invoiceN1, registrationNo, "", sum.val() * 1.18, sum.val(), registrationPhone, registrationAddressCity, registrationAddressStreet, registrationAddressZip],
+        dataObj.arrPayment = [invoiceN1, registrationNo, "", sum.val(), sum.val() / 1.18, registrationPhone, registrationAddressCity, registrationAddressStreet, registrationAddressZip],
 
-         //if valid save post in db
+        //if valid save post in db
         $.post('wp-admin/admin-ajax.php', {
             data: encodeURI(JSON.stringify(dataObj)),
             action: 'addSystemUser'
         },
         function (data) {
             if ((data) && (data != "")) {
-                console.log(data);
-
-                alert("your contractID: " + data);
-                //if need to pay
-                if (toPay) {
+                if (data.indexOf("client") > -1) {
+                    goToStep2();
+                    alert(" בדוק האם הזנת את כל הנתונים שלך כראוי ונסה שנית");
+                }
+                else if (data.indexOf("contract") > -1) {
+                    goToStep2();
+                    alert("בדוק האם הזנת את כל נתוני המבקרים הנוספים ופרטי התשלום כראוי ונסה שנית");
 
                 }
                 else {
+                    if (dataObj.toPAy) {
+                        $.post('wp-admin/admin-ajax.php', {
+                            price: sum.val() * 1.18,
+                            contractId: data,
+                            action: 'payInPelecard'
+                        },
+                        function (data) {
+                            if ((data) && (data != "")) {
+                                $("body").append(data);
+                                $("#pelecard_payment_form").hide();
+                                $("#submit_pelecard_payment_form").click();
+                            }
 
+                        });
+                        alert("מספר החוזה שלך הוא: " + data);
+                    }
+                    else {
+                        window.location = domain + "?page_id=639";
+                    }
                 }
-                //$("#formPay [name='amount']").val(sum.val());
-                //$("#formPay [name='item_number']").val(data);
-                //$("#formPay").submit();
+                console.log(data);
             }
 
         });
@@ -275,7 +330,8 @@ function saveUser() {
     return false;
 }
 
-//validate input
+
+//*************************validate input************************
 function isValid(input) {
     if (input.val() != "") {
         if (input.attr("placeholder") != input.val()) {
@@ -312,5 +368,17 @@ function isValidEmail(input) {
     return null;
 }
 
+function isNumeric(input) {
+    var obj = input.val();
+    if (obj != "") {
+        var result = !jQuery.isArray(obj) && (obj - parseFloat(obj) + 1) >= 0;
+        if (result) {
+            input.removeClass("alert");
+            return obj;
+        }
+    }
+    input.addClass("alert");
+    return null;
+}
 
 

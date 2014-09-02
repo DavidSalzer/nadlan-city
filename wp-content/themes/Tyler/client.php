@@ -19,19 +19,29 @@ error_reporting(E_ALL | E_STRICT);
                //var_dump($client->__getFunctions());
                
                
-              
+              try {
                $token = $client->fnAuthenticate('4909','test1234');
               
-            
-            
+            echo $token;
+              }
+               catch(Exception $e) {
+                    echo 'Message: ' .$e->getMessage();
+                }
                echo "<pre>";
-               print_r($_GET['Participant']);
+              // print_r($_GET['Participant']);
                echo "</pre>";
                
                
   
                if($_GET['form'] == "client"){
-                  $result = $client->fnSetClient($token, $_GET);
+                   try {
+              $result = $client->fnSetClient($token, $_GET);
+            echo $token;
+              }
+               catch(Exception $e) {
+                    echo 'Message: ' .$e->getMessage();
+                }
+                  //$result = $client->fnSetClient($token, $_GET);
                   $strResult = "CLientID";
                }elseif($_GET['form'] == "room"){
                    $arrRooms = array();

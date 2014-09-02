@@ -302,7 +302,7 @@ form.contact-us {
     margin-top: 25px;
 }
 
-select {
+select, input[type=number] {
     font-size: 18px;
     background: #f1f1f1;
     border: none;
@@ -315,7 +315,8 @@ select {
     /*min-width: 213px;*/
 }
 
-#nadlan-register-form input[type=text], select {
+
+#nadlan-register-form input[type=text], select,input[type=number] {
     width: 100%;
 }
 
@@ -471,6 +472,10 @@ select {
 .carousel-indicators {
     padding-right: 0;
     direction: ltr;
+}
+
+.mediabox a.post .desc strong{
+    color: #fff;
 }
 /********************speakers********************/
 .speakers .featured .photo img, .speakers .photo img {
