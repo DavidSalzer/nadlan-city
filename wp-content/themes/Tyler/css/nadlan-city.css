@@ -297,6 +297,10 @@ form.contact-us {
     color: #6d6d6d;
 }
 
+#nadlan-register-form a {
+    font-weight: bold;
+}
+
 #nadlan-register-form button {
     width: 100%;
     margin-top: 25px;
@@ -316,7 +320,7 @@ select, input[type=number] {
 }
 
 
-#nadlan-register-form input[type=text], select,input[type=number] {
+#nadlan-register-form input[type=text], select, input[type=number] {
     width: 100%;
 }
 
@@ -325,11 +329,14 @@ select, input[type=number] {
     display: none;
 }
 
-#details2, #details3 {
+#details2, #details3, #payment2, #payment3 {
     display: none;
     margin-top: 25px;
 }
 
+#amount1 {
+    display: none;
+}
 
 #nadlan-register-form .col-sm-11 {
     width: 100%;
@@ -346,6 +353,12 @@ select, input[type=number] {
 #nadlan-register-form .alert {
     border: 1px solid rgb(221, 11, 11);
 }
+
+.check-alert {
+    outline: 1px solid rgb(221, 11, 11);
+}
+
+
 
 #nadlan-register-form .remark {
     font-size: 14px;
@@ -474,7 +487,7 @@ select, input[type=number] {
     direction: ltr;
 }
 
-.mediabox a.post .desc strong{
+.mediabox a.post .desc strong {
     color: #fff;
 }
 /********************speakers********************/
@@ -500,4 +513,9 @@ select, input[type=number] {
 /********************single speaker********************/
 .to-schedule-btn {
     float: left !important;
+}
+
+/********************slideshow********************/
+.slideshow_container{
+    margin: auto !important;
 }

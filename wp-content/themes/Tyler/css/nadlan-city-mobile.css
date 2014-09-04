@@ -102,6 +102,15 @@
     .sessions.condensed .session .session-inner {
         text-align: center;
     }
+
+    select, input[type=number], input[type=text], textarea {
+        font-size: 14px;
+    }
+
+    #nadlan-register-form button {        
+        padding-right: 5px;
+        padding-left: 5px;
+    }
 }
 
 

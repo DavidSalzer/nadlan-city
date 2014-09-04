@@ -17,6 +17,10 @@ $(document).ready(function () {
     endDay = $("#register-end-day");
     roomType = $("#register-room-type");
     bedType = $("#register-bed-type");
+    paymentType = $("#split-payment");
+    uploadImag1 = "";
+    uploadImag2 = "";
+    uploadImag3 = "";
 
     daysNum = 0;
     sum = $("#register-sum");
@@ -25,6 +29,8 @@ $(document).ready(function () {
     window.onhashchange = changeHash;
 
     $("#nadlan-register-form").on("change", "#register-room-type", updateRoom);
+    $("#nadlan-register-form").on("change", "#split-payment", updatepaymentDetails);
+
     $(".upload-imag-icon").on("change", "input", uploaduserImage);
 
 
@@ -46,13 +52,15 @@ function init() {
     else {
         registerNavigation("#step-1");
     }
-    sortSelect(document.getElementById('registrationAddressCity'));
+    sortSelect(document.getElementById('registrationAddressCity1'));
+    sortSelect(document.getElementById('registrationAddressCity2'));
+    sortSelect(document.getElementById('registrationAddressCity3'));
 
 }
 
 function sortSelect(selElem) {
     var tmpAry = new Array();
-    for (var i=0;i<selElem.options.length;i++) {
+    for (var i = 0; i < selElem.options.length; i++) {
         tmpAry[i] = new Array();
         tmpAry[i][0] = selElem.options[i].text;
         tmpAry[i][1] = selElem.options[i].value;
@@ -61,7 +69,7 @@ function sortSelect(selElem) {
     while (selElem.options.length > 0) {
         selElem.options[0] = null;
     }
-    for (var i=0;i<tmpAry.length;i++) {
+    for (var i = 0; i < tmpAry.length; i++) {
         var op = new Option(tmpAry[i][0], tmpAry[i][1]);
         selElem.options[i] = op;
     }
@@ -81,9 +89,32 @@ function changeHash() {
 
 function uploaduserImage() {
     $this = $(this);
-    uploadImage($this, function (url) {
-        $this.parents(".upload-imag-icon").css("background-image", "url(" + url + ")");
+    var i = $this.attr("id").slice(-1);
+    //uploadImage($this, function (url) {
+    //    $this.parents(".upload-imag-icon").css("background-image", "url(" + url + ")");
+    //});
+
+    $this.upload(domain + 'wp-content/themes/Tyler/uploadImage.php', function (url) {
+        //if this image was upload
+        if (url.indexOf("upload") > -1) {
+            if (i == "1") {
+                uploadImag1 = domain + 'wp-content/themes/Tyler/' + url;
+            }
+            if (i == "2") {
+                uploadImag2 = domain + 'wp-content/themes/Tyler/' + url;
+            }
+            if (i == "3") {
+                uploadImag3 = domain + 'wp-content/themes/Tyler/' + url;
+            }
+            console.log(url);
+
+            $this.parents(".upload-imag-icon").css("background-image", "url(" + domain + 'wp-content/themes/Tyler/' + url + ")");
+        }
     });
+}
+
+function goToStep1() {
+    registerNavigation("#step-1");
 }
 
 function goToStep2() {
@@ -110,12 +141,7 @@ function goToStep3() {
     var id1 = isNumeric($("#id1"));
     var companyName1 = isValid($("#companyName1"));
     var companyJob1 = isValid($("#companyJob1"));
-    var uploadImag1 = $("#upload-imag1")[0].files[0];
 
-    if (uploadImag1) {
-        uploadImag1 = [uploadImag1.name, uploadImag1.size, uploadImag1.type]
-
-    }
 
     if (Fname1 && Lname1 && Phone_Mobile1 && Email1 && title1 && id1 && companyName1 && companyJob1) {
         //create bamby object
@@ -135,7 +161,6 @@ function goToStep3() {
         var id2 = isNumeric($("#id2"));
         var companyName2 = isValid($("#companyName2"));
         var companyJob2 = isValid($("#companyJob2"));
-        var uploadImag2 = $("#upload-imag2")[0].files[0];
 
         if (Fname2 && Lname2 && Phone_Mobile2 && Email2 && title2 && id2 && companyName2 && companyJob2) {
             //create bamby object           
@@ -155,7 +180,6 @@ function goToStep3() {
         var id3 = isNumeric($("#id3"));
         var companyName3 = isValid($("#companyName3"));
         var companyJob3 = isValid($("#companyJob3"));
-        var uploadImag3 = $("#upload-imag3")[0].files[0];
 
         if (Fname3 && Lname3 && Phone_Mobile3 && Email3 && title3 && id3 && companyName3 && companyJob3) {
             //create bamby object
@@ -230,6 +254,30 @@ function updateRoom() {
     }
 }
 
+function updatepaymentDetails() {
+    var paymentTypeVal = paymentType.val();
+    $("#siugnUpWithPay").css("visibility", "hidden");
+    $("#discount-text").css("visibility", "hidden");
+    $("#amount1").show();
+    //show and hide details
+    if (paymentTypeVal == "2") {
+        $("#payment2").show();
+        $("#payment3").hide();
+    }
+    else if (paymentTypeVal == "3") {
+        $("#payment2").show();
+        $("#payment3").show();
+    }
+    else {// 1
+        $("#payment2").hide();
+        $("#payment3").hide();
+        $("#amount1").hide();
+        $("#siugnUpWithPay").css("visibility", "visible");
+        $("#discount-text").css("visibility", "visible");
+    }
+
+}
+
 function updatePrice() {
     if ((endDay.val() != "") && (startDay.val() != "")) {
         daysNum = endDay.val() - startDay.val();
@@ -267,7 +315,7 @@ function saveUser() {
     if ($(this).attr("id") == "siugnUpWithPay") {
         dataObj.toPAy = true;
     }
-    else{
+    else {
         dataObj.toPAy = false;
     }
     if (sum.val() > 0) {
@@ -280,31 +328,36 @@ function saveUser() {
         var registrationPhone = isNumeric($("#registrationPhone"));
 
         //To do: add paypal and referance
-        dataObj.arrPayment = [invoiceN1, registrationNo, "", sum.val(), sum.val() / 1.18, registrationPhone, registrationAddressCity, registrationAddressStreet, registrationAddressZip],
+        dataObj.arrPayment = [invoiceN1, registrationNo, "", sum.val(), sum.val() / 1.18, registrationPhone, registrationAddressCity, registrationAddressStreet, registrationAddressZip];
 
-        //if valid save post in db
-        $.post('wp-admin/admin-ajax.php', {
-            data: encodeURI(JSON.stringify(dataObj)),
-            action: 'addSystemUser'
-        },
-        function (data) {
-            if ((data) && (data != "")) {
-                if (data.indexOf("client") > -1) {
-                    goToStep2();
-                    alert(" בדוק האם הזנת את כל הנתונים שלך כראוי ונסה שנית");
-                }
-                else if (data.indexOf("contract") > -1) {
-                    goToStep2();
-                    alert("בדוק האם הזנת את כל נתוני המבקרים הנוספים ופרטי התשלום כראוי ונסה שנית");
+        var terms = $("#terms-of-use").is(":checked");
+        // var content=$("#content").is(":checked");
+        $(".check-alert").removeClass("check-alert");
 
-                }
-                else {
-                    if (dataObj.toPAy) {
-                        $.post('wp-admin/admin-ajax.php', {
-                            price: sum.val() * 1.18,
-                            contractId: data,
-                            action: 'payInPelecard'
-                        },
+        if (terms) {
+            //if valid save post in db
+            $.post('wp-admin/admin-ajax.php', {
+                data: encodeURI(JSON.stringify(dataObj)),
+                action: 'addSystemUser'
+            },
+            function (data) {
+                if ((data) && (data != "")) {
+                    if (data.indexOf("client") > -1) {
+                        goToStep2();
+                        alert(" בדוק האם הזנת את כל הנתונים שלך כראוי ונסה שנית");
+                    }
+                    else if (data.indexOf("contract") > -1) {
+                        goToStep2();
+                        alert("בדוק האם הזנת את כל נתוני המבקרים הנוספים ופרטי התשלום כראוי ונסה שנית");
+
+                    }
+                    else {
+                        if (dataObj.toPAy) {
+                            $.post('wp-admin/admin-ajax.php', {
+                                price: sum.val(),
+                                contractId: data,
+                                action: 'payInPelecard'
+                            },
                         function (data) {
                             if ((data) && (data != "")) {
                                 $("body").append(data);
@@ -313,19 +366,25 @@ function saveUser() {
                             }
 
                         });
-                        alert("מספר החוזה שלך הוא: " + data);
+                            alert("מספר החוזה שלך הוא: " + data);
+                        }
+                        else {
+                            window.location = domain + "?page_id=" + signupNum;
+                        }
                     }
-                    else {
-                        window.location = domain + "?page_id=639";
-                    }
+                    console.log(data);
                 }
-                console.log(data);
-            }
 
-        });
+            });
+        }
+        else {
+            $("#terms-of-use").addClass("check-alert");
+        }
     }
     else {
-        alert("לא הזנת נתונים")
+        //alert("לא הזנת נתונים")
+        goToStep1();
+
     }
     return false;
 }

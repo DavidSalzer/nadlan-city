@@ -17,8 +17,9 @@
         
                 <!--<iframe width="100%" height="100%" src="http://nadlancity.cambium-team.com/slideshow.pdf"></iframe>-->
 
-      <?php do_action('slideshow_deploy', '49'); ?>
-           
+      <?php //do_action('slideshow_deploy', '49'); 
+ ?>
+       <?php do_action('slideshow_deploy', '673'); ?>     
         
     </div>
 <?php endwhile; // end of the loop. ?>

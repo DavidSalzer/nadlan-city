@@ -92,7 +92,7 @@
         <input type="hidden" name="submitted" id="submitted" value="true" />
     </form>
 
-    <a href="<?php echo home_url( '/' ); ?>#tile_registration" class="btn btn-lg btn-secondary sign-up-btn">הירשם און ליין</a>
+    <a href="<?php echo home_url( '/' ); ?>?page_id=48" class="btn btn-lg btn-secondary sign-up-btn">הירשם און ליין</a>
 </div>
 <style type="text/css">
     @media only screen and (max-width: 40.063em) {

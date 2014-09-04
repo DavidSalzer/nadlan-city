@@ -2,15 +2,17 @@
         require_once("../../../wp-load.php");
         
         session_start();   
-        $_SESSION['contractID']="161357";
-        $_SESSION['contract_post_id']="614";
+        //$_SESSION['contractID']="161357";
+        //$_SESSION['contract_post_id']="614";
         $contractID = $_SESSION['contractID'] ;
         echo $contractID;
         if($contractID!=NULL){
+            $_SESSION['contractID']=NULL;//reset
             $contract_post_id = $_SESSION['contract_post_id'];
             echo $contract_post_id;
             if($contract_post_id!=NULL){
-               //if( ( $_POST['post_status'] == 'publish' ) && ( $_POST['original_post_status'] != 'publish' ) ){
+                $_SESSION['contract_post_id']=NULL;//reset
+               
                 //echo $contract_post_id;
                 $post = get_post($contract_post_id);
     
@@ -43,13 +45,14 @@
                     $token = $client->fnAuthenticate('4909','test1234');          
                       echo $token;    
                       echo $contractID;
-                         print_r($arrPayment); 
+                    print_r($arrPayment); 
                     $result = $client->fnUpdatePayment($token,$contractID,$arrPayment); 
-    echo $result;
+                    echo $result;
                     if($result=="success"){
                         echo $result;
                         mail(  $email, "התשלום עבד ","") ;  
-                        header("Location:". home_url( '/' )."?page_id=641");
+                        mail(  "treut@cambium.co.il", "התשלום עבד ",$contractID ) ;  
+                        header("Location:". home_url( '/' )."?page_id=".$signupWithPayment);
                         die();
                     }
     
@@ -57,8 +60,8 @@
                 catch(Exception $e) {
                     echo 'Message: clientid' .$e;
                     //mail( $email, "התשלום  לא עבד ","") ;  
-
-                   header("Location:". home_url( '/' )."?page_id=643");
+                    mail(  "treut@cambium.co.il", " התשלום   לא עבד העידכון בבמבי של התשלום לא עבד",$e) ;  
+                   header("Location:". home_url( '/' )."?page_id=".$signupPaymentError);
                         die();
                     echo 'client';
                     return;       
@@ -66,6 +69,6 @@
             }
         }
     
-        //mail( "treut@cambium.co.il", "התשלום עבד ","") ;    
+        mail( "treut@cambium.co.il", "התשלום לא עבד - אין מספר חוזה ","") ;    
     
 ?>
