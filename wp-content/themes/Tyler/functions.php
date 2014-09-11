@@ -748,7 +748,7 @@
                        "companyJob"=>$dataObj->client[7]
     
                    );
-    
+                    print_r($clientArray);
                    ////rooms details
                     $arrRooms=array();
                     for ($i = 0; $i <count($dataObj->arrRooms); $i++) {
@@ -759,22 +759,55 @@
                         );
                     }
     
-                    //print_r($arrRooms);
+                    print_r($arrRooms);
     
                     //paypment details
-                    $arrPayment=array(           
-                        "InvoiceN1"=>$dataObj->arrPayment[0],
-                        "RegistrationNo1"=>$dataObj->arrPayment[1],
-                        "Reference"=>$dataObj->arrPayment[2],
-                        "PriceIncVat"=>$dataObj->arrPayment[3],
-                        "Price"=>$dataObj->arrPayment[4],
-                        "InvoicePhone"=>$dataObj->arrPayment[5],
-                        "InvoiceCityID"=>$dataObj->arrPayment[6],
-                        "InvoiceStreet"=>$dataObj->arrPayment[7],
-                        "InvoiceZip"=>$dataObj->arrPayment[8]
-    
-                    );
-    
+                    $arrPayment=array();
+
+                    $arrPayment[0]=array(
+                        "InvoiceNo"=>$dataObj->arrPayment[0][0],
+                        "RegistrationNo"=>$dataObj->arrPayment[0][1],
+                        "Charge"=>$dataObj->arrPayment[0][2],
+                                    
+                        "InvoiceZip"=>$dataObj->arrPayment[0][3],
+                        "InvoiceCityID"=>$dataObj->arrPayment[0][4],
+                        "InvoiceStreet"=>$dataObj->arrPayment[0][5],
+
+                        "InvoicePhone"=>$dataObj->arrPayment[0][6],
+                        "InvoiceAddress"=>""
+                    );    
+                    for ($i = 1; $i < count($dataObj->arrPayment); $i++) {
+                           //if there is details
+                           if(count($dataObj->arrPayment[$i])>0){
+                               $arrPayment[$i]=array(
+                                    "InvoiceNo"=>$dataObj->arrPayment[$i][0],
+                                    "RegistrationNo"=>$dataObj->arrPayment[$i][1],
+                                    "Charge"=>$dataObj->arrPayment[$i][2],
+                                    
+                                    "InvoiceZip"=>"",
+                                    "InvoiceCityID"=>"",
+                                    "InvoiceStreet"=>"",
+
+                                    "InvoicePhone"=>"",
+                                    "InvoiceAddress"=>$dataObj->arrPayment[$i][3]
+                                );    
+                           }
+                           else{
+                               $arrPayment[$i]=array(
+                                   "InvoiceNo"=>"",
+                                    "RegistrationNo"=>"",
+                                    "Charge"=>"",
+                                    "InvoiceZip"=>"",
+                                    "InvoiceCityID"=>"",
+                                    "InvoiceStreet"=>"",
+                                    "InvoicePhone"=>"",
+                                    "InvoiceAddress"=>""
+                                );
+                           }                            
+                       }
+
+                    print_r($arrPayment);
+
                     //participants details
                      if(count($dataObj->Participant)>0){
     
@@ -792,66 +825,68 @@
                                "companyJob"=>$dataObj->Participant[$i][7]    
                            );    
                        }
+
+                       print_r($arrParticipants);
                    }                 
     
              
-                    $token = $client->fnAuthenticate('4909','test1234');
-                    try {
-                        //get client id
-                        $clientid = $client->fnSetClient($token,  $clientArray);    
-                    }               
-                    catch(Exception $e) {
-                        //echo 'Message: clientid' .$e;
-                        echo 'client';
-                    return;
-                    }
+                    //$token = $client->fnAuthenticate('4909','test1234');
+                    //try {
+                    //    //get client id
+                    //    $clientid = $client->fnSetClient($token,  $clientArray);    
+                    //}               
+                    //catch(Exception $e) {
+                    //    echo 'Message: clientid' .$e->getMessage();
+                    //    echo 'client';
+                    //return;
+                    //}
     
-                    try {
-                        //get contract id
-                        if(isset($arrParticipants)){
-                            //print_r($arrParticipants);
-                            $contractID = $client->fnSetRegistration($token,$clientid, $arrRooms, $arrPayment,$arrParticipants); 
-                        }
-                        else{
-                           // echo $token . "<br />";
-                           // echo $clientid;
-                           //print_r($arrRooms);
-                           //print_r($arrPayment);
-                            $contractID = $client->fnSetRegistration($token,$clientid, $arrRooms, $arrPayment);     
-                        }
+              //      //try {
+                    //    //get contract id
+                    //    if(isset($arrParticipants)){
+                    //        //print_r($arrParticipants);
+                    //        $contractID = $client->fnSetRegistration($token,$clientid, $arrRooms, $arrPayment,$arrParticipants); 
+                    //    }
+                    //    else{
+                    //       // echo $token . "<br />";
+                    //       // echo $clientid;
+                    //       //print_r($arrRooms);
+                    //       //print_r($arrPayment);
+                    //        $contractID = $client->fnSetRegistration($token,$clientid, $arrRooms, $arrPayment);     
+                    //    }
     
-                        //save contract post
-                        $contract_post = array(
-                            'post_title'	=>	$dataObj->client[3],
-                            'post_status'	=>	'publish',           // Choose: publish, preview, future, draft, etc.
-                            'post_type'	=>	'contract',  //'post',page' or use a custom post type if you want to
+              //      //    //save contract post
+                    //    $contract_post = array(
+                    //        'post_title'	=>	$dataObj->client[3],
+                    //        'post_status'	=>	'publish',           // Choose: publish, preview, future, draft, etc.
+                    //        'post_type'	=>	'contract',  //'post',page' or use a custom post type if you want to
     
-                        );
+              //      //    );
     
-                        ////SAVE THE POST
-                        $contract_post_id = wp_insert_post($contract_post);
-                                         
-                        update_post_meta($contract_post_id, 'wpcf-invoicen1', $dataObj->arrPayment[0]);
-                        update_post_meta($contract_post_id, 'wpcf-registrationno1',$dataObj->arrPayment[1]);          
-                        update_post_meta($contract_post_id, 'wpcf-priceincvat',$dataObj->arrPayment[3]);
-                        update_post_meta($contract_post_id, 'wpcf-price',$dataObj->arrPayment[4]);
-                        update_post_meta($contract_post_id, 'wpcf-contractid',$contractID);                         
+              //      //    ////SAVE THE POST
+                    //    $contract_post_id = wp_insert_post($contract_post);
+                    //                     
+                    //    update_post_meta($contract_post_id, 'wpcf-invoicen1', $dataObj->arrPayment[0]);
+                    //    update_post_meta($contract_post_id, 'wpcf-registrationno1',$dataObj->arrPayment[1]);          
+                    //    update_post_meta($contract_post_id, 'wpcf-priceincvat',$dataObj->arrPayment[3]);
+                    //    update_post_meta($contract_post_id, 'wpcf-price',$dataObj->arrPayment[4]);
+                    //    update_post_meta($contract_post_id, 'wpcf-contractid',$contractID);                         
     
-                        //save to pelecard
-                        $_SESSION['contract_post_id'] = $contract_post_id;
-                        $_SESSION['contractID'] = $contractID;
-                        $_SESSION['price'] = $dataObj->arrPayment[3];
+              //      //    //save to pelecard
+                    //    $_SESSION['contract_post_id'] = $contract_post_id;
+                    //    $_SESSION['contractID'] = $contractID;
+                    //    $_SESSION['price'] = $dataObj->arrPayment[3];
 
-                        echo $contractID;
-                    }
-                    catch(Exception $e) {
-                        print_r($arrRooms);
-                        print_r($arrPayment);
-                        print_r($arrParticipants);
-                        echo 'Message: contractID ' .$e;
-                        echo 'contract'.$contractID;
-                        return;
-                    }
+                    //    echo $contractID;
+                    //}
+                    //catch(Exception $e) {
+                    //    print_r($arrRooms);
+                    //    print_r($arrPayment);
+                    //    print_r($arrParticipants);
+                    //    echo 'Message: contractID ' .$e;
+                    //    echo 'contract'.$contractID;
+                    //    return;
+                    //}
     
     
     

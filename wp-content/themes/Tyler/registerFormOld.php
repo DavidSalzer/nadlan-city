@@ -337,12 +337,13 @@
         </div>
 
         <div class="register-step" id="step-3">
-            <label id="split-payment-label">האם לפצל את החשבונית?</label><br>
+            <label id="split-payment-label">פיצול החשבונית</label><br>
             <div class="row">
                 <div class="col-sm-11">
                     <select id="split-payment">
-                        <option value="0">לא</option>
-                        <option value="1">כן</option>                        
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option id="split-payment-3" value="3">3</option>
                     </select>
                 </div>
             </div>
@@ -2434,7 +2435,7 @@
             </div>
 
             <div id="payment2">
-                <input id="payment-checkbox-2" type="checkbox" value="payment"><label>תשלום מס' 2</label><label id="payment-name-2"></label><br>
+                <label>תשלום מס' 2</label></label><br>
                 <label>פרטי תשלום</label><br>
                 <div class="row">
                     <div class="col-sm-6">
@@ -2446,7 +2447,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-6">
-                        <input id="registrationAddress2" type="text" value="" placeholder="עיר רחוב ומספר">
+                        <input id="address2" type="text" value="" placeholder="עיר רחוב ומספר">
                     </div>
                     <div class="col-sm-6">
                         <input id="amount2" type="text" value="" placeholder="סכום לתשלום">
@@ -2456,7 +2457,7 @@
             </div>
 
             <div id="payment3">
-               <input id="payment-checkbox-3" type="checkbox" value="payment" > <label>תשלום מס' 3</label><label id="payment-name-3"></label><br>
+                <label>תשלום מס' 3</label></label><br>
                 <label>פרטי תשלום</label><br>
                 <div class="row">
                     <div class="col-sm-6">
@@ -2468,7 +2469,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-6">
-                        <input id="registrationAddress3" type="text" value="" placeholder="עיר רחוב ומספר">
+                        <input id="registrationAddressStreet2" type="text" value="" placeholder="עיר רחוב ומספר">
                     </div>
                     <div class="col-sm-6">
                         <input id="amount3" type="text" value="" placeholder="סכום לתשלום">
