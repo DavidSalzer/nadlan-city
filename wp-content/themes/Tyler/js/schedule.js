@@ -75,11 +75,15 @@ function updateSchedule(timestamp, location, track){
         },
         success: function (data) {
             //for filter by days
-            if(timestamp){
-                window.location.hash=timestamp
+            if (timestamp) {
+                window.location.hash = timestamp
+                jQuery("#nadlan-schedule-title").text(jQuery(".schedule a[data-timestamp="+timestamp+"]").text());
+            }
+            if (track) {
+                jQuery("#nadlan-schedule-title").text(jQuery(".schedule a[data-track="+track+"]").text());
             }
             console.log(timestamp + " " + location + " " + track);
-           // alert(0);
+            // alert(0);
             if (data.sessions && data.sessions.length > 0) {
                 var cur_time = 0;
                 var cur_date = 0;

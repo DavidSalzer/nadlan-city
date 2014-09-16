@@ -22,11 +22,14 @@ $session_locations = get_terms('session-location');
     <div class="container">
         <?php the_content(); ?>
         <p><br /></p>
+
+        <div id="nadlan-schedule-title"></div>
+
         <div class="schedule">
             <ul class="nav nav-tabs pull-right">
                 <?php if (!empty($session_tracks)) { ?>
                 <li>
-                    <a href="#"><?php _e('Filter by track', 'tyler'); ?></a>
+                    <a href="#">סנן לפי ועידה</a>
                     
                         <ul>
                             <li><a href="#" data-track="0"><?php _e('All', 'tyler'); ?></a></li>
@@ -59,7 +62,7 @@ $session_locations = get_terms('session-location');
                 </li>
                 <?php } ?>
                 <li class="active">
-                    <a href="#" data-timestamp="0"><?php _e('Filter by days', 'tyler'); ?></a>
+                    <a href="#"><?php _e('Filter by days', 'tyler'); ?></a>
                     <?php if (!empty($session_dates)) { ?>
                         <ul>
                             <li><a href="#" data-timestamp="0"><?php _e('All', 'tyler'); ?></a></li>

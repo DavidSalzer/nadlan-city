@@ -27,12 +27,17 @@ $(document).ready(function () {
     uploadImag3 = "";
     daysNum = 0;
 
+    isPayment1Change = 0;
+    isPayment2Change = 0;
+    isPayment3Change = 0;
+
     //attach events
     window.onhashchange = changeHash;
 
     $("#nadlan-register-form").on("change", "#register-room-type", updateRoom);
     $("#nadlan-register-form").on("change", "#split-payment", updatepaymentDetails);
 
+    $("#step-3").on("change", "#amount1,#amount2,#amount3,#payment-checkbox-1,#payment-checkbox-2,#payment-checkbox-3", updatePaymentSpread);
     $(".upload-imag-icon").on("change", "input", uploaduserImage);
 
 
@@ -56,9 +61,12 @@ function init() {
     }
     //sort select elements
     sortSelect(document.getElementById('registrationAddressCity1'));
-    //sortSelect(document.getElementById('registrationAddressCity2'));
-    //sortSelect(document.getElementById('registrationAddressCity3'));
+    $('#registrationAddressCity1  option[value="18"]').attr('selected', 'selected');
 
+    setTimeout(function () {
+        $(window).scrollTop(0);
+    }, 500);
+     
 }
 
 //sort selects element
@@ -80,6 +88,9 @@ function sortSelect(selElem) {
     return;
 }
 
+function getTotalSum(){
+    return sum.val().slice(0, -4);
+}
 //*************************navigation and validation************************
 function registerNavigation(step) {
     window.location.hash = step;
@@ -125,7 +136,7 @@ function goToStep3() {
     //check if client details is valid
     if (Fname1 && Lname1 && Phone_Mobile1 && Email1 && title1 && id1 && companyName1 && companyJob1) {
         //create bamby object
-        dataObj.client = [Fname1, Lname1, Phone_Mobile1, Email1, title1, id1, companyName1, companyJob1, uploadImag1];
+        dataObj.client = [Fname1, Lname1, Phone_Mobile1, Email1, parseInt(title1, 10), id1, companyName1, parseInt(companyJob1, 10), uploadImag1];
         $("#payment-name-1").html(" - " + Fname1 + " " + Lname1);
     }
     else {
@@ -146,7 +157,7 @@ function goToStep3() {
 
         if (Fname2 && Lname2 && Phone_Mobile2 && Email2 && title2 && id2 && companyName2 && companyJob2) {
             //create bamby object           
-            dataObj.Participant[0] = [Fname2, Lname2, Phone_Mobile2, Email2, title2, id2, companyName2, companyJob2, uploadImag2];
+            dataObj.Participant[0] = [Fname2, Lname2, Phone_Mobile2, Email2, parseInt(title2, 10), id2, companyName2, parseInt(companyJob2, 10), uploadImag2];
             $("#payment-name-2").html(" - " + Fname2 + " " + Lname2);
         }
         else {
@@ -166,7 +177,7 @@ function goToStep3() {
 
         if (Fname3 && Lname3 && Phone_Mobile3 && Email3 && title3 && id3 && companyName3 && companyJob3) {
             //create bamby object
-            dataObj.Participant[1] = [Fname3, Lname3, Phone_Mobile3, Email3, title3, id3, companyName3, companyJob3, uploadImag3];
+            dataObj.Participant[1] = [Fname3, Lname3, Phone_Mobile3, Email3, parseInt(title3, 10), id3, companyName3, parseInt(companyJob3, 10), uploadImag3];
             $("#payment-name-3").html(" - " + Fname3 + " " + Lname3);
         }
         else {
@@ -246,18 +257,29 @@ function updatepaymentDetails() {
     var paymentTypeVal = paymentType.val();
     $("#amount1").show();
     $("#payment-name-1").show();
+    $(".nadlan-tooltip").hide();
     //if to split
     if (paymentTypeVal == "1") {
         roomTypeVal = roomType.val();
         if (roomTypeVal == "2") {
             $("#payment2").show();
             $("#payment3").hide();
-            $("#amount1,#amount2").val(sum.val() / 2);
+            $("#amount1,#amount2").val(getTotalSum() / 2);
+            $(".nadlan-tooltip").hide();
+            $("#payment-checkbox-2").hide();
+            $("#payment-checkbox-1").hide();
+             $("#payment-checkbox-1").hide().prop('checked', true);
+            $("#payment-checkbox-2").hide().prop('checked', true);
+            $("#payment-checkbox-3").hide().prop('checked', false);
         }
         else if (roomTypeVal == "3") {
             $("#payment2").show();
             $("#payment3").show();
-            $("#amount1,#amount2,#amount3").val(sum.val() / 3);
+            $("#amount1,#amount2,#amount3").val(getTotalSum() / 3);
+            $(".nadlan-tooltip").show();
+            $("#payment-checkbox-1").show().prop('checked', true);
+            $("#payment-checkbox-2").show().prop('checked', true);
+            $("#payment-checkbox-3").show().prop('checked', true);
         }
     }
     else {//ont to split
@@ -265,6 +287,9 @@ function updatepaymentDetails() {
         $("#payment3").hide();
         $("#amount1").hide();
         $("#payment-name-1").hide();
+        $("#payment-checkbox-1").hide().prop('checked', false);
+        $("#payment-checkbox-2").hide().prop('checked', false);
+        $("#payment-checkbox-3").hide().prop('checked', false);
     }
 
 }
@@ -280,21 +305,135 @@ function updatePrice() {
 
         //if without night -> no check how mach days
         if (roomTypeVal == "0") {
-            sum.val(priceArr[roomTypeVal]);
+            sum.val(priceArr[roomTypeVal]+' ש"ח');
         }
         else {
-            sum.val(priceArr[roomTypeVal][daysNum - 1]);
+            sum.val(priceArr[roomTypeVal][daysNum - 1]+' ש"ח');
         }
 
         return;
     }
     else {
         goToStep1();
-        sum.val("0");
+        sum.val('0 ש"ח');
         return;
     }
 }
 
+function updatePaymentSpread(e) {
+    var isPayment1 = $("#payment-checkbox-1").is(":checked");
+    var isPayment2 = $("#payment-checkbox-2").is(":checked");
+    var isPayment3 = $("#payment-checkbox-3").is(":checked");
+
+    //if (e.target.id.indexOf("amount1") > -1) { isPayment1Change = 1; }
+    //if (e.target.id.indexOf("amount2") > -1) { isPayment2Change = 1; }
+    //if (e.target.id.indexOf("amount3") > -1) { isPayment3Change = 1; }
+
+    ////get dif
+    //var difference = parseInt(getTotalSum(), 10) - (parseInt(e.target.value, 10));
+    //if (e.target.id.indexOf("1") > -1) {
+    //    $("#amount2,#amount3").val(difference / 2);
+    //}
+    //if (e.target.id.indexOf("2") > -1) {
+    //    $("#amount1,#amount3").val(difference / 2);
+    //}
+    //if (e.target.id.indexOf("3") > -1) {
+    //    $("#amount1,#amount2").val(difference / 2);
+    //}
+
+
+    if (e.target.id.indexOf("checkbox") > -1) {
+        //if 3 are pay =1,2,3
+        if (isPayment1 && isPayment2 && isPayment3) {
+
+            $("#amount1,#amount2,#amount3").val(getTotalSum / 3);
+
+
+
+        }
+        //if 2 are pay =1 + 2 | 2 + 3 | 1 + 3
+        else if ((isPayment1 && isPayment2) || (isPayment2 && isPayment3) || (isPayment1 && isPayment3)) {
+            if (!isPayment1) {
+                $("#amount2,#amount3").val(getTotalSum() / 2);
+                $("#amount1").val(0);
+            }
+            else if (!isPayment2) {
+                $("#amount1,#amount3").val(getTotalSum() / 2);
+                $("#amount2").val(0);
+            }
+            else if (!isPayment3) {
+                $("#amount1,#amount2").val(getTotalSum() / 2);
+                $("#amount3").val(0);
+            }
+        }
+        //if 1 is pay = 1 | 2 | 3
+        else {
+            if (isPayment1) {
+                $("#amount1").val(getTotalSum());
+                $("#amount2").val(0);
+                $("#amount3").val(0);
+            }
+            else if (isPayment2) {
+                $("#amount2").val(getTotalSum());
+                $("#amount1").val(0);
+                $("#amount3").val(0);
+            }
+            else if (isPayment3) {
+                $("#amount3").val(getTotalSum());
+                $("#amount2").val(0);
+                $("#amount1").val(0);
+            }
+        }
+    }
+
+    //if amount is changed
+    //else if (e.target.id.indexOf("amount") > -1) {
+    //    var difference = parseInt(getTotalSum(), 10) - parseInt(e.target.value, 10);
+
+    //    //if 3 are pay =1,2,3
+    //    if (isPayment1 && isPayment2 && isPayment3) {
+    //        if (e.target.id.indexOf("1") > -1) {
+    //            $("#amount2,#amount3").val(difference / 2);
+    //        }
+    //        if (e.target.id.indexOf("2") > -1) {
+    //            $("#amount1,#amount3").val(difference / 2);
+    //        }
+    //        if (e.target.id.indexOf("3") > -1) {
+    //            $("#amount1,#amount2").val(difference / 2);
+    //        }
+
+    //    }
+    //    //if 2 are pay =1 + 2 | 2 + 3 | 1 + 3
+    //    else if ((isPayment1 && isPayment2) || (isPayment2 && isPayment3) || (isPayment1 && isPayment3)) {
+    //        if (!isPayment1) {
+    //            if (e.target.id.indexOf("2") > -1) {
+    //                $("#amount3").val(difference);
+    //            }
+    //            else {
+    //                $("#amount2").val(difference);
+    //            }
+    //        }
+    //        else if (!isPayment2) {
+    //            if (e.target.id.indexOf("1") > -1) {
+    //                $("#amount3").val(difference);
+    //            }
+    //            else {
+    //                $("#amount1").val(difference);
+    //            }
+    //        }
+    //        else if (!isPayment3) {
+    //            if (e.target.id.indexOf("1") > -1) {
+    //                $("#amount2").val(difference);
+    //            }
+    //            else {
+    //                $("#amount1").val(difference);
+    //            }
+    //        }
+
+
+    //    }
+    //}
+}
 
 //*************************save and pay************************
 function saveUser() {
@@ -306,96 +445,192 @@ function saveUser() {
     else {
         dataObj.toPAy = false;
     }
+
+    //if is shoham
+    if(location.search.indexOf("shoham")>-1){
+        dataObj.shoham = true;
+    }
+    else {
+        dataObj.shoham = false;
+    }
+
     //if the sum is not 0
-    if (sum.val() > 0) {
-        dataObj.arrPayment = [];
+    if (getTotalSum() > 0) {
+        dataObj.price = parseInt(getTotalSum(), 10);
+        var isPayment1 = $("#payment-checkbox-1").is(":checked");
+        var isPayment2 = $("#payment-checkbox-2").is(":checked");
+        var isPayment3 = $("#payment-checkbox-3").is(":checked");
         var paymentTypeVal = paymentType.val();
+        //if someone is pay
+        if (isPayment1 || isPayment2 || isPayment3 || (paymentTypeVal == "0")) {
 
-        //validate 
-        var invoiceN1 = isValid($("#invoiceN1"));
-        var registrationNo = isNumeric($("#registrationNo1"));
-        var registrationAddressCity = isValid($("#registrationAddressCity1"));
-        var registrationAddressStreet = isValid($("#registrationAddressStreet1"));
-        var registrationAddressZip = isNumeric($("#registrationAddressZip1"));
-        var registrationPhone = isNumeric($("#registrationPhone1"));
-        var charge1 = parseInt($("#amount1").val(), 10);
-        if (paymentTypeVal == "0") {
-            charge1 = sum.val();
-        }
-        //if is valid
-        if (invoiceN1 && registrationNo && registrationAddressCity && registrationAddressStreet && registrationAddressZip && registrationPhone) {
+            dataObj.arrPayment = [];
 
-            dataObj.arrPayment[0] = [invoiceN1, registrationNo, charge1, registrationAddressZip, registrationAddressCity, registrationAddressStreet, registrationPhone];
-        }
-
-
-
-
-        //if to split
-        if (paymentTypeVal == "1") {
-            var charge2 = 0, charge3 = 0;
-            var isPayment2 = $("#payment-checkbox-2").is(":checked");
-            var isPayment3 = $("#payment-checkbox-3").is(":checked");
-            if (isPayment2) {
-                charge2 = parseInt($("#amount2").val(), 10);
+            var valid = true;
+            //validate 
+            var charge1 = parseInt($("#amount1").val(), 10);
+            if (paymentTypeVal == "0") {
+                charge1 = getTotalSum();
             }
-            if (isPayment3) {
-                charge3 = parseInt($("#amount3").val(), 10);
+
+            if (isPayment1 || (paymentTypeVal == "0")) {
+                var invoiceN1 = isValid($("#invoiceN1"));
+                var registrationNo = isNumeric($("#registrationNo1"));
+                var registrationAddressCity = isValid($("#registrationAddressCity1"));
+                var registrationAddressStreet = isValid($("#registrationAddressStreet1"));
+                var registrationAddressZip = isNumeric($("#registrationAddressZip1"));
+                var registrationPhone = isNumeric($("#registrationPhone1"));
+
+                //if is valid
+                if (invoiceN1 && registrationNo && registrationAddressCity && registrationAddressStreet && registrationAddressZip && registrationPhone) {
+
+                    dataObj.arrPayment[0] = [invoiceN1, registrationNo, charge1, registrationAddressZip, registrationAddressCity, registrationAddressStreet, registrationPhone];
+                }
+                else {
+                    valid = false;
+                }
             }
-            //if the amount is the same sum            
-            if ((charge1 + charge2 + charge3) == sum.val()) {
+            else {
+                dataObj.arrPayment[0] = [];
+            }
+
+
+
+
+
+            //if to split
+            if (paymentTypeVal == "1") {
+                var charge2 = 0, charge3 = 0;
+
+
+
                 if (isPayment2) {
-                    var invoiceN2 = isValid($("#invoiceN2"));
-                    var registrationNo2 = isNumeric($("#registrationNo2"));
-                    var registrationAddress2 = isValid($("#registrationAddress2"));
-
-                    if (invoiceN2 && registrationNo2 && charge2 && registrationAddress2) {
-                        dataObj.arrPayment[1] = [invoiceN2, registrationNo2, charge2, registrationAddress2];
-                    }
+                    charge2 = parseInt($("#amount2").val(), 10);
                 }
-                else {
-                    dataObj.arrPayment[1] = [];
-                }
-
                 if (isPayment3) {
-                    var invoiceN3 = isValid($("#invoiceN3"));
-                    var registrationNo3 = isNumeric($("#registrationNo3"));
-                    var registrationAddress3 = isValid($("#registrationAddress3"));
-
-                    if (invoiceN3 && registrationNo3 && charge3 && registrationAddress3) {
-                        dataObj.arrPayment[2] = [invoiceN3, registrationNo3, charge3, registrationAddress3];
-                    }
+                    charge3 = parseInt($("#amount3").val(), 10);
                 }
-                else {
-                    dataObj.arrPayment[2] = [];
-                }
+                //if the amount is the same sum            
+                if ((charge1 + charge2 + charge3) == getTotalSum()) {
+                    if (isPayment2) {
+                        var invoiceN2 = isValid($("#invoiceN2"));
+                        var registrationNo2 = isNumeric($("#registrationNo2"));
+                        var registrationAddress2 = isValid($("#registrationAddress2"));
 
-                var terms = $("#terms-of-use").is(":checked");
-                // var content=$("#content").is(":checked");
-                $(".check-alert").removeClass("check-alert");
-
-                if (terms) {
-                    //if valid save post in db
-                    $.post('wp-admin/admin-ajax.php', {
-                        data: encodeURI(JSON.stringify(dataObj)),
-                        action: 'addSystemUser'
-                    },
-            function (data) {
-                if ((data) && (data != "")) {
-                    if (data.indexOf("client") > -1) {
-                        goToStep2();
-                        alert(" בדוק האם הזנת את כל הנתונים שלך כראוי ונסה שנית");
-                    }
-                    else if (data.indexOf("contract") > -1) {
-                        goToStep2();
-                        alert("בדוק האם הזנת את כל נתוני המבקרים הנוספים ופרטי התשלום כראוי ונסה שנית");
+                        if (invoiceN2 && registrationNo2 && charge2 && registrationAddress2) {
+                            dataObj.arrPayment[1] = [invoiceN2, registrationNo2, charge2, registrationAddress2];
+                        }
+                        else {
+                            valid = false;
+                        }
 
                     }
                     else {
+                        dataObj.arrPayment[1] = [];
+                    }
+
+                    if (isPayment3) {
+                        var invoiceN3 = isValid($("#invoiceN3"));
+                        var registrationNo3 = isNumeric($("#registrationNo3"));
+                        var registrationAddress3 = isValid($("#registrationAddress3"));
+
+                        if (invoiceN3 && registrationNo3 && charge3 && registrationAddress3) {
+                            dataObj.arrPayment[2] = [invoiceN3, registrationNo3, charge3, registrationAddress3];
+                        }
+                        else {
+                            valid = false;
+                        }
+
+                    }
+                    else {
+                        dataObj.arrPayment[2] = [];
+                    }
+                }
+
+                else {
+                    alert("סכומי החשבוניות לא תואמות לסכום הכללי או שסימנת משתתף ולא הזנת לו סכום");
+                    return false;
+                }
+            }
+
+            var terms = $("#terms-of-use").is(":checked");
+            // var content=$("#content").is(":checked");
+            $(".check-alert").removeClass("check-alert");
+
+            if (terms && valid) {
+                //if valid save post in db
+                $.post('wp-admin/admin-ajax.php', {
+                    data: encodeURI(JSON.stringify(dataObj)),
+                    action: 'addSystemUser'
+                },
+            function (data) {
+                if (data) {
+                    if (data[data.length - 1] != "}") {
+                        data = data.slice(0, -1);
+                    }
+                    var result = JSON.parse(data);
+                    if (result.error) {
+                        console.log(result.errorMassege);
+                        switch (result.error) {
+                            case "401":
+                                {
+                                    alert("Incorrect ProjectID and/or password. or Invalid username and ProjectID format. Values may not be empty");
+                                    break;
+                                }
+                            case "402":
+                                {
+                                    alert("Need to Authenticate first.");
+                                    break;
+                                }
+                            case "403":
+                                {
+                                    alert("Need to Insert Fname or Lname Phone_Mobile");
+                                    break;
+                                }
+                            case "406":
+                                {
+                                    alert("Need to Insert CLientID");
+                                    break;
+                                }
+                            case "400":
+                                {
+                                    alert("Need to Insert Room");
+                                    break;
+                                }
+                            case "404":
+                                {
+                                    alert("Need to Insert HouseType,BedType,RoomType");
+                                    break;
+                                }
+                            case "421":
+                                {
+                                    alert("No room vacancy in the second hotel too");
+                                    break;
+                                }
+                            case "411":
+                                {
+                                    alert("Need to Insert ContractID");
+                                    break;
+                                }
+                            case "407":
+                                {
+                                    alert("Need to Insert Id");
+                                    break;
+                                }
+                            default:
+                                {
+                                    alert("בעיה לא ידועה");
+                                    break;
+                                }
+                        }
+
+                    }
+                    else {
+                        alert("הרשמך התקבלה, מספר הזמנה:" + result.data + " . סיכום ההזמנה ישלח במייל.");
                         if (dataObj.toPAy) {
                             $.post('wp-admin/admin-ajax.php', {
-                                price: sum.val(),
-                                contractId: data,
+                                price: getTotalSum(),
+                                contractId: result.data,
                                 action: 'payInPelecard'
                             },
                         function (data) {
@@ -406,9 +641,10 @@ function saveUser() {
                             }
 
                         });
-                            alert("מספר החוזה שלך הוא: " + data);
+
                         }
                         else {
+                            $("#nadlan-register-form input,#nadlan-register-form select").val("");
                             window.location = domain + "?page_id=" + signupNum;
                         }
                     }
@@ -416,16 +652,15 @@ function saveUser() {
                 }
 
             });
-                }
-                else {
-                    $("#terms-of-use").addClass("check-alert");
-                }
             }
             else {
-                alert("סכומי החשבוניות לא תואמות לסכום הכללי או שסימנת משתתף ולא הזנת לו סכום");
+                $("#terms-of-use").addClass("check-alert");
             }
-        }
 
+        }
+        else {
+            alert("אף אחד לא רשום לתשלום");
+        }
 
     }
     else {

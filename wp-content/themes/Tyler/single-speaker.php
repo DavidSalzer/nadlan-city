@@ -24,7 +24,7 @@
                 <div class="nav">
                     <?php echo get_previous_post_link('%link', '<i class="icon-angle-left"></i>'); ?>
                     <?php if (!empty($full_speakers_url)) { ?>
-                        <a href="<?php echo $full_speakers_url; ?>" title="<?php _e('All', 'tyler'); ?>"><i class="icon-th-large"></i></a>
+                        <span><i class="icon-th-large"></i></span>
                     <?php } ?>
                     <?php echo get_next_post_link('%link', '<i class="icon-angle-right"></i>'); ?>
                 </div>

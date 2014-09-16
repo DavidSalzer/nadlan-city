@@ -87,6 +87,11 @@
         margin: 53px 0;
     }
 
+
+    .landing .btn.btn-lg {
+        font-size: 13px;
+    }
+
     .text-img {
         width: 270px;
     }
@@ -107,7 +112,7 @@
         font-size: 14px;
     }
 
-    #nadlan-register-form button {        
+    #nadlan-register-form button {
         padding-right: 5px;
         padding-left: 5px;
     }

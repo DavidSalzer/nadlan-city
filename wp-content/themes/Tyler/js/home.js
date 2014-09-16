@@ -15,20 +15,20 @@ function initGallery(){
     else {
         jQuery('.mediabox a.post').attr('target','_blank');
     }   
-}  
+}
 
-jQuery(function(){
+jQuery(function () {
 
-    jQuery('#tile_media .btn-group-header .btn').click(function(){
+    jQuery('#tile_media .btn-group-header .btn').click(function () {
         jQuery('#tile_media .btn-group-header .btn').removeClass('active');
         jQuery(this).addClass('active');
         jQuery('#tile_media .carousel-indicators').empty();
         jQuery('#tile_media .carousel-inner').empty();
     });
 
-    jQuery('#tile_media .btn-group-header .btn').click(function(e){
+    jQuery('#tile_media .btn-group-header .btn').click(function (e) {
         var data_id = jQuery(this).attr('data-id');
-        
+
         jQuery.ajax({
             type: "POST",
             dataType: "json",
@@ -37,18 +37,18 @@ jQuery(function(){
                 'action': 'get_media',
                 'data-id': data_id
             },
-            success: function(data) {
+            success: function (data) {
                 var medias = '';
-                if(data.media)
-                    jQuery.each(data.media, function(index, media_chunk) {
+                if (data.media)
+                    jQuery.each(data.media, function (index, media_chunk) {
                         var class_active = index == 0 ? ' class="active"' : '';
                         var active = index == 0 ? 'active' : '';
                         jQuery('#tile_media .carousel-indicators').append('<li data-target="#mediabox-carousel" data-slide-to="' + index + '"' + class_active + '></li>');
                         medias += '<div class="item ' + active + '">';
-                        for(var key in media_chunk){
+                        for (var key in media_chunk) {
                             var media = media_chunk[key];
 
-                            if(media.post_video_code != '')
+                            if (media.post_video_code != '')
                                 medias += '<a class="post video" ' + media.post_video_attributes + '">';
                             else
                                 medias += '<a class="post" href="' + media.post_image_big_url + '">';
@@ -65,52 +65,55 @@ jQuery(function(){
                 initGallery();
             }
         });
-        
+
         e.preventDefault();
     });
-    
-    jQuery('#tile_media .btn-group-header .btn:first').trigger('click');
-    
-    
 
-    jQuery('#tile_contact form').submit(function() {
+    jQuery('#tile_media .btn-group-header .btn:first').trigger('click');
+
+
+
+    jQuery('#tile_contact form').submit(function () {
         var hasError = false;
         jQuery('.error', this).remove();
-        jQuery('.requiredField', this).each(function() {
-            if(jQuery.trim(jQuery(this).val()) == '') {
+        jQuery('.requiredField', this).each(function () {
+            if (jQuery.trim(jQuery(this).val()) == '') {
                 jQuery(this).parent().append('<span class="error">' + contact_missingfield_error + '</span>');
                 jQuery(this).addClass('inputError');
                 hasError = true;
-            } else if(jQuery(this).hasClass('email')) {
+            } else if (jQuery(this).hasClass('email')) {
                 var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?jQuery/;
-                if(!emailReg.test(jQuery.trim(jQuery(this).val()))) {
-                    jQuery(this).parent().append('<span class="error">' + contact_wrongemail_error+ '</span>');
+                if (!emailReg.test(jQuery.trim(jQuery(this).val()))) {
+                    jQuery(this).parent().append('<span class="error">' + contact_wrongemail_error + '</span>');
                     jQuery(this).addClass('inputError');
                     hasError = true;
                 }
             }
         });
-        if(!hasError) {
+        if (!hasError) {
             jQuery('#tile_contact .alert, #tile_contact .info').remove();
             jQuery.ajax({
                 url: ajaxurl,
                 data: jQuery(this).serialize(),
                 dataType: 'json',
                 type: 'POST',
-                success: function(data) {
-                    if(data.sent == true)
-                        jQuery('#tile_contact form').slideUp("fast", function() {
-                            jQuery('#tile_contact form').before('<p class="info">' + data.message + '</p>');
-                        });
+                success: function (data) {
+                    if (data.sent == true) {
+                        $("#tile_contact input").val("");
+                        window.location = data.redirect;
+                        //jQuery('#tile_contact form').slideUp("fast", function () {
+                        //    jQuery('#tile_contact form').before('<p class="info">' + data.message + '</p>');
+                        //});
+                    }
                     else
                         jQuery('#tile_contact form').before('<p class="alert">' + data.message + '</p>');
                 },
-                error: function(data) {
+                error: function (data) {
                     jQuery('#tile_contact form').before('<p class="alert">' + data.message + '</p>');
                 }
             });
         }
-        return false;	
+        return false;
     });
 
 });

@@ -10,12 +10,12 @@
     get_header();
     wp_enqueue_script('nadlan-fileUpload', get_template_directory_uri() . '/js/nadlan-fileUpload.js', array('jquery'), false, true);   
     wp_enqueue_script('nadlan-register', get_template_directory_uri() . '/js/nadlan-register.js', array('jquery'), false, true);   
-
-
+    wp_enqueue_script('tooltip', get_template_directory_uri() . '/js/tooltip.js', array('jquery'), false, true);   
+    
     $signup="667";
     $signupWithPayment="663";
     $signupPaymentError="665";
-
+    
     //check if qa
     if(strpos(home_url( '/' ),"cambium")>-1){
         $signup="639";
@@ -35,10 +35,11 @@
     </div>
 </div>
 <div class="container">
-  
-    <?php  
-   //echo do_shortcode('[pelecard_pay_button value="2" item_name=" כניסה לועידה - עיר הנדלן " button_class="my-class" button_text="Pay Now"]'); 
-   ?>
+
+    <?php
+        
+        //echo do_shortcode('[pelecard_pay_button value="2" item_name=" כניסה לועידה - עיר הנדלן " button_class="my-class" button_text="Pay Now"]'); 
+    ?>
     <form id="nadlan-register-form">
         <div class="register-step" id="step-1">
             <?php the_content(); ?>
@@ -81,7 +82,7 @@
             <div class="row">
                 <div class="col-sm-11">
                     <label>סוג מיטה</label>
-                    <span class="remark">  (* איננו מתחייבים כי נוכל לספק את בקשתך אך נשתדל לפעול עלפיה, בחדרים בהם אין מיטות נפרדות תהיה לרוב ספה הנפתחת למיטה)</span><br>
+                    <span class="remark">  (* איננו מתחייבים כי נוכל לספק את בקשתך אך נשתדל לפעול עלפיה)</span><br>
                     <select id="register-bed-type">
                         <option value="2">זוגית</option>
                         <option value="1">נפרדות</option>
@@ -111,29 +112,32 @@
                     <div class="col-sm-6">
                         <select id="title1">
                             <option value="">תואר</option>
-                            <option value="אדריכל">אדריכל</option>
-                            <option value="מעצב פנים">מעצב פנים</option>
-                            <option value="מנהל מכירות">מנהל מכירות</option>
-                            <option value="יועץ">יועץ</option>
-                            <option value="מהנדס">מהנדס</option>
-                            <option value="מנהל אזור">מנהל אזור</option>
-                            <option value="מנהל לקוחות">מנהל לקוחות</option>
-                            <option value="מנהל פיתוח עסקי">מנהל פיתוח עסקי</option>
-                            <option value="מנהל פרויקטים">מנהל פרויקטים</option>
-                            <option value="מנהל/ת תיקי לקוחות">מנהל/ת תיקי לקוחות</option>
-                            <option value="מנהל/ת כספים">מנהל/ת כספים</option>
-                            <option value='רו"ח'>רו"ח</option>
-                            <option value="שמאי">שמאי</option>
-                            <option value="בנקאי">בנקאי</option>
-                            <option value="משרד פירסום">משרד פירסום</option>
-                            <option value="קבלן ביצוע">קבלן ביצוע</option>
-                            <option value="תעשיין">תעשיין</option>
-                            <option value="יזם">יזם</option>
-                            <option value='עו"ד'>עו"ד</option>
-                            <option value="דר'">דר'</option>
-                            <option value="פרופ'">פרופ'</option>
-                            <option value="אחר">אחר</option>
+                            <option value="18554">אדריכל</option>
+                            <option value="18555">מעצב פנים</option>
+                            <option value="18556">מנהל מכירות</option>
+                            <option value="18557">יועץ</option>
+                            <option value="18558">מהנדס</option>
+                            <option value="18559">מנהל אזור</option>
+                            <option value="18560">מנהל לקוחות</option>
+                            <option value="18561">מנהל פיתוח עסקי</option>
+                            <option value="18562">מנהל פרויקטים</option>
+                            <option value="18563">מנהל/ת תיקי לקוחות</option>
+                            <option value="18564">מנהל/ת כספים</option>
+                            <option value="18565">רו"ח</option>
+                            <option value="18566">שמאי</option>
+                            <option value="18567">בנקאי</option>
+                            <option value="18568">משרד פירסום</option>
+                            <option value="18569">קבלן ביצוע</option>
+                            <option value="18570">תעשיין</option>
+                            <option value="18571">יזם</option>
+                            <option value="18572">עו"ד</option>
+                            <option value="18573">דר'</option>
+                            <option value="18574">פרופ'</option>
+                            <option value="18575">אחר</option>
                         </select>
+
+
+
                     </div>
                     <div class="col-sm-6">
                         <input id="id1" type="text" value="" placeholder=" ת.ז">
@@ -146,19 +150,20 @@
                     <div class="col-sm-6">
                         <select id="companyJob1">
                             <option value="">תפקיד</option>
-                            <option value='יו"ר'>יו"ר</option>
-                            <option value='מנכ"ל'>מנכ"ל</option>
-                            <option value='סמנכ"ל מכירות'>סמנכ"ל מכירות</option>
-                            <option value="מנהל מכירות">מנהל מכירות</option>
-                            <option value="מנהל/ת שיווק">מנהל/ת שיווק</option>
-                            <option value='סמנכ"ל שיווק'>סמנכ"ל שיווק</option>
-                            <option value="מנהל/ת רכש">מנהל/ת רכש</option>
-                            <option value='משנה למנכ"ל'>משנה למנכ"ל</option>
-                            <option value='מנכ"ל משותף'>מנכ"ל משותף</option>
-                            <option value="מנהל כספים">מנהל כספים</option>
-                            <option value="אחר">אחר</option>
+                            <option value="18543">יו"ר</option>
+                            <option value="18544">מנכ"ל</option>
+                            <option value="18545">סמנכ"ל מכירות</option>
+                            <option value="18546">מנהל מכירות</option>
+                            <option value="18547">מנהל/ת שיווק</option>
+                            <option value="18548">סמנכ"ל שיווק</option>
+                            <option value="18549">מנהל/ת רכש</option>
+                            <option value="18550">משנה למנכ"ל</option>
+                            <option value="18551">מנכ"ל משותף</option>
+                            <option value="18552">מנהל כספים</option>
+                            <option value="18553">אחר</option>
                         </select>
                     </div>
+
                 </div>
                 <div class="row">
                     <div class="col-sm-6">
@@ -187,29 +192,29 @@
                 <div class="row">
                     <div class="col-sm-6">
                         <select id="title2">
-                            <option value="">תואר</option>
-                            <option value="אדריכל">אדריכל</option>
-                            <option value="מעצב פנים">מעצב פנים</option>
-                            <option value="מנהל מכירות">מנהל מכירות</option>
-                            <option value="יועץ">יועץ</option>
-                            <option value="מהנדס">מהנדס</option>
-                            <option value="מנהל אזור">מנהל אזור</option>
-                            <option value="מנהל לקוחות">מנהל לקוחות</option>
-                            <option value="מנהל פיתוח עסקי">מנהל פיתוח עסקי</option>
-                            <option value="מנהל פרויקטים">מנהל פרויקטים</option>
-                            <option value="מנהל/ת תיקי לקוחות">מנהל/ת תיקי לקוחות</option>
-                            <option value="מנהל/ת כספים">מנהל/ת כספים</option>
-                            <option value='רו"ח'>רו"ח</option>
-                            <option value="שמאי">שמאי</option>
-                            <option value="בנקאי">בנקאי</option>
-                            <option value="משרד פירסום">משרד פירסום</option>
-                            <option value="קבלן ביצוע">קבלן ביצוע</option>
-                            <option value="תעשיין">תעשיין</option>
-                            <option value="יזם">יזם</option>
-                            <option value='עו"ד'>עו"ד</option>
-                            <option value="דר'">דר'</option>
-                            <option value="פרופ'">פרופ'</option>
-                            <option value="אחר">אחר</option>
+                             <option value="">תואר</option>
+                            <option value="18554">אדריכל</option>
+                            <option value="18555">מעצב פנים</option>
+                            <option value="18556">מנהל מכירות</option>
+                            <option value="18557">יועץ</option>
+                            <option value="18558">מהנדס</option>
+                            <option value="18559">מנהל אזור</option>
+                            <option value="18560">מנהל לקוחות</option>
+                            <option value="18561">מנהל פיתוח עסקי</option>
+                            <option value="18562">מנהל פרויקטים</option>
+                            <option value="18563">מנהל/ת תיקי לקוחות</option>
+                            <option value="18564">מנהל/ת כספים</option>
+                            <option value="18565">רו"ח</option>
+                            <option value="18566">שמאי</option>
+                            <option value="18567">בנקאי</option>
+                            <option value="18568">משרד פירסום</option>
+                            <option value="18569">קבלן ביצוע</option>
+                            <option value="18570">תעשיין</option>
+                            <option value="18571">יזם</option>
+                            <option value="18572">עו"ד</option>
+                            <option value="18573">דר'</option>
+                            <option value="18574">פרופ'</option>
+                            <option value="18575">אחר</option>
                         </select>
                     </div>
                     <div class="col-sm-6">
@@ -222,18 +227,18 @@
                     </div>
                     <div class="col-sm-6">
                         <select id="companyJob2">
-                             <option value="">תפקיד</option>
-                            <option value='יו"ר'>יו"ר</option>
-                            <option value='מנכ"ל'>מנכ"ל</option>
-                            <option value='סמנכ"ל מכירות'>סמנכ"ל מכירות</option>
-                            <option value="מנהל מכירות">מנהל מכירות</option>
-                            <option value="מנהל/ת שיווק">מנהל/ת שיווק</option>
-                            <option value='סמנכ"ל שיווק'>סמנכ"ל שיווק</option>
-                            <option value="מנהל/ת רכש">מנהל/ת רכש</option>
-                            <option value='משנה למנכ"ל'>משנה למנכ"ל</option>
-                            <option value='מנכ"ל משותף'>מנכ"ל משותף</option>
-                            <option value="מנהל כספים">מנהל כספים</option>
-                            <option value="אחר">אחר</option>
+                           <option value="">תפקיד</option>
+                            <option value="18543">יו"ר</option>
+                            <option value="18544">מנכ"ל</option>
+                            <option value="18545">סמנכ"ל מכירות</option>
+                            <option value="18546">מנהל מכירות</option>
+                            <option value="18547">מנהל/ת שיווק</option>
+                            <option value="18548">סמנכ"ל שיווק</option>
+                            <option value="18549">מנהל/ת רכש</option>
+                            <option value="18550">משנה למנכ"ל</option>
+                            <option value="18551">מנכ"ל משותף</option>
+                            <option value="18552">מנהל כספים</option>
+                            <option value="18553">אחר</option>
                         </select>
                     </div>
                 </div>
@@ -264,29 +269,29 @@
                 <div class="row">
                     <div class="col-sm-6">
                         <select id="title3">
-                            <option value="">תואר</option>
-                            <option value="אדריכל">אדריכל</option>
-                            <option value="מעצב פנים">מעצב פנים</option>
-                            <option value="מנהל מכירות">מנהל מכירות</option>
-                            <option value="יועץ">יועץ</option>
-                            <option value="מהנדס">מהנדס</option>
-                            <option value="מנהל אזור">מנהל אזור</option>
-                            <option value="מנהל לקוחות">מנהל לקוחות</option>
-                            <option value="מנהל פיתוח עסקי">מנהל פיתוח עסקי</option>
-                            <option value="מנהל פרויקטים">מנהל פרויקטים</option>
-                            <option value="מנהל/ת תיקי לקוחות">מנהל/ת תיקי לקוחות</option>
-                            <option value="מנהל/ת כספים">מנהל/ת כספים</option>
-                            <option value='רו"ח'>רו"ח</option>
-                            <option value="שמאי">שמאי</option>
-                            <option value="בנקאי">בנקאי</option>
-                            <option value="משרד פירסום">משרד פירסום</option>
-                            <option value="קבלן ביצוע">קבלן ביצוע</option>
-                            <option value="תעשיין">תעשיין</option>
-                            <option value="יזם">יזם</option>
-                            <option value='עו"ד'>עו"ד</option>
-                            <option value="דר'">דר'</option>
-                            <option value="פרופ'">פרופ'</option>
-                            <option value="אחר">אחר</option>
+                             <option value="">תואר</option>
+                            <option value="18554">אדריכל</option>
+                            <option value="18555">מעצב פנים</option>
+                            <option value="18556">מנהל מכירות</option>
+                            <option value="18557">יועץ</option>
+                            <option value="18558">מהנדס</option>
+                            <option value="18559">מנהל אזור</option>
+                            <option value="18560">מנהל לקוחות</option>
+                            <option value="18561">מנהל פיתוח עסקי</option>
+                            <option value="18562">מנהל פרויקטים</option>
+                            <option value="18563">מנהל/ת תיקי לקוחות</option>
+                            <option value="18564">מנהל/ת כספים</option>
+                            <option value="18565">רו"ח</option>
+                            <option value="18566">שמאי</option>
+                            <option value="18567">בנקאי</option>
+                            <option value="18568">משרד פירסום</option>
+                            <option value="18569">קבלן ביצוע</option>
+                            <option value="18570">תעשיין</option>
+                            <option value="18571">יזם</option>
+                            <option value="18572">עו"ד</option>
+                            <option value="18573">דר'</option>
+                            <option value="18574">פרופ'</option>
+                            <option value="18575">אחר</option>
                         </select>
                     </div>
                     <div class="col-sm-6">
@@ -299,18 +304,18 @@
                     </div>
                     <div class="col-sm-6">
                         <select id="companyJob3">
-                             <option value="">תפקיד</option>
-                            <option value='יו"ר'>יו"ר</option>
-                            <option value='מנכ"ל'>מנכ"ל</option>
-                            <option value='סמנכ"ל מכירות'>סמנכ"ל מכירות</option>
-                            <option value="מנהל מכירות">מנהל מכירות</option>
-                            <option value="מנהל/ת שיווק">מנהל/ת שיווק</option>
-                            <option value='סמנכ"ל שיווק'>סמנכ"ל שיווק</option>
-                            <option value="מנהל/ת רכש">מנהל/ת רכש</option>
-                            <option value='משנה למנכ"ל'>משנה למנכ"ל</option>
-                            <option value='מנכ"ל משותף'>מנכ"ל משותף</option>
-                            <option value="מנהל כספים">מנהל כספים</option>
-                            <option value="אחר">אחר</option>
+                           <option value="">תפקיד</option>
+                            <option value="18543">יו"ר</option>
+                            <option value="18544">מנכ"ל</option>
+                            <option value="18545">סמנכ"ל מכירות</option>
+                            <option value="18546">מנהל מכירות</option>
+                            <option value="18547">מנהל/ת שיווק</option>
+                            <option value="18548">סמנכ"ל שיווק</option>
+                            <option value="18549">מנהל/ת רכש</option>
+                            <option value="18550">משנה למנכ"ל</option>
+                            <option value="18551">מנכ"ל משותף</option>
+                            <option value="18552">מנהל כספים</option>
+                            <option value="18553">אחר</option>
                         </select>
                     </div>
                 </div>
@@ -342,7 +347,7 @@
                 <div class="col-sm-11">
                     <select id="split-payment">
                         <option value="0">לא</option>
-                        <option value="1">כן</option>                        
+                        <option value="1">כן</option>
                     </select>
                 </div>
             </div>
@@ -354,7 +359,7 @@
                 </div>
             </div>
             <div id="payment1">
-                <label>תשלום מס' 1</label><label id="payment-name-1"></label><br>
+                 <input id="payment-checkbox-1" type="checkbox" value="payment"><label>תשלום מס' 1</label><label id="payment-name-1"></label><abbr class="nadlan-tooltip" title="נא הסר את ה V במידה ואינך מעוניין כי תצא חשבונית על מבקר זה." rel="tooltip"> ? </abbr><br>
                 <label>פרטי תשלום</label><br>
                 <div class="row">
                     <div class="col-sm-6">
@@ -1214,7 +1219,7 @@
                             <option value="3990">כוכב
       יאיר / צור
       יגאל</option>
-                            <option value="18">ירושלים</option>
+                            <option value="18" selected>ירושלים</option>
                             <option value="601">אביעזר</option>
                             <option value="610">אדרת</option>
                             <option value="641">איתנים</option>
@@ -2434,7 +2439,7 @@
             </div>
 
             <div id="payment2">
-                <input id="payment-checkbox-2" type="checkbox" value="payment"><label>תשלום מס' 2</label><label id="payment-name-2"></label><br>
+                <input id="payment-checkbox-2" type="checkbox" value="payment"><label>תשלום מס' 2</label><label id="payment-name-2"></label><abbr class="nadlan-tooltip" title="נא הסר את ה V במידה ואינך מעוניין כי תצא חשבונית על מבקר זה." rel="tooltip"> ? </abbr><br>
                 <label>פרטי תשלום</label><br>
                 <div class="row">
                     <div class="col-sm-6">
@@ -2452,11 +2457,11 @@
                         <input id="amount2" type="text" value="" placeholder="סכום לתשלום">
                     </div>
                 </div>
-                        
+
             </div>
 
             <div id="payment3">
-               <input id="payment-checkbox-3" type="checkbox" value="payment" > <label>תשלום מס' 3</label><label id="payment-name-3"></label><br>
+                <input id="payment-checkbox-3" type="checkbox" value="payment"> <label>תשלום מס' 3</label><label id="payment-name-3"></label><abbr class="nadlan-tooltip" title="נא הסר את ה V במידה ואינך מעוניין כי תצא חשבונית על מבקר זה." rel="tooltip"> ? </abbr><br>
                 <label>פרטי תשלום</label><br>
                 <div class="row">
                     <div class="col-sm-6">
@@ -2474,29 +2479,32 @@
                         <input id="amount3" type="text" value="" placeholder="סכום לתשלום">
                     </div>
                 </div>
-               
-                
+
+
             </div>
 
-            <div id="register-paypment-area">                
-                <!--<div class="row">
+            <div id="register-paypment-area">
+                                    <!--<div class="row">
+                                        <div class="col-sm-11">
+                                            <input id="content" type="checkbox" value="content" checked>
+                                            <label>אני מעוניין לקבל תוכן פרסומי ממרכז הבנייה הישראלי </label><br>
+                    
+                                        </div>
+                                    </div>-->
+                <div class="row">
                     <div class="col-sm-11">
-                        <input id="content" type="checkbox" value="content" checked>
-                        <label>אני מעוניין לקבל תוכן פרסומי ממרכז הבנייה הישראלי </label><br>
-                        
-                    </div>
-                </div>-->
-                 <div class="row">
-                    <div class="col-sm-11">
-                        <input id="terms-of-use" type="checkbox" value="terms" >
-                        <label>קראתי, הבנתי ואני מסכים/ה   </label><a href="<?php echo home_url( '/' ); ?>wp-content/themes/Tyler/siteRules.pdf" target="_blank"> לתקנון האתר </a><a href="<?php echo home_url( '/' ); ?>wp-content/themes/Tyler/nadlanCityRules.pdf" target="_blank">ולתקנון עיר הנדל"ן</a><br>
-                        
+                        <input id="terms-of-use" type="checkbox" value="terms">
+                        <label>קראתי, הבנתי ואני מסכים/ה   </label>
+                        <a href="<?php echo home_url( '/' ); ?>wp-content/themes/Tyler/siteRules.pdf" target="_blank"> לתקנון האתר </a><a href="<?php echo home_url( '/' ); ?>wp-content/themes/Tyler/nadlanCityRules.pdf" target="_blank">ולתקנון עיר הנדל"ן</a><br>
+                        <label>ניתן לבטל את ההזמנה עד ה- 14 לאוקטובר בחיוב של 750 ש"ח למשתתף.</label><br>
+                        <label>ביטול לאחר ה-14 לאוקטובר יחוייב בדמי ביטול מלאים.</label>
+
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-6">
                         <button id="siugnUpWithPay" class="btn btn-secondary">השלם הרשמה באמצעות אשראי</button>
-                        <label id="discount-text">הרשמה באשראי דרך האתר מקנה 5% הנחה</label>
+                        <!--<label id="discount-text">הרשמה באשראי דרך האתר מקנה 5% הנחה</label>-->
                     </div>
                     <div class="col-sm-6">
                         <button id="siugnUp" class="btn btn-secondary">הרשם ושלם באמצעות נציג</button>
@@ -2514,19 +2522,15 @@
                         <input type="hidden" name="notify_url" value="http://nadlancity.cambium-team.com/?page_id=310" />
                         <input type="hidden" name="cancel_return" value="http://nadlancity.cambium-team.com/?page_id=48/#cancel" /> <br />
                                                     <!--<input type="image" name="submit" border="0"
-                                                            src="https://www.paypalobjects.com/en_US/i/btn/btn_buynow_LG.gif"
-                                                            alt="PayPal - The safer, easier way to pay online">-->
+                                                                                        src="https://www.paypalobjects.com/en_US/i/btn/btn_buynow_LG.gif"
+                                                                                        alt="PayPal - The safer, easier way to pay online">-->
                     </form>
 
                 </div>
             </div>
         </div>
-<!--</div>-->
-
-
-
-
-        </form>
-      </div>
+        <!--</div>-->
+    </form>
+</div>
 <?php endwhile; // end of the loop. ?>
 <?php get_footer();?>

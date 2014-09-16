@@ -1,6 +1,8 @@
 <?php
         require_once("../../../wp-load.php");
         
+        print_r($_POST);
+
         session_start();   
         //$_SESSION['contractID']="161357";
         //$_SESSION['contract_post_id']="614";
@@ -50,9 +52,9 @@
                     echo $result;
                     if($result=="success"){
                         echo $result;
-                        mail(  $email, "התשלום עבד ","") ;  
+                        //mail(  $email, "התשלום עבד ","") ;  
                         mail(  "treut@cambium.co.il", "התשלום עבד ",$contractID ) ;  
-                        header("Location:". home_url( '/' )."?page_id=".$signupWithPayment);
+                        header("Location:". home_url( '/' )."?page_id=663");
                         die();
                     }
     
@@ -61,7 +63,7 @@
                     echo 'Message: clientid' .$e;
                     //mail( $email, "התשלום  לא עבד ","") ;  
                     mail(  "treut@cambium.co.il", " התשלום   לא עבד העידכון בבמבי של התשלום לא עבד",$e) ;  
-                   header("Location:". home_url( '/' )."?page_id=".$signupPaymentError);
+                   header("Location:". home_url( '/' )."?page_id=665");
                         die();
                     echo 'client';
                     return;       
