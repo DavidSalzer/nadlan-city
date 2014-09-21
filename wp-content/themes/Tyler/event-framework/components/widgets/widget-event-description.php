@@ -63,7 +63,7 @@
                         <span class="photo">
                             <img src="<?php echo get_template_directory_uri() . '/images/mic.jpg'; ?>" class="attachment-tyler-speaker wp-post-image" alt="ועידות" title="ועידות">
                         </span>
-                        <span class="name"><span class="text-fit"><span class="text-fit-inner" style="display:block">8 ועידות תוכן בתחומים שונים</span></span></span>
+                        <span class="name"><span class="text-fit"><span class="text-fit-inner" style="display:block">7 ועידות תוכן מקצועיות<br>בראשות 15 יושבי ראש</span></span></span>
 
                     </a>
                 </div>
@@ -72,7 +72,7 @@
                         <span class="photo">
                             <img src="<?php echo get_template_directory_uri() . '/images/tie.jpg'; ?>" class="attachment-tyler-speaker wp-post-image" alt="מרצים" title="מרצים">
                         </span>
-                        <span class="name"><span class="text-fit"><span class="text-fit-inner" style="display:block">400 מרצים מומחים מהארץ ומחו"ל!</span></span></span>
+                        <span class="name"><span class="text-fit"><span class="text-fit-inner" style="display:block">250 מרצים מומחים מהארץ ומחו"ל!</span></span></span>
 
                     </a>
                 </div>
@@ -81,7 +81,7 @@
                         <span class="photo">
                             <img src="<?php echo get_template_directory_uri() . '/images/men.jpg'; ?>" class="attachment-tyler-speaker wp-post-image" alt="משתתפים" title="משתתפים">
                         </span>
-                        <span class="name"><span class="text-fit"><span class="text-fit-inner" style="display:block">בהשתתפות 1500 בכירים מעולם הנדל"ן</span></span></span>
+                        <span class="name"><span class="text-fit"><span class="text-fit-inner" style="display:block">בהשתתפות 2000 בכירים מעולם הנדל"ן</span></span></span>
 
                     </a>
                 </div>
@@ -105,8 +105,138 @@
                 </div>
 
             </div>
+
+            <h2>הועידות...</h2>
+            <div class="sessions condensed">
+
+                <div class="session">
+                    <a href="<?php echo home_url( '/' ); ?>?page_id=124" class="session-inner">
+                        <span class="title"><span class="text-fit"><span class="text-fit-inner" style="display:block">הוועידה השנתית לבניה לגובה</span></span></span>
+                        <span class="desc">יושבי הראש של הועידה</span>
+                        <span class="speakers-thumbs">
+                            <span class="speaker  featured">
+                                <img width="319" height="319" src="http://nadlancity2014.co.il/wp-content/uploads/2014/08/-----------------2-212x212.jpg" class="attachment-post-thumbnail wp-post-image" alt="ישראל דוד" title="ישראל דוד">
+                            </span>
+                            <span class="speaker  featured">
+                                <img width="319" height="319" src="http://nadlancity2014.co.il/wp-content/uploads/2014/08/--------------------1-212x212.jpg" class="attachment-post-thumbnail wp-post-image" alt="יוסי סיוון" title="יוסי סיוון">
+                            </span>
+                            <span class="speaker  featured">
+                                <img width="319" height="319" src="http://nadlancity2014.co.il/wp-content/uploads/2014/08/----------------1-212x212.jpg" class="attachment-post-thumbnail wp-post-image" alt="רחל פללר" title="רחל פללר">
+                            </span>
+                        </span>
+                        <span class="more">
+                                      לפרטים נוספים <i class="icon-angle-right"></i>
+                        </span>
+                    </a>
+                </div>
+                <div class="session">
+                    <a href="<?php echo home_url( '/' ); ?>?page_id=169" class="session-inner">
+                        <span class="title"><span class="text-fit"><span class="text-fit-inner" style="display:block">הוועידה השנתית למגורים</span></span></span>
+                        <span class="desc">יושבי הראש של הועידה</span>
+                        <span class="speakers-thumbs">
+                            <span class="speaker  featured">
+                                <img width="319" height="319" src="http://nadlancity2014.co.il/wp-content/uploads/2014/08/-------------------1-212x212.jpg" class="attachment-post-thumbnail wp-post-image" alt="שמשון הראל" title="שמשון הראל">
+                            </span>
+                            <span class="speaker  featured">
+                                <img width="319" height="319" src="http://nadlancity2014.co.il/wp-content/uploads/2014/08/---------------2-212x212.jpg" class="attachment-post-thumbnail wp-post-image" alt="דרור נגל" title="דרור נגל">
+                            </span>
+                        </span>
+                        <span class="more">
+                                      לפרטים נוספים <i class="icon-angle-right"></i>
+                        </span>
+                    </a>
+                </div>
+                <div class="session">
+                    <a href="<?php echo home_url( '/' ); ?>?page_id=172" class="session-inner">
+                        <span class="title"><span class="text-fit"><span class="text-fit-inner" style="display:block">הוועידה השנתית למשרדים ופארקי תעסוקה</span></span></span>
+                        <span class="desc">יושבי הראש של הועידה</span>
+                        <span class="speakers-thumbs">
+                            <span class="speaker  featured">
+                                <img width="319" height="319" src="http://nadlancity2014.co.il/wp-content/uploads/2014/08/IMG-5145-212x212.jpg" class="attachment-post-thumbnail wp-post-image" alt="אבי יעקובוביץ" title="אבי יעקובוביץ">
+                            </span>
+                            <span class="speaker  featured">
+                                <img width="319" height="319" src="http://nadlancity2014.co.il/wp-content/uploads/2014/08/------------------212x212.jpg" class="attachment-post-thumbnail wp-post-image" alt="ג'קי מוקמל" title="ג'קי מוקמל">
+                            </span>
+                        </span>
+                        <span class="more">
+                                      לפרטים נוספים <i class="icon-angle-right"></i>
+                        </span>
+                    </a>
+                </div>
+                <div class="session">
+                    <a href="<?php echo home_url( '/' ); ?>?page_id=171" class="session-inner">
+                        <span class="title"><span class="text-fit"><span class="text-fit-inner" style="display:block">הוועידה השנתית לתכנון ופיתוח מוניציפלי</span></span></span>
+                        <span class="desc">יושבי הראש של הועידה</span>
+                        <span class="speakers-thumbs">
+                            <span class="speaker  featured">
+                                <img width="319" height="319" src="http://nadlancity2014.co.il/wp-content/uploads/2014/09/----------------1-212x212.jpg" class="attachment-post-thumbnail wp-post-image" alt="יונה יהב" title="יונה יהב">
+                            </span>
+                            <span class="speaker  featured">
+                                <img width="319" height="319" src="http://nadlancity2014.co.il/wp-content/uploads/2014/08/-----------------1-212x212.jpg" class="attachment-post-thumbnail wp-post-image" alt="דניאלה פז" title="דניאלה פז">
+                            </span>
+                        </span>
+                        <span class="more">
+                                      לפרטים נוספים <i class="icon-angle-right"></i>
+                        </span>
+                    </a>
+                </div>
+                <div class="session">
+                    <a href="<?php echo home_url( '/' ); ?>?page_id=167" class="session-inner">
+                        <span class="title"><span class="text-fit"><span class="text-fit-inner" style="display:block">הוועידה השנתית להתחדשות עירונית</span></span></span>
+                        <span class="desc">יושבי הראש של הועידה</span>
+                        <span class="speakers-thumbs">
+                            <span class="speaker  featured">
+                                <img width="319" height="319" src="http://nadlancity2014.co.il/wp-content/uploads/2014/08/--------------------212x212.jpg" class="attachment-post-thumbnail wp-post-image" alt="אילן שרקון" title="אילן שרקון">
+                            </span>
+                            <span class="speaker  featured">
+                                <img width="319" height="319" src="http://nadlancity2014.co.il/wp-content/uploads/2014/08/---------------5-212x212.jpg" class="attachment-post-thumbnail wp-post-image" alt="זיו כספי" title="זיו כספי">
+                            </span>
+                        </span>
+                        <span class="more">
+                                      לפרטים נוספים <i class="icon-angle-right"></i>
+                        </span>
+                    </a>
+                </div>
+
+                <div class="session">
+                    <a href="<?php echo home_url( '/' ); ?>?page_id=165" class="session-inner">
+                        <span class="title"><span class="text-fit"><span class="text-fit-inner" style="display:block">הוועידה השנתית לשיווק נדל"ן ומשכנתאות</span></span></span>
+                        <span class="desc">יושבי הראש של הועידה</span>
+                        <span class="speakers-thumbs">
+                            <span class="speaker  featured">
+                                <img width="319" height="319" src="http://nadlancity2014.co.il/wp-content/uploads/2014/08/---------------3-212x212.jpg" class="attachment-post-thumbnail wp-post-image" alt="רוני כהן" title="רוני כהן">
+                            </span>
+                            <span class="speaker  featured">
+                                <img width="319" height="319" src="http://nadlancity2014.co.il/wp-content/uploads/2014/08/-----------------3-212x212.jpg" class="attachment-post-thumbnail wp-post-image" alt="אורנה פרי" title="אורנה פרי">
+                            </span>
+                        </span>
+                        <span class="more">
+                                      לפרטים נוספים <i class="icon-angle-right"></i>
+                        </span>
+                    </a>
+                </div>
+                <div class="session">
+                    <a href="<?php echo home_url( '/' ); ?>?page_id=121" class="session-inner">
+                        <span class="title"><span class="text-fit"><span class="text-fit-inner" style="display:block">הוועידה השנתית לאדריכלות ועיצוב פנים</span></span></span>
+                        <span class="desc">יושבי הראש של הועידה</span>
+                        <span class="speakers-thumbs">
+                            <span class="speaker  featured">
+                                <img width="319" height="319" src="http://nadlancity2014.co.il/wp-content/uploads/2014/08/--------------------------212x212.jpg" class="attachment-post-thumbnail wp-post-image" alt="אירית אקסלרוד" title="אירית אקסלרוד">
+                            </span>
+                            <span class="speaker  featured">
+                                <img width="319" height="319" src="http://nadlancity2014.co.il/wp-content/uploads/2014/08/----------------------212x212.jpg" class="attachment-post-thumbnail wp-post-image" alt="יונתן מונג'ק" title="יונתן מונג'ק">
+                            </span>
+                        </span>
+                        <span class="more" data-track="8">
+                                      לפרטים נוספים <i class="icon-angle-right"></i>
+                        </span>
+                    </a>
+                </div>
+            </div>
+
+
         </div>
-     <!-- <?php           echo stripslashes($eventdescriptioncontent);?>-->
+
     </p>
 </div><?php
     

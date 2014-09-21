@@ -272,12 +272,12 @@ header ul ul {
 }
 
 header ul li.register a {
-    /*background-color: #ffda00 !important;*/
-    background-color: #FF00F5 !important;
+    background-color: #ffda00 !important;
+    /*background-color: #FF00F5 !important;*/
     color: #123781 !important;
 }
 
-/********************connect********************/
+/********************nadlan-description********************/
 #nadlan-description .speakers .speaker.featured .speaker-inner {
     color: #ffda00;
 }
@@ -323,6 +323,41 @@ header ul li.register a {
 #tile_description h2 {
     text-align: center;
     font-size: 26px;
+}
+
+#nadlan-description .speakers{
+    margin-bottom: 40px;
+}
+#nadlan-description .sessions {
+    text-align: center;
+}
+
+#nadlan-description .sessions .session{
+    margin: 15px -4.5px;
+    width: 25%;
+}
+
+#nadlan-description .sessions .session .more{
+    /*display: none;*/
+    background-color: #123781;
+}
+
+#nadlan-description .sessions .session .title{
+    color: #123781;
+}
+
+#nadlan-description .speakers-thumbs{
+    height: 65px;
+    margin: 16px 0;
+}
+
+#nadlan-description .sessions .session .speaker{
+    height: 54px;
+    width: 54px;
+}
+
+#nadlan-description .sessions.condensed .session .session-inner{
+    border: 1px solid #123781;
 }
 /********************connect********************/
 .connect .connect-inner > span {
@@ -475,6 +510,32 @@ select, input[type=number] {
 #register-sum::after {
     content: 'ש"ח';
     position: absolute;
+}
+
+#nadlan-mask{
+    background-color: transparent;
+height: 100%;
+width: 100%;
+position: absolute;
+z-index: 2;
+display: none;
+}
+
+#nadlan-loader{
+    background-image: url("../images/ajax_loader.gif") ;
+    width: 100px;
+    height: 100px;
+    background-size: contain;
+position: absolute;
+left: 0;
+right: 0;
+margin: auto;
+top: 0;
+bottom: 0;
+}
+
+#tile_registration{
+    display: none;
 }
 /********************session********************/
 

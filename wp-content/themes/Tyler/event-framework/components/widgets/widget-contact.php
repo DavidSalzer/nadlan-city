@@ -382,13 +382,13 @@
                       $ret['sent']	= true;
                       $ret['message']	="send";
                       $ret['redirect']=home_url()."?page_id=1199";
-                      mail(  "treut@cambium.co.il", "work","1") ;  
+                     // mail(  "treut@cambium.co.il", "contact work","1") ;  
                      //  wp_redirect( home_url()."?page_id=1199" );
                        //header("Location:". home_url( '/' )."?page_id=1199");
                        //exit();
                  } else {  
                     //  echo $server_output;
-                    mail(  "treut@cambium.co.il", "not work","0") ;  
+                    mail(  "treut@cambium.co.il", "contact not work","0") ;  
                       $ret['message']	= __( 'Error submitting the form', 'dxef' );
                  }
     

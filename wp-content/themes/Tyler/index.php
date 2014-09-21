@@ -31,7 +31,7 @@ $ef_options = EF_Event_Options::get_theme_options();
 			}
 		} ?>
         <!--contact button-->
-        <a href="<?php echo home_url( '/' ); ?>#tile_contact" class="btn btn-lg btn-secondary">לעזרה בהרשמה-צור קשר</a>        
+        <a href="<?php echo home_url( '/' ); ?>#tile_contact" class="btn btn-lg btn-secondary">לעזרה בהרשמה</a>        
         <div class="row">
             <div class="col-md-6" id="event-calendar">
                 <div class="box">

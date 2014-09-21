@@ -3,6 +3,9 @@
     <head>
         <meta charset="<?php bloginfo('charset'); ?>" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+        <meta property="og:image" content="<?php echo home_url( '/' ); ?>/wp-content/themes/Tyler/images/logo_merkaz-01.png" />
+
+
         <!--[if IE]>
         <meta name="X-UA-Compatible" content="IE=edge" >
         <![endif]-->
@@ -46,6 +49,31 @@
               ga('send', 'pageview');
 
         </script>
+
+        <script type="text/javascript">
+          (function() {
+            window._pa = window._pa || {};
+            // _pa.orderId = "myCustomer@email.com"; // OPTIONAL: attach user email or order ID to conversions
+            // _pa.revenue = "19.99"; // OPTIONAL: attach dynamic purchase values to conversions
+            var pa = document.createElement('script'); pa.type = 'text/javascript'; pa.async = true;
+            pa.src = ('https:' == document.location.protocol ? 'https:' : 'http:') + "//tag.perfectaudience.com/serve/522d8a0273583cf13a000014.js";
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(pa, s);
+          })();
+        </script>
+
+        <script type="text/javascript">(function(){
+          window._fbds = window._fbds || {};
+          _fbds.pixelId = 191467084396020;
+          var fbds = document.createElement('script');
+          fbds.async = true;
+          fbds.src = ('https:' == document.location.protocol ? 'https:' : 'http:') + '//connect.facebook.net/en_US/fbds.js';
+          var s = document.getElementsByTagName('script')[0];
+          s.parentNode.insertBefore(fbds, s);
+        })();
+        window._fbq = window._fbq || [];
+        window._fbq.push(["track", "PixelInitialized", {}]);
+        </script>
+        <noscript><img height="1" width="1" border="0" alt="" style="display:none" src="https://www.facebook.com/tr?id=191467084396020&amp;ev=NoScript" /></noscript>
 
     </head>
     <body <?php body_class(); ?>>

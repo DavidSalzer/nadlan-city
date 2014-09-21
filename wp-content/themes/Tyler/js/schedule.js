@@ -1,15 +1,15 @@
 /**
- * stick date titles to top
- * @param stickies
- */
+* stick date titles to top
+* @param stickies
+*/
 function stickyTitles(stickies) {
     var self = this,
     isLoaded = false;
 
-    this.load = function() {
-        stickies.each(function(){
+    this.load = function () {
+        stickies.each(function () {
             var thisSticky = jQuery(this);
-            if(!self.isLoaded) {
+            if (!self.isLoaded) {
                 thisSticky.wrap('<div class="followWrap" />');
                 thisSticky.parent().height(thisSticky.outerHeight());
             }
@@ -20,11 +20,11 @@ function stickyTitles(stickies) {
         self.isLoaded = true;
     }
 
-    this.scroll = function() {
+    this.scroll = function () {
         var offsetTop = (parseInt(jQuery(document.body).css('padding-top')) || 0) + 33, // 33px allocated by nav-tabs
         isFloating = false;
 
-        stickies.each(function(i){
+        stickies.each(function (i) {
 
             var thisSticky = jQuery(this),
             pos = thisSticky.hasClass('fixed')
@@ -35,19 +35,19 @@ function stickyTitles(stickies) {
             pos -= offsetTop;
 
             if (pos <= jQuery(window).scrollTop()) {
-                if(!thisSticky.hasClass('fixed')) {
+                if (!thisSticky.hasClass('fixed')) {
                     thisSticky.prepend(jQuery('.schedule > .nav-tabs').clone(true));
                 }
                 thisSticky.addClass("fixed container");
             } else {
-                if(thisSticky.hasClass('fixed')) {
+                if (thisSticky.hasClass('fixed')) {
                     thisSticky.find('.nav-tabs').remove();
                 }
                 thisSticky.removeClass("fixed container");
             }
         });
 
-        if(isFloating) {
+        if (isFloating) {
             jQuery('.schedule').addClass('floating');
         }
         else {
@@ -56,13 +56,10 @@ function stickyTitles(stickies) {
     }
 }
 
-// expand menu on click
-jQuery('.schedule > ul li a').click(function(event) {
-    event.preventDefault();
-    jQuery(this).toggleClass('expand');
-});
+
+
+function updateSchedule(timestamp, location, track) {
     
-function updateSchedule(timestamp, location, track){
     jQuery.ajax({
         type: "POST",
         dataType: "json",
@@ -74,13 +71,15 @@ function updateSchedule(timestamp, location, track){
             'data-track': track
         },
         success: function (data) {
+            //$(".schedule ul li ul").hide();
             //for filter by days
             if (timestamp) {
-                window.location.hash = timestamp
-                jQuery("#nadlan-schedule-title").text(jQuery(".schedule a[data-timestamp="+timestamp+"]").text());
+                window.location.hash = "timestamp/" + timestamp;
+                jQuery("#nadlan-schedule-title").text(jQuery(".schedule a[data-timestamp=" + timestamp + "]").text());
             }
             if (track) {
-                jQuery("#nadlan-schedule-title").text(jQuery(".schedule a[data-track="+track+"]").text());
+                window.location.hash = "track/" + track;
+                jQuery("#nadlan-schedule-title").text(jQuery(".schedule a[data-track=" + track + "]").text());
             }
             console.log(timestamp + " " + location + " " + track);
             // alert(0);
@@ -154,9 +153,25 @@ jQuery(document).ready(function () {
         updateSchedule(jQuery(this).attr('data-timestamp'), jQuery(this).attr('data-location'), jQuery(this).attr('data-track'));
     });
 
+    // expand menu on click
+jQuery('.schedule > ul li a').click(function (event) {
+    event.preventDefault();
+    jQuery(this).toggleClass('expand');
+});
+   
     //for filter by days
     if (window.location.hash && window.location.hash != 0) {
-        updateSchedule(window.location.hash.slice(1), null, null);
+        var hash = window.location.hash.split("/");
+        if (hash[0] == "#timestamp") {
+            updateSchedule(hash[1], null, null);
+        }
+        else if (hash[0] == "#track") {
+            updateSchedule(null, null, hash[1]);
+        }
+        else {
+            updateSchedule(null, null, null);
+        }
+
     }
     else {
         updateSchedule(null, null, null);

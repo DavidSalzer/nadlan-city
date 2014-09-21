@@ -888,7 +888,7 @@
                    //    //save to pelecard
                        $_SESSION['contract_post_id'] = $contract_post_id;
                        $_SESSION['contractID'] = $contractID;
-                       $_SESSION['price'] = $dataObj->arrPayment[3];
+                       //$_SESSION['price'] = $dataObj->price;
                        
                        //user details
                        $_SESSION['Fname'] = $clientArray['Fname'];
@@ -908,22 +908,24 @@
                        );
                                
                        try {   
-                           $fnUpdatePayment = $client->fnUpdatePayment($token,$contractID,$arrTotalPayment); 
+                           $fnUpdatePayment = $client->fnUpdatePayment($token,$contractID,$arrTotalPayment,0); 
                            //echo $result;
                            if($fnUpdatePayment=="success"){
                                //echo $result;
                                //mail(  $email, "התשלום עבד ","") ;  
-                               mail(  "treut@cambium.co.il", "reference send",$contractID ) ;                                 
+                               mail(  "treut@cambium.co.il", "update bmby not paying in site",$contractID ) ;                                 
                            }
     
                        }
                         catch(Exception $e) {
-                            mail(  "treut@cambium.co.il", "reference not send",$contractID ) ;      
+                            mail(  "treut@cambium.co.il", "update bmby not paying in site not success",$contractID ) ;      
                        }
     
-                       updateBmbyNotPay( $clientArray['Fname'],$clientArray['Lname'],$clientArray['Phone_Mobile'],$clientArray['Email']);
+                      // updateBmbyNotPay( $clientArray['Fname'],$clientArray['Lname'],$clientArray['Phone_Mobile'],$clientArray['Email']);
                    }
-    
+                    else{
+                        mail(  "treut@cambium.co.il", "try to pay...",$contractID ) ;      
+                    }
                    echo json_encode($result);
                    return "";
                        //echo $contractID;
@@ -945,52 +947,52 @@
            }
     
           function payInPelecard(){
-               $price = $_REQUEST["price"];//round($_REQUEST["price"]*0.95);
+               $price = $_REQUEST["price"];//round($_REQUEST["price"]*0.95);$_SESSION['price']
                $contractId = $_REQUEST["contractId"];
     
-               echo do_shortcode('[pelecard_pay_button value="' . "2" . '" item_name=" כניסה לועידה - עיר הנדלן ' .$contractId. '" button_class="my-class" button_text="Pay Now"]'); 
+               echo do_shortcode('[pelecard_pay_button value="' . $price . '" item_name=" כניסה לועידה - עיר הנדלן ' .$contractId. '" button_class="my-class" button_text="Pay Now"]'); 
     
            }
     
-           function updateBmbyNotPay($Fname,$Lname, $phone,$email){
+         //  function updateBmbyNotPay($Fname,$Lname, $phone,$email){
     
-                 $sendObj = array( 'Fname' => $Fname, 'Lname' => $Lname, 'Phone' => $phone,'Email'=>$email,'Comments'=>'יש לבצע סליקה ידנית','AllowedMail'=>'0',IP=>$_SERVER['REMOTE_ADDR'],'ProjectID'=>'4909','Password'=>'pwd@4909s' );
-                  mail(  "treut@cambium.co.il", " הפונקציה נקראה","") ; 
+   //      //        $sendObj = array( 'Fname' => $Fname, 'Lname' => $Lname, 'Phone' => $phone,'Email'=>$email,'Comments'=>'יש לבצע סליקה ידנית','AllowedMail'=>'0',IP=>$_SERVER['REMOTE_ADDR'],'ProjectID'=>'4909','Password'=>'pwd@4909s' );
+         //         mail(  "treut@cambium.co.il", " הפונקציה נקראה","") ; 
     
-          // echo json_encode($sendObj);
-             try {
+   //      // // echo json_encode($sendObj);
+         //    try {
     
-                 $ch = curl_init();
+   //      //        $ch = curl_init();
     
-                 curl_setopt($ch, CURLOPT_URL,"http://www.bmby.com/shared/AddClient/index.php");
-                 curl_setopt($ch, CURLOPT_POST, 1);
-                 curl_setopt($ch, CURLOPT_POSTFIELDS,http_build_query($sendObj));
+   //      //        curl_setopt($ch, CURLOPT_URL,"http://www.bmby.com/shared/AddClient/index.php");
+         //        curl_setopt($ch, CURLOPT_POST, 1);
+         //        curl_setopt($ch, CURLOPT_POSTFIELDS,http_build_query($sendObj));
     
-                 // receive server response ...
-                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+   //      //        // receive server response ...
+         //        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     
-                 $server_output = curl_exec ($ch);
+   //      //        $server_output = curl_exec ($ch);
     
-                 curl_close ($ch);
+   //      //        curl_close ($ch);
     
-                 // further processing ....
-                 if (strpos($server_output,"Response=1")>-1) { 
-                       $ret['sent']	= true;
-                       $ret['message']	="ההודעה נשלחה";
+   //      //        // further processing ....
+         //        if (strpos($server_output,"Response=1")>-1) { 
+         //              $ret['sent']	= true;
+         //              $ret['message']	="ההודעה נשלחה";
     
-                       mail(  "treut@cambium.co.il", " במבי עודכנו שאין תשלום","") ;  
-                  } else {  
-                     //  echo $server_output;
-                       $ret['message']	= __( 'Error submitting the form', 'dxef' );
-                  }
+   //      //              mail(  "treut@cambium.co.il", " במבי עודכנו שאין תשלום","") ;  
+         //         } else {  
+         //            //  echo $server_output;
+         //              $ret['message']	= __( 'Error submitting the form', 'dxef' );
+         //         }
     
+   // 
+   //      //    } catch (Exception $e) {    
+         //        $ret['message']	= "שליחת ההודעה נכשלה, אנא נסו שנית";
+         //        mail(  "treut@cambium.co.il", " במבי לא עודכנו שאין תשלום","לא עודכנו") ;  
     
-             } catch (Exception $e) {    
-                 $ret['message']	= "שליחת ההודעה נכשלה, אנא נסו שנית";
-                 mail(  "treut@cambium.co.il", " במבי לא עודכנו שאין תשלום","לא עודכנו") ;  
-    
-             }
-         }
+   //      //    }
+         //}
     
     
     

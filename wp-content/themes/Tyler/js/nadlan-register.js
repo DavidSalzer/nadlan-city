@@ -558,12 +558,14 @@ function saveUser() {
             $(".check-alert").removeClass("check-alert");
 
             if (terms && valid) {
+                showLoader();
                 //if valid save post in db
                 $.post('wp-admin/admin-ajax.php', {
                     data: encodeURI(JSON.stringify(dataObj)),
                     action: 'addSystemUser'
                 },
             function (data) {
+                hideLoader();
                 if (data) {
                     if (data[data.length - 1] != "}") {
                         data = data.slice(0, -1);
@@ -627,9 +629,11 @@ function saveUser() {
                     }
                     else {
                         alert("הרשמך התקבלה, מספר הזמנה:" + result.data + " . סיכום ההזמנה ישלח במייל.");
+                        $("#nadlan-register-form input,#nadlan-register-form select").val("");
+                        $("#siugnUpWithPay,#siugnUp").hide();
                         if (dataObj.toPAy) {
                             $.post('wp-admin/admin-ajax.php', {
-                                price: getTotalSum(),
+                                price: dataObj.price,
                                 contractId: result.data,
                                 action: 'payInPelecard'
                             },
@@ -644,7 +648,7 @@ function saveUser() {
 
                         }
                         else {
-                            $("#nadlan-register-form input,#nadlan-register-form select").val("");
+                            //$("#nadlan-register-form input,#nadlan-register-form select").val("");
                             window.location = domain + "?page_id=" + signupNum;
                         }
                     }
@@ -746,6 +750,13 @@ function checkIfDateIsValid() {
     return false;
 }
 
+function showLoader(){
+    $("#nadlan-mask").show();
+}
+
+function hideLoader(){
+    $("#nadlan-mask").hide();
+}
 //*************************upload image************************
 
 function uploaduserImage() {

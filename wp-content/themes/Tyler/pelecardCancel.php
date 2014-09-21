@@ -45,12 +45,12 @@
                                               
                 try {
                     $token = $client->fnAuthenticate('4909','test1234');                  
-                    $result = $client->fnUpdatePayment($token,$contractID,$arrPayment); 
+                    $result = $client->fnUpdatePayment($token,$contractID,$arrPayment,0); 
                     
                     if($result=="success"){
                         mail(  "treut@cambium.co.il", "update bmby after cancel payment work ",$contractID ) ;  
                         
-                        die();
+                      
                     }
     
                 }
@@ -61,7 +61,7 @@
             }
         }
 
-    updateBmbyNotPay( $_SESSION['Fname'],$_SESSION['Lname'],$_SESSION['Phone_Mobile'],$_SESSION['Email']);
+    //updateBmbyNotPay( $_SESSION['Fname'],$_SESSION['Lname'],$_SESSION['Phone_Mobile'],$_SESSION['Email']);
 
     mail( "treut@cambium.co.il", "התשלום נכשל ", $_REQUEST['result']) ;    
     header("Location:". home_url( '/' )."?page_id=665");

@@ -30,6 +30,9 @@
                 $priceincvat = get_post_meta($post->ID, 'wpcf-priceincvat',true);
                 $price = get_post_meta($post->ID, 'wpcf-price',true);
                 $Reference = "nr_".$contractID;
+
+                $_SESSION['price'] = $priceincvat;
+
                 //update bmby
                 $arrPayment=array(  
                             "Reference"=>$Reference,
@@ -48,12 +51,12 @@
                       echo $token;    
                       echo $contractID;
                     print_r($arrPayment); 
-                    $result = $client->fnUpdatePayment($token,$contractID,$arrPayment); 
+                    $result = $client->fnUpdatePayment($token,$contractID,$arrPayment,1); 
                     echo $result;
                     if($result=="success"){
                         echo $result;
                         //mail(  $email, "התשלום עבד ","") ;  
-                        mail(  "treut@cambium.co.il", "התשלום עבד ",$contractID ) ;  
+                        mail(  "treut@cambium.co.il", "pay success and update bmby ",$contractID ) ;  
                         header("Location:". home_url( '/' )."?page_id=663");
                         die();
                     }
@@ -62,7 +65,7 @@
                 catch(Exception $e) {
                     echo 'Message: clientid' .$e;
                     //mail( $email, "התשלום  לא עבד ","") ;  
-                    mail(  "treut@cambium.co.il", " התשלום   לא עבד העידכון בבמבי של התשלום לא עבד",$e) ;  
+                    mail(  "treut@cambium.co.il", " pay success and not! update bmby ",$e) ;  
                    header("Location:". home_url( '/' )."?page_id=665");
                         die();
                     echo 'client';
@@ -71,6 +74,6 @@
             }
         }
     
-        mail( "treut@cambium.co.il", "התשלום לא עבד - אין מספר חוזה ","") ;    
+        mail( "treut@cambium.co.il", "pay not success ","") ;    
     
 ?>
