@@ -94,6 +94,17 @@
 
     <a href="<?php echo home_url( '/' ); ?>?page_id=48" class="btn btn-lg btn-secondary sign-up-btn">הירשם און ליין</a>
 </div>
+
+<div id="contact-phone-btn"></div>
+<div id="contact-popup">
+    <span class="triangle"></span>
+    <div id="contact-popup-title">להרשמה טלפונית</div>
+    <input type="text" value="" name="contact-phone" placeholder="מספר טלפון">
+    <div id="contact-success">תודה על פנייתך. נציגינו יחזרו אליך בהקדם</div>
+    <div id="contact-popup-error">*נא להזין מספר טלפון תקין</div>
+    <div id="contact-popup-sign-btn" class="next-page"></div>
+</div>
+
 <style type="text/css">
     @media only screen and (max-width: 40.063em) {
         #recaptcha_area, #recaptcha_table {
@@ -401,6 +412,66 @@
     
         echo json_encode( $ret );
         die;
+    }
+    
+    function phoneContact(){
+    
+        $ret = array( 'sent' => false, 'error' => false, 'message' => '' );
+    
+         // require a name from user
+        if( trim( $_POST['contact-phone'] ) === '' ) {
+    
+            $ret['message']	= "שכחת להזין מספר טלפון";
+            $ret['error']	= true;
+        } 
+        else {
+    
+            $phone = trim( $_POST['phone'] );
+        }
+    
+          if ( !$ret['error'] ) {
+    
+          $sendObj = array( 'Destination' => $phone,IP=>$_SERVER['REMOTE_ADDR'],'CompanyID '=>'143','ProjectID'=>'4909','Password'=>'pwd@4909' ,'Token'=>'7276dd1bdb78020059d8e2f9aeda4523');
+        try {
+    
+                $ch = curl_init();
+    
+                curl_setopt($ch, CURLOPT_URL,"http://noname.bmby.com/Asterisk/Calling.php");
+                curl_setopt($ch, CURLOPT_POST, 1);
+                curl_setopt($ch, CURLOPT_POSTFIELDS,http_build_query($sendObj));
+    
+                // receive server response ...
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    
+                $server_output = curl_exec ($ch);
+    
+                curl_close ($ch);
+    
+                // further processing ....
+                if (strpos($server_output,"Response=1")>-1) { 
+                      $ret['sent']	= true;
+                      $ret['message']	="send";
+                      //$ret['redirect']=home_url()."?page_id=1199";
+                     // mail(  "treut@cambium.co.il", "contact work","1") ;  
+                     //  wp_redirect( home_url()."?page_id=1199" );
+                       //header("Location:". home_url( '/' )."?page_id=1199");
+                       //exit();
+                 } else {  
+                    //  echo $server_output;
+                    mail(  "treut@cambium.co.il", "contact not work","0") ;  
+                      $ret['message']	="שליחת ההודעה נכשלה, אנא נסו שנית";
+                 }
+    
+    
+            } catch (Exception $e) {    
+                 mail(  "treut@cambium.co.il", "contact not work","0") ;  
+                $ret['message']	= "שליחת ההודעה נכשלה, אנא נסו שנית";
+    
+            }
+    
+            echo json_encode( $ret );
+        die;
+    }
     }
     // Register widget
     register_widget( 'Ef_Contact_Widget' );

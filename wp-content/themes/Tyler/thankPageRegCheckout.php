@@ -34,6 +34,8 @@
     var google_conversion_format = "3";
     var google_conversion_color = "ffffff";
     var google_conversion_label = "Kx8dCN6rklYQsKTD1wM";
+    var google_conversion_value = <?php echo $_SESSION['price'];?>;
+var google_conversion_currency = "ILS";
     var google_remarketing_only = false;
     /* ]]> */
 </script>
@@ -41,7 +43,7 @@
 </script>
 <noscript>
     <div style="display:inline;">
-        <img height="1" width="1" style="border-style:none;" alt="" src="//www.googleadservices.com/pagead/conversion/988860976/?label=Kx8dCN6rklYQsKTD1wM&amp;guid=ON&amp;script=0" />
+        <img height="1" width="1" style="border-style:none;" alt="" src="//www.googleadservices.com/pagead/conversion/988860976/?value=<?php echo $_SESSION['price'];?>&amp;currency_code=ILS&amp;label=Kx8dCN6rklYQsKTD1wM&amp;guid=ON&amp;script=0"/>
     </div>
 </noscript>
 

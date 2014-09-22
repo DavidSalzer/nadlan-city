@@ -224,7 +224,7 @@ header ul ul {
 }
 
 .text-img {
-    background: url("../images/text.png") no-repeat top left;
+    background: url("../images/text1.png") no-repeat top left;
     background-size: contain;
     width: 399px;
     height: 100px;
@@ -394,6 +394,95 @@ form.contact-us {
 
 #tile_contact h2 {
     font-size: 26px;
+}
+
+#contact-phone-btn{
+    cursor: pointer;
+position: fixed;
+top: 420px;
+left: 0;
+background-color: #ffffff;
+width: 63px;
+height: 65px;
+background-image: url("../images/phone.png");
+z-index: 16;
+border-radius: 0px 31px 31px 0px;
+}
+
+#contact-phone-btn:hover, #contact-phone-btn.selected {
+background-color: #ffda00;
+}
+
+#contact-popup{
+    display: none; 
+width: 586px;
+height: 208px;
+background-color: #ffffff;
+position: fixed;
+top: 352px;
+left: 96px;
+color: #428bca;
+z-index: 40;
+}
+
+#contact-popup .triangle{
+    position: absolute;
+background-image: url("../images/triangle.png");
+width: 50px;
+height: 57px;
+left: -35px;
+top: 72px;
+}
+
+#contact-popup-title{
+    text-align: center;
+margin-top: 27px;
+font-size: 24px;
+margin-bottom: 16px;
+}
+
+#contact-popup input{
+    width: 80%;
+height: 43px;
+font-size: 19px;
+position: absolute;
+border: 2px solid #e8e8e8;
+left: 0;
+right: 0;
+margin: auto;
+}
+#contact-success {
+    text-align: center;
+    margin-top: 81px;
+    font-size: 24px;
+    margin-bottom: 16px;
+    position: relative;
+    display: none;
+}
+#contact-popup-error {
+    position: absolute;
+    bottom: 20px;
+    left: 42px;
+    font-size: 15px;
+    display: none;
+}
+
+#contact-popup-sign-btn{
+    margin: auto;
+width: 166px;
+height: 43px;
+border: 2px solid #e8e8e8;
+background-color: #428bca;
+color: white;
+cursor: pointer;
+position: absolute;
+line-height: 45px;
+text-align: center;
+font-size: 25px;
+border-radius: 3px;
+right: 0;
+left: 0;
+bottom: 20px;
 }
 /********************register form********************/
 #nadlan-register-form label {

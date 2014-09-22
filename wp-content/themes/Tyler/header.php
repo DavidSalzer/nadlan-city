@@ -3,8 +3,7 @@
     <head>
         <meta charset="<?php bloginfo('charset'); ?>" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-        <meta property="og:image" content="<?php echo home_url( '/' ); ?>/wp-content/themes/Tyler/images/logo_merkaz-01.png" />
-
+        <meta property="og:image" content="<?php echo home_url( '/' ); ?>/wp-content/themes/Tyler/images/llooogggoo.jpg<?php echo "?". round(microtime(true) * 1000); ?>" />    
 
         <!--[if IE]>
         <meta name="X-UA-Compatible" content="IE=edge" >
