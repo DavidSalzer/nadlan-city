@@ -817,3 +817,14 @@ bottom: 0;
     left: auto;
     margin: 0;
 }
+
+/********************forum********************/
+
+
+.bbp-template-notice,#bbp_stick_topic_select,#bbpress-forums fieldset.bbp-form label[for=bbp_stick_topic],#bbp_topic_status_select,#bbpress-forums fieldset.bbp-form label[for=bbp_topic_status],#bbp_anonymous_website,#bbpress-forums fieldset.bbp-form label[for=bbp_anonymous_website],.form-allowed-tags{
+    display: none;
+}
+
+.bbp-template-notice.error{
+    display: block;
+}

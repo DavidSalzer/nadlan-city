@@ -950,7 +950,7 @@
                $price = $_REQUEST["price"];//round($_REQUEST["price"]*0.95);$_SESSION['price']
                $contractId = $_REQUEST["contractId"];
     
-               echo do_shortcode('[pelecard_pay_button value="' . $price . '" item_name=" כניסה לועידה - עיר הנדלן ' .$contractId. '" button_class="my-class" button_text="Pay Now"]'); 
+               echo do_shortcode('[pelecard_pay_button value="' . $price . '" item_name="' .$contractId. ' כניסה לועידה - עיר הנדלן " button_class="my-class" button_text="Pay Now"]'); 
     
            }
     

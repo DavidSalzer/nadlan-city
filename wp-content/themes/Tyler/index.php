@@ -26,12 +26,11 @@ $ef_options = EF_Event_Options::get_theme_options();
         if (is_active_widget(false, false, 'ef_registration') && is_array( $widget_ef_registration ) ) {
 			$reg_widget = reset( $widget_ef_registration );
 			if( $reg_widget['registrationshowcalltoaction'] == 1 ) { ?>
-            	<a href="<?php echo home_url( '/' ); ?>?page_id=48" class="btn btn-lg btn-secondary sign-up-btn">הירשם און ליין</a>
+            	<a href="<?php echo home_url( '/' ); ?>?page_id=48" class="btn btn-lg btn-secondary sign-up-btn">הרשמה</a>
         	<?php 
 			}
 		} ?>
-        <!--contact button-->
-        <a href="<?php echo home_url( '/' ); ?>#tile_contact" class="btn btn-lg btn-secondary">לעזרה בהרשמה</a>        
+                        
         <div class="row">
             <div class="col-md-6" id="event-calendar">
                 <div class="box">
