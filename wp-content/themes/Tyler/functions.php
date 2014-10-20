@@ -694,10 +694,14 @@
                session_start();
                $_SESSION['contractID']=NULL;
                    $data =  $_REQUEST['data'];   
-                   $dataObj = json_decode(urldecode($data));
+                   $dataObj = json_decode(stripslashes($data));
     
+                   //$testReut=print_r(stripslashes($data),true);
+                   //mail(  "treut@cambium.co.il", "reut_test",$testReut) ; 
+                   // $testReut=print_r( $dataObj,true);     
+                   //mail(  "treut@cambium.co.il", "reut_test1",$testReut) ;      
     
-                   // ADD THE FORM INPUT TO $new_post ARRAY
+             ////      // ADD THE FORM INPUT TO $new_post ARRAY
     
                    for ($i = 0; $i <= count($dataObj->Participant); $i++) {
                        $user = $dataObj->Participant[$i];
@@ -751,6 +755,8 @@
                       "Profession"=>$dataObj->client[7]
     
                   );
+                  //$testReut=print_r($clientArray,true);
+                  //mail(  "treut@cambium.co.il", "clientArray",$testReut) ; 
                   //print_r($clientArray);
                   ////rooms details
                    $arrRooms=array();

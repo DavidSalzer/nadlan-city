@@ -3,7 +3,7 @@
     <head>
         <meta charset="<?php bloginfo('charset'); ?>" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-        <meta property="og:image" content="<?php echo home_url( '/' ); ?>/wp-content/themes/Tyler/images/llooogggoo.jpg<?php echo "?". round(microtime(true) * 1000); ?>" />    
+        <meta property="og:image" content="<?php echo home_url( '/' ); ?>/wp-content/themes/Tyler/images/pointing_ad_2-01.png<?php echo "?". round(microtime(true) * 1000); ?>" />    
 
         <!--[if IE]>
         <meta name="X-UA-Compatible" content="IE=edge" >
@@ -76,6 +76,7 @@
 
     </head>
     <body <?php body_class(); ?>>
+        <div id="not-seport-html5"></div>
         <header class="nav transition">
             <a href="<?php echo esc_url(home_url()); ?>" id="logo">
                 <img src="<?php echo tyler_set_theme_logo(); ?>" alt="Logo <?php bloginfo('name'); ?>" title="<?php bloginfo('name'); ?>" />

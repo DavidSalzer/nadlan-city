@@ -105,11 +105,14 @@ jQuery(function () {
                         //    jQuery('#tile_contact form').before('<p class="info">' + data.message + '</p>');
                         //});
                     }
-                    else
-                        jQuery('#tile_contact form').before('<p class="alert">' + data.message + '</p>');
+                    else {
+                        jQuery('#tile_contact form').before('<p class="alert">הטופס לא נשלח</p>');
+                        location.reload();
+                    }
                 },
                 error: function (data) {
-                    jQuery('#tile_contact form').before('<p class="alert">' + data.message + '</p>');
+                    jQuery('#tile_contact form').before('<p class="alert">הטופס לא נשלח</p>');
+                    location.reload();
                 }
             });
         }

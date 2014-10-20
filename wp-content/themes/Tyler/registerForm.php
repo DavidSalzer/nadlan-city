@@ -161,6 +161,7 @@
                             <option value="18550">משנה למנכ"ל</option>
                             <option value="18551">מנכ"ל משותף</option>
                             <option value="18552">מנהל כספים</option>
+                            <option value="18855">בעלים</option>                            
                             <option value="18553">אחר</option>
                         </select>
                     </div>
@@ -239,6 +240,7 @@
                             <option value="18550">משנה למנכ"ל</option>
                             <option value="18551">מנכ"ל משותף</option>
                             <option value="18552">מנהל כספים</option>
+                            <option value="18855">בעלים</option> 
                             <option value="18553">אחר</option>
                         </select>
                     </div>
@@ -316,6 +318,7 @@
                             <option value="18550">משנה למנכ"ל</option>
                             <option value="18551">מנכ"ל משותף</option>
                             <option value="18552">מנהל כספים</option>
+                            <option value="18855">בעלים</option> 
                             <option value="18553">אחר</option>
                         </select>
                     </div>

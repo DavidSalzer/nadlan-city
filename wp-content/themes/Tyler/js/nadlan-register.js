@@ -561,7 +561,8 @@ function saveUser() {
                 showLoader();
                 //if valid save post in db
                 $.post('wp-admin/admin-ajax.php', {
-                    data: encodeURI(JSON.stringify(dataObj)),
+                    //data: encodeURI(JSON.stringify(dataObj)),
+                    data:(JSON.stringify(dataObj)),
                     action: 'addSystemUser'
                 },
             function (data) {

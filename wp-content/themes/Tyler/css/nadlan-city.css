@@ -131,6 +131,17 @@ footer .credits {
     margin: auto;
     display: block;
 }
+
+#not-seport-html5 {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    z-index: 2000;
+    top: 0;
+    background-color: rgb(212, 223, 233);
+    display: none;
+}
+
 /********************homepage********************/
 header ul ul {
     text-align: right;
@@ -325,38 +336,39 @@ header ul li.register a {
     font-size: 26px;
 }
 
-#nadlan-description .speakers{
+#nadlan-description .speakers {
     margin-bottom: 40px;
 }
+
 #nadlan-description .sessions {
     text-align: center;
 }
 
-#nadlan-description .sessions .session{
+#nadlan-description .sessions .session {
     margin: 15px -4.5px;
     width: 25%;
 }
 
-#nadlan-description .sessions .session .more{
+#nadlan-description .sessions .session .more {
     /*display: none;*/
     background-color: #123781;
 }
 
-#nadlan-description .sessions .session .title{
+#nadlan-description .sessions .session .title {
     color: #123781;
 }
 
-#nadlan-description .speakers-thumbs{
+#nadlan-description .speakers-thumbs {
     height: 65px;
     margin: 16px 0;
 }
 
-#nadlan-description .sessions .session .speaker{
+#nadlan-description .sessions .session .speaker {
     height: 54px;
     width: 54px;
 }
 
-#nadlan-description .sessions.condensed .session .session-inner{
+#nadlan-description .sessions.condensed .session .session-inner {
     border: 1px solid #123781;
 }
 /********************connect********************/
@@ -396,61 +408,62 @@ form.contact-us {
     font-size: 26px;
 }
 
-#contact-phone-btn{
+#contact-phone-btn {
     cursor: pointer;
-position: fixed;
-top: 420px;
-left: 0;
-background-color: #ffffff;
-width: 63px;
-height: 65px;
-background-image: url("../images/phone.png");
-z-index: 16;
-border-radius: 0px 31px 31px 0px;
+    position: fixed;
+    top: 420px;
+    left: 0;
+    background-color: #ffffff;
+    width: 63px;
+    height: 65px;
+    background-image: url("../images/phone.png");
+    z-index: 16;
+    border-radius: 0px 31px 31px 0px;
 }
 
 #contact-phone-btn:hover, #contact-phone-btn.selected {
-background-color: #ffda00;
+    background-color: #ffda00;
 }
 
-#contact-popup{
-    display: none; 
-width: 586px;
-height: 208px;
-background-color: #ffffff;
-position: fixed;
-top: 352px;
-left: 96px;
-color: #428bca;
-z-index: 40;
+#contact-popup {
+    display: none;
+    width: 586px;
+    height: 208px;
+    background-color: #ffffff;
+    position: fixed;
+    top: 352px;
+    left: 96px;
+    color: #428bca;
+    z-index: 40;
 }
 
-#contact-popup .triangle{
+#contact-popup .triangle {
     position: absolute;
-background-image: url("../images/triangle.png");
-width: 50px;
-height: 57px;
-left: -35px;
-top: 72px;
+    background-image: url("../images/triangle.png");
+    width: 50px;
+    height: 57px;
+    left: -35px;
+    top: 72px;
 }
 
-#contact-popup-title{
+#contact-popup-title {
     text-align: center;
-margin-top: 27px;
-font-size: 24px;
-margin-bottom: 16px;
+    margin-top: 27px;
+    font-size: 24px;
+    margin-bottom: 16px;
 }
 
-#contact-popup input{
+#contact-popup input {
     width: 80%;
-height: 43px;
-font-size: 19px;
-position: absolute;
-border: 2px solid #e8e8e8;
-left: 0;
-right: 0;
-margin: auto;
+    height: 43px;
+    font-size: 19px;
+    position: absolute;
+    border: 2px solid #e8e8e8;
+    left: 0;
+    right: 0;
+    margin: auto;
 }
+
 #contact-success {
     text-align: center;
     margin-top: 81px;
@@ -459,6 +472,7 @@ margin: auto;
     position: relative;
     display: none;
 }
+
 #contact-popup-error {
     position: absolute;
     bottom: 20px;
@@ -467,22 +481,22 @@ margin: auto;
     display: none;
 }
 
-#contact-popup-sign-btn{
+#contact-popup-sign-btn {
     margin: auto;
-width: 166px;
-height: 43px;
-border: 2px solid #e8e8e8;
-background-color: #428bca;
-color: white;
-cursor: pointer;
-position: absolute;
-line-height: 45px;
-text-align: center;
-font-size: 25px;
-border-radius: 3px;
-right: 0;
-left: 0;
-bottom: 20px;
+    width: 166px;
+    height: 43px;
+    border: 2px solid #e8e8e8;
+    background-color: #428bca;
+    color: white;
+    cursor: pointer;
+    position: absolute;
+    line-height: 45px;
+    text-align: center;
+    font-size: 25px;
+    border-radius: 3px;
+    right: 0;
+    left: 0;
+    bottom: 20px;
 }
 /********************register form********************/
 #nadlan-register-form label {
@@ -601,29 +615,29 @@ select, input[type=number] {
     position: absolute;
 }
 
-#nadlan-mask{
+#nadlan-mask {
     background-color: transparent;
-height: 100%;
-width: 100%;
-position: absolute;
-z-index: 2;
-display: none;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: 2;
+    display: none;
 }
 
-#nadlan-loader{
-    background-image: url("../images/ajax_loader.gif") ;
+#nadlan-loader {
+    background-image: url("../images/ajax_loader.gif");
     width: 100px;
     height: 100px;
     background-size: contain;
-position: absolute;
-left: 0;
-right: 0;
-margin: auto;
-top: 0;
-bottom: 0;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    top: 0;
+    bottom: 0;
 }
 
-#tile_registration{
+#tile_registration {
     display: none;
 }
 /********************session********************/
@@ -712,11 +726,11 @@ bottom: 0;
     font-size: 25px;
 }
 
-.schedule ul ul li a{
+.schedule ul ul li a {
     display: inline-block;
 }
 
-.sessions.list .time{
+.sessions.list .time {
     color: #242424;
     font-weight: normal;
 }
@@ -821,10 +835,10 @@ bottom: 0;
 /********************forum********************/
 
 
-.bbp-template-notice,#bbp_stick_topic_select,#bbpress-forums fieldset.bbp-form label[for=bbp_stick_topic],#bbp_topic_status_select,#bbpress-forums fieldset.bbp-form label[for=bbp_topic_status],#bbp_anonymous_website,#bbpress-forums fieldset.bbp-form label[for=bbp_anonymous_website],.form-allowed-tags{
+.bbp-template-notice, #bbp_stick_topic_select, #bbpress-forums fieldset.bbp-form label[for=bbp_stick_topic], #bbp_topic_status_select, #bbpress-forums fieldset.bbp-form label[for=bbp_topic_status], #bbp_anonymous_website, #bbpress-forums fieldset.bbp-form label[for=bbp_anonymous_website], .form-allowed-tags {
     display: none;
 }
 
-.bbp-template-notice.error{
+.bbp-template-notice.error {
     display: block;
 }
