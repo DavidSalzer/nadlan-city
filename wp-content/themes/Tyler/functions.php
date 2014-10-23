@@ -837,17 +837,18 @@
     
                      // print_r($arrParticipants);
                   }                 
-    
+                    
+                   $MediaID=$dataObj->mediaID;
     
                    $token = $client->fnAuthenticate('4909','test1234');
                    try {
     
                        //get client id
                        if ($dataObj->shoham){                              
-                           $clientid = $client->fnSetClient($token,  $clientArray,1);   
+                           $clientid = $client->fnSetClient($token,  $clientArray,1,$MediaID);   
                        }
                        else{
-                           $clientid = $client->fnSetClient($token,  $clientArray,0);
+                           $clientid = $client->fnSetClient($token,  $clientArray,0,$MediaID);
                        }
                       // echo $clientid;
                    }               
@@ -919,7 +920,7 @@
                            if($fnUpdatePayment=="success"){
                                //echo $result;
                                //mail(  $email, "התשלום עבד ","") ;  
-                               mail(  "treut@cambium.co.il", "update bmby not paying in site",$contractID ) ;                                 
+                              // mail(  "treut@cambium.co.il", "update bmby not paying in site",$contractID ) ;                                 
                            }
     
                        }

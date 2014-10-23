@@ -66,7 +66,12 @@ function init() {
     setTimeout(function () {
         $(window).scrollTop(0);
     }, 500);
-     
+
+    //save mediaId
+    if ((location.search.indexOf("media=") > -1) && (localStorage)) {
+        localStorage.setItem("media", window.location.search.split("media=")[1]);
+    }
+
 }
 
 //sort selects element
@@ -88,7 +93,7 @@ function sortSelect(selElem) {
     return;
 }
 
-function getTotalSum(){
+function getTotalSum() {
     return sum.val().slice(0, -4);
 }
 //*************************navigation and validation************************
@@ -268,7 +273,7 @@ function updatepaymentDetails() {
             $(".nadlan-tooltip").hide();
             $("#payment-checkbox-2").hide();
             $("#payment-checkbox-1").hide();
-             $("#payment-checkbox-1").hide().prop('checked', true);
+            $("#payment-checkbox-1").hide().prop('checked', true);
             $("#payment-checkbox-2").hide().prop('checked', true);
             $("#payment-checkbox-3").hide().prop('checked', false);
         }
@@ -305,10 +310,10 @@ function updatePrice() {
 
         //if without night -> no check how mach days
         if (roomTypeVal == "0") {
-            sum.val(priceArr[roomTypeVal]+' ש"ח');
+            sum.val(priceArr[roomTypeVal] + ' ש"ח');
         }
         else {
-            sum.val(priceArr[roomTypeVal][daysNum - 1]+' ש"ח');
+            sum.val(priceArr[roomTypeVal][daysNum - 1] + ' ש"ח');
         }
 
         return;
@@ -447,11 +452,27 @@ function saveUser() {
     }
 
     //if is shoham
-    if(location.search.indexOf("shoham")>-1){
+    if (location.search.indexOf("shoham") > -1) {
         dataObj.shoham = true;
     }
     else {
         dataObj.shoham = false;
+    }
+
+    //save mediaId
+    if (location.search.indexOf("media=") > -1) {
+        //if (localStorage) {
+        //    localStorage.setItem("media", window.location.search.split("media=")[1]);
+        //}
+        dataObj.mediaID = window.location.search.split("media=")[1];
+    }
+    else {
+        if (localStorage && localStorage.getItem("media")) {
+            dataObj.mediaID = localStorage.getItem("media");
+        }
+        else {
+            dataObj.mediaID = "";
+        }
     }
 
     //if the sum is not 0
@@ -562,7 +583,7 @@ function saveUser() {
                 //if valid save post in db
                 $.post('wp-admin/admin-ajax.php', {
                     //data: encodeURI(JSON.stringify(dataObj)),
-                    data:(JSON.stringify(dataObj)),
+                    data: (JSON.stringify(dataObj)),
                     action: 'addSystemUser'
                 },
             function (data) {
@@ -751,11 +772,11 @@ function checkIfDateIsValid() {
     return false;
 }
 
-function showLoader(){
+function showLoader() {
     $("#nadlan-mask").show();
 }
 
-function hideLoader(){
+function hideLoader() {
     $("#nadlan-mask").hide();
 }
 //*************************upload image************************

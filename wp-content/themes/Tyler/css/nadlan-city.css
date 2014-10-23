@@ -419,6 +419,7 @@ form.contact-us {
     background-image: url("../images/phone.png");
     z-index: 16;
     border-radius: 0px 31px 31px 0px;
+    display: none;
 }
 
 #contact-phone-btn:hover, #contact-phone-btn.selected {
@@ -667,6 +668,9 @@ select, input[type=number] {
 
 .sessions.list .session .speaker img {
     float: right;
+   -webkit-filter: grayscale(1); -webkit-filter: grayscale(100%); -moz-filter: grayscale(100%);
+filter: gray; filter: grayscale(100%);
+/*filter: url(desaturate.svg#greyscale);*/
 }
 
 .sessions.list .session .speaker .name {

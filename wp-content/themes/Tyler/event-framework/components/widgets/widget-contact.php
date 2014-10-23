@@ -66,6 +66,7 @@
                 <input type="text" name="contactLastName" placeholder="שם משפחה" />
                 <input type="text" name="phone" placeholder="<?php _e('Number', 'dxef'); ?>" />
                 <input type="text" name="email" placeholder="<?php _e('Email', 'dxef'); ?>" />
+                <input type="hidden" name="mediaId" id="mediaIdInput" />
             </div>
 
         </div>
@@ -186,292 +187,317 @@
 <br /><br />
 <input type="hidden" name="submitted" value="1" /><?php
     
-        }
-    }
-    // Ajax code for send contect email
-    // add_action('wp_ajax_nopriv_send_contact_email', 'ef_ajax_send_contact_email');
-    //add_action('wp_ajax_send_contact_email', 'ef_ajax_send_contact_email');
-    
-    add_action('wp_ajax_nopriv_send_contact_email', 'sendBamby');
-    add_action('wp_ajax_send_contact_email', 'sendBamby');
-    /**
-     * Ajax Code Contect Email
-     * 
-     * Handle to send contact
-     * email functionality
-     * 
-     * @package Event Framework
-     * @since 1.0.0
-     */
-    function ef_ajax_send_contact_email() {
-    
-        $ret = array( 'sent' => false, 'error' => false, 'message' => '' );
-    
-        $recaptchapublickey		= isset( $_POST['recaptcha_publickey'] ) ? $_POST['recaptcha_publickey'] : '';
-        $recaptchaprivatekey	= isset( $_POST['recaptcha_privatekey'] ) ? $_POST['recaptcha_privatekey'] : '';
-        $contactemail			= isset( $_POST['contact_email'] ) ? $_POST['contact_email'] : '';
-    
-        if( !empty( $recaptchapublickey ) && !empty( $recaptchaprivatekey ) ) {
-    
-            $resp = recaptcha_check_answer( $recaptchaprivatekey, $_SERVER["REMOTE_ADDR"], $_POST["recaptcha_challenge_field"], $_POST["recaptcha_response_field"] );
-    
-            // check reCaptcha
-            if( !$resp || !$resp->is_valid ) {
-    
-                $ret['message'] = __('The reCAPTCHA wasn\'t entered correctly. Go back and try it again.!', 'dxef');
-                $ret['error'] = true;
             }
         }
+        // Ajax code for send contect email
+        // add_action('wp_ajax_nopriv_send_contact_email', 'ef_ajax_send_contact_email');
+        //add_action('wp_ajax_send_contact_email', 'ef_ajax_send_contact_email');
     
-        // require a name from user
-        if( trim( $_POST['contactName'] ) === '' ) {
+        add_action('wp_ajax_nopriv_send_contact_email', 'sendBamby');
+        add_action('wp_ajax_send_contact_email', 'sendBamby');
+        /**
+         * Ajax Code Contect Email
+         * 
+         * Handle to send contact
+         * email functionality
+         * 
+         * @package Event Framework
+         * @since 1.0.0
+         */
+        function ef_ajax_send_contact_email() {
     
-            $ret['message']	= __( 'Forgot your name!', 'dxef' );
-            $ret['error']	= true;
-        } else {
+            $ret = array( 'sent' => false, 'error' => false, 'message' => '' );
     
-            $name	= trim( $_POST['contactName'] );
-        }
+            $recaptchapublickey		= isset( $_POST['recaptcha_publickey'] ) ? $_POST['recaptcha_publickey'] : '';
+            $recaptchaprivatekey	= isset( $_POST['recaptcha_privatekey'] ) ? $_POST['recaptcha_privatekey'] : '';
+            $contactemail			= isset( $_POST['contact_email'] ) ? $_POST['contact_email'] : '';
     
-        // need valid email
-        if( trim($_POST['email']) === '' ) {
+            if( !empty( $recaptchapublickey ) && !empty( $recaptchaprivatekey ) ) {
     
-            $ret['message'] = __('Forgot to enter in your e-mail address.', 'dxef');
-            $ret['error'] = true;
-        } else if ( !preg_match( "/^[[:alnum:]][a-z0-9_.-]*@[a-z0-9.-]+\.[a-z]{2,4}$/i", trim( $_POST['email'] ) ) ) {
+                $resp = recaptcha_check_answer( $recaptchaprivatekey, $_SERVER["REMOTE_ADDR"], $_POST["recaptcha_challenge_field"], $_POST["recaptcha_response_field"] );
     
-            $ret['message'] = __('You entered an invalid email address.', 'dxef');
-            $ret['error'] = true;
-        } else {
+                // check reCaptcha
+                if( !$resp || !$resp->is_valid ) {
     
-            $email = trim($_POST['email']);
-        }
+                    $ret['message'] = __('The reCAPTCHA wasn\'t entered correctly. Go back and try it again.!', 'dxef');
+                    $ret['error'] = true;
+                }
+            }
     
-         // require a name from user
-        if( trim( $_POST['phone'] ) === '' ) {
+            // require a name from user
+            if( trim( $_POST['contactName'] ) === '' ) {
     
-            $ret['message']	= "שכחת להזין מספר טלפון";
-            $ret['error']	= true;
-        } else {
-    
-            $phone = trim( $_POST['phone'] );
-        }
-    
-    
-    
-        // we need at least some content
-        if( trim( $_POST['comments'] ) === '' ) {
-    
-            $ret['message'] = __('You forgot to enter a message!', 'dxef');
-            $ret['error'] = true;
-        } else {
-    
-            if( function_exists( 'stripslashes' ) ) {
-    
-                $comments = stripslashes( trim($_POST['comments']) );
+                $ret['message']	= __( 'Forgot your name!', 'dxef' );
+                $ret['error']	= true;
             } else {
     
-                $comments = trim( $_POST['comments'] );
+                $name	= trim( $_POST['contactName'] );
             }
-        }
-        // upon no failure errors let's email now!
-        if ( !$ret['error'] ) {
     
-            $subject	= __('Submitted message from ', 'dxef') . $name;
-            $body		= __('Name:', 'dxef') . " $name \n\n" . __('Email:', 'dxef') . " $email \n\n " . __('Phone:', 'dxef') . " $phone \n\n" . __('Comments:', 'dxef') . " $comments";
-            $headers	= 'From: ' . $contactemail . "\r\n" . 'Reply-To: ' . $email . "\r\n";
+            // need valid email
+            if( trim($_POST['email']) === '' ) {
     
-            try {
-    
-                wp_mail($contactemail, $subject, $body, $headers);
-                $ret['sent']	= true;
-                $ret['message']	= __('Your email was sent.', 'dxef');
-    
-            } catch (Exception $e) {
-    
-                $ret['message']	= __( 'Error submitting the form', 'dxef' );
-    
-            }
-        }
-    
-        echo json_encode( $ret );
-        die;
-    }
-    
-    function sendBamby(){
-        $ret = array( 'sent' => false, 'error' => false, 'message' => '' );
-    
-        $recaptchapublickey		= isset( $_POST['recaptcha_publickey'] ) ? $_POST['recaptcha_publickey'] : '';
-        $recaptchaprivatekey	= isset( $_POST['recaptcha_privatekey'] ) ? $_POST['recaptcha_privatekey'] : '';
-        $contactemail			= isset( $_POST['contact_email'] ) ? $_POST['contact_email'] : '';
-    
-        if( !empty( $recaptchapublickey ) && !empty( $recaptchaprivatekey ) ) {
-    
-            $resp = recaptcha_check_answer( $recaptchaprivatekey, $_SERVER["REMOTE_ADDR"], $_POST["recaptcha_challenge_field"], $_POST["recaptcha_response_field"] );
-    
-            // check reCaptcha
-            if( !$resp || !$resp->is_valid ) {
-    
-                $ret['message'] = __('The reCAPTCHA wasn\'t entered correctly. Go back and try it again.!', 'dxef');
+                $ret['message'] = __('Forgot to enter in your e-mail address.', 'dxef');
                 $ret['error'] = true;
+            } else if ( !preg_match( "/^[[:alnum:]][a-z0-9_.-]*@[a-z0-9.-]+\.[a-z]{2,4}$/i", trim( $_POST['email'] ) ) ) {
+    
+                $ret['message'] = __('You entered an invalid email address.', 'dxef');
+                $ret['error'] = true;
+            } else {
+    
+                $email = trim($_POST['email']);
             }
-        }
     
-        // require a first name from user
-        if( trim( $_POST['contactFirstName'] ) === '' ) {
+             // require a name from user
+            if( trim( $_POST['phone'] ) === '' ) {
     
-            $ret['message']	= __( 'Forgot your name!', 'dxef' );
-            $ret['error']	= true;
-        } else {
+                $ret['message']	= "שכחת להזין מספר טלפון";
+                $ret['error']	= true;
+            } else {
     
-            $Fname 	= trim( $_POST['contactFirstName'] );
-        }
-    
-        // require a last name from user
-        if( trim( $_POST['contactLastName'] ) === '' ) {
-    
-            $ret['message']	= __( 'Forgot your name!', 'dxef' );
-            $ret['error']	= true;
-        } else {
-    
-            $Lname 	= trim( $_POST['contactLastName'] );
-        }
-    
-         // require a name from user
-        if( trim( $_POST['phone'] ) === '' ) {
-    
-            $ret['message']	= "שכחת להזין מספר טלפון";
-            $ret['error']	= true;
-        } else {
-    
-            $phone = trim( $_POST['phone'] );
-        }
-    
-        // need valid email
-        if( trim($_POST['email']) === '' ) {
-    
-            $ret['message'] = __('Forgot to enter in your e-mail address.', 'dxef');
-            $ret['error'] = true;
-        } else if ( !preg_match( "/^[[:alnum:]][a-z0-9_.-]*@[a-z0-9.-]+\.[a-z]{2,4}$/i", trim( $_POST['email'] ) ) ) {
-    
-            $ret['message'] = __('You entered an invalid email address.', 'dxef');
-            $ret['error'] = true;
-        } else {
-    
-            $email = trim($_POST['email']);
-        }
-    
-    
-        //referal
-        session_start();
-    
-        if ( !isset( $_SESSION["origURL"] ) )
-            $_SESSION["origURL"] = $_SERVER["HTTP_REFERER"];
-    
-        // upon no failure errors let's email now!
-        if ( !$ret['error'] ) {
-    
-          $sendObj = array( 'Fname' => $Fname, 'Lname' => $Lname, 'Phone' => $phone,'Email'=>$email,'AllowedMail'=>'0',IP=>$_SERVER['REMOTE_ADDR'],'ProjectID'=>'4909','Password'=>'pwd@4909' );
-         // echo json_encode($sendObj);
-            try {
-    
-                $ch = curl_init();
-    
-                curl_setopt($ch, CURLOPT_URL,"http://www.bmby.com/shared/AddClient/index.php");
-                curl_setopt($ch, CURLOPT_POST, 1);
-                curl_setopt($ch, CURLOPT_POSTFIELDS,http_build_query($sendObj));
-    
-                // receive server response ...
-                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    
-                $server_output = curl_exec ($ch);
-    
-                curl_close ($ch);
-    
-                // further processing ....
-                if (strpos($server_output,"Response=1")>-1) { 
-                      $ret['sent']	= true;
-                      $ret['message']	="send";
-                      $ret['redirect']=home_url()."?page_id=1199";
-                     // mail(  "treut@cambium.co.il", "contact work","1") ;  
-                     //  wp_redirect( home_url()."?page_id=1199" );
-                       //header("Location:". home_url( '/' )."?page_id=1199");
-                       //exit();
-                 } else {  
-                    //  echo $server_output;
-                    mail(  "treut@cambium.co.il", "contact not work","0") ;  
-                      $ret['message']	= __( 'Error submitting the form', 'dxef' );
-                 }
-    
-    
-            } catch (Exception $e) {    
-                $ret['message']	= "שליחת ההודעה נכשלה, אנא נסו שנית";
-    
+                $phone = trim( $_POST['phone'] );
             }
-        }
-    
-        echo json_encode( $ret );
-        die;
-    }
-    
-    function phoneContact(){
-    
-        $ret = array( 'sent' => false, 'error' => false, 'message' => '' );
-    
-         // require a name from user
-        if( trim( $_POST['contact-phone'] ) === '' ) {
-    
-            $ret['message']	= "שכחת להזין מספר טלפון";
-            $ret['error']	= true;
-        } 
-        else {
-    
-            $phone = trim( $_POST['phone'] );
-        }
-    
-          if ( !$ret['error'] ) {
-    
-          $sendObj = array( 'Destination' => $phone,IP=>$_SERVER['REMOTE_ADDR'],'CompanyID '=>'143','ProjectID'=>'4909','Password'=>'pwd@4909' ,'Token'=>'7276dd1bdb78020059d8e2f9aeda4523');
-        try {
-    
-                $ch = curl_init();
-    
-                curl_setopt($ch, CURLOPT_URL,"http://noname.bmby.com/Asterisk/Calling.php");
-                curl_setopt($ch, CURLOPT_POST, 1);
-                curl_setopt($ch, CURLOPT_POSTFIELDS,http_build_query($sendObj));
-    
-                // receive server response ...
-                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    
-                $server_output = curl_exec ($ch);
-    
-                curl_close ($ch);
-    
-                // further processing ....
-                if (strpos($server_output,"Response=1")>-1) { 
-                      $ret['sent']	= true;
-                      $ret['message']	="send";
-                      //$ret['redirect']=home_url()."?page_id=1199";
-                     // mail(  "treut@cambium.co.il", "contact work","1") ;  
-                     //  wp_redirect( home_url()."?page_id=1199" );
-                       //header("Location:". home_url( '/' )."?page_id=1199");
-                       //exit();
-                 } else {  
-                    //  echo $server_output;
-                    mail(  "treut@cambium.co.il", "contact not work","0") ;  
-                      $ret['message']	="שליחת ההודעה נכשלה, אנא נסו שנית";
-                 }
     
     
-            } catch (Exception $e) {    
-                 mail(  "treut@cambium.co.il", "contact not work","0") ;  
-                $ret['message']	= "שליחת ההודעה נכשלה, אנא נסו שנית";
     
+            // we need at least some content
+            if( trim( $_POST['comments'] ) === '' ) {
+    
+                $ret['message'] = __('You forgot to enter a message!', 'dxef');
+                $ret['error'] = true;
+            } else {
+    
+                if( function_exists( 'stripslashes' ) ) {
+    
+                    $comments = stripslashes( trim($_POST['comments']) );
+                } else {
+    
+                    $comments = trim( $_POST['comments'] );
+                }
+            }
+            // upon no failure errors let's email now!
+            if ( !$ret['error'] ) {
+    
+                $subject	= __('Submitted message from ', 'dxef') . $name;
+                $body		= __('Name:', 'dxef') . " $name \n\n" . __('Email:', 'dxef') . " $email \n\n " . __('Phone:', 'dxef') . " $phone \n\n" . __('Comments:', 'dxef') . " $comments";
+                $headers	= 'From: ' . $contactemail . "\r\n" . 'Reply-To: ' . $email . "\r\n";
+    
+                try {
+    
+                    wp_mail($contactemail, $subject, $body, $headers);
+                    $ret['sent']	= true;
+                    $ret['message']	= __('Your email was sent.', 'dxef');
+    
+                } catch (Exception $e) {
+    
+                    $ret['message']	= __( 'Error submitting the form', 'dxef' );
+    
+                }
             }
     
             echo json_encode( $ret );
-        die;
-    }
-    }
-    // Register widget
-    register_widget( 'Ef_Contact_Widget' );
+            die;
+        }
+    
+        function sendBamby(){       
+            $ret = array( 'sent' => false, 'error' => false, 'message' => '' );
+    
+            $recaptchapublickey		= isset( $_POST['recaptcha_publickey'] ) ? $_POST['recaptcha_publickey'] : '';
+            $recaptchaprivatekey	= isset( $_POST['recaptcha_privatekey'] ) ? $_POST['recaptcha_privatekey'] : '';
+            $contactemail			= isset( $_POST['contact_email'] ) ? $_POST['contact_email'] : '';
+    
+            if( !empty( $recaptchapublickey ) && !empty( $recaptchaprivatekey ) ) {
+    
+                $resp = recaptcha_check_answer( $recaptchaprivatekey, $_SERVER["REMOTE_ADDR"], $_POST["recaptcha_challenge_field"], $_POST["recaptcha_response_field"] );
+    
+                // check reCaptcha
+                if( !$resp || !$resp->is_valid ) {
+    
+                    $ret['message'] = __('The reCAPTCHA wasn\'t entered correctly. Go back and try it again.!', 'dxef');
+                    $ret['error'] = true;
+                }
+            }
+    
+            // require a first name from user
+            if( trim( $_POST['contactFirstName'] ) === '' ) {
+    
+                $ret['message']	= __( 'Forgot your name!', 'dxef' );
+                $ret['error']	= true;
+            } else {
+    
+                $Fname 	= trim( $_POST['contactFirstName'] );
+            }
+    
+            // require a last name from user
+            if( trim( $_POST['contactLastName'] ) === '' ) {
+    
+                $ret['message']	= __( 'Forgot your name!', 'dxef' );
+                $ret['error']	= true;
+            } else {
+    
+                $Lname 	= trim( $_POST['contactLastName'] );
+            }
+    
+             // require a name from user
+            if( trim( $_POST['phone'] ) === '' ) {
+    
+                $ret['message']	= "שכחת להזין מספר טלפון";
+                $ret['error']	= true;
+            } else {
+    
+                $phone = trim( $_POST['phone'] );
+            }
+    
+            // need valid email
+            if( trim($_POST['email']) === '' ) {
+    
+                $ret['message'] = __('Forgot to enter in your e-mail address.', 'dxef');
+                $ret['error'] = true;
+            } else if ( !preg_match( "/^[[:alnum:]][a-z0-9_.-]*@[a-z0-9.-]+\.[a-z]{2,4}$/i", trim( $_POST['email'] ) ) ) {
+    
+                $ret['message'] = __('You entered an invalid email address.', 'dxef');
+                $ret['error'] = true;
+            } else {
+    
+                $email = trim($_POST['email']);
+            }
+    
+    
+            //referal
+            session_start();
+    
+            if ( !isset( $_SESSION["origURL"] ) )
+                $_SESSION["origURL"] = $_SERVER["HTTP_REFERER"];
+    
+            // upon no failure errors let's email now!
+            if ( !$ret['error'] ) {
+    
+                switch (trim($_POST['mediaId'])):
+                    case "36433":
+                        $mediaTitle= "Facebook";
+                        break;
+                     case "33703":
+                        $mediaTitle= "Google";
+                        break;
+                    case "47906":
+                        $mediaTitle= "Gmail";
+                        break;
+                    case "47905":
+                        $mediaTitle= "Linkedin";
+                        break;
+                    case "32276":
+                        $mediaTitle= "Calcalist";
+                        break;
+                    default:
+                       $mediaTitle= "";
+                endswitch;
+                //$mediaId=trim($_POST['mediaId']);
+              $sendObj = array( 'Fname' => $Fname, 'Lname' => $Lname, 'Phone' => $phone,'Email'=>$email,'AllowedMail'=>'0',IP=>$_SERVER['REMOTE_ADDR'],'ProjectID'=>'4909','Password'=>'pwd@4909','MediaTitle'=>$mediaTitle);
+              //$ccc=print_r($sendObj,true);
+              //mail(  "treut@cambium.co.il", "sendObj",$ccc) ; 
+             // echo json_encode($sendObj);
+                try {
+    
+                    $ch = curl_init();
+    
+                    curl_setopt($ch, CURLOPT_URL,"http://www.bmby.com/shared/AddClient/index.php");
+                    curl_setopt($ch, CURLOPT_POST, 1);
+                    curl_setopt($ch, CURLOPT_POSTFIELDS,http_build_query($sendObj));
+    
+                    // receive server response ...
+                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    
+                    $server_output = curl_exec ($ch);
+    
+                    curl_close ($ch);
+    
+                    // further processing ....
+                    if (strpos($server_output,"Response=1")>-1) { 
+                          $ret['sent']	= true;
+                          $ret['message']	="send";
+                          $ret['redirect']=home_url()."?page_id=1199";
+    
+                         //mail(  "treut@cambium.co.il", "contact work",$test) ;  
+                         //  wp_redirect( home_url()."?page_id=1199" );
+                           //header("Location:". home_url( '/' )."?page_id=1199");
+                           //exit();
+                     } else {  
+                        //  echo $server_output;
+                        $ret['sent']	= false;
+                        mail(  "treut@cambium.co.il", "contact not work","0") ;  
+                          $ret['message']	= __( 'Error submitting the form', 'dxef' );
+                     }
+    
+    
+                } catch (Exception $e) {    
+                     $ret['sent']	= false;
+                    $ret['message']	= "שליחת ההודעה נכשלה, אנא נסו שנית";
+    
+                }
+            }
+    
+            echo json_encode( $ret );
+            die;
+        }
+    
+        function phoneContact(){
+    
+            $ret = array( 'sent' => false, 'error' => false, 'message' => '' );
+    
+             // require a name from user
+            if( trim( $_POST['contact-phone'] ) === '' ) {
+    
+                $ret['message']	= "שכחת להזין מספר טלפון";
+                $ret['error']	= true;
+            } 
+            else {
+    
+                $phone = trim( $_POST['phone'] );
+            }
+    
+              if ( !$ret['error'] ) {
+    
+              $sendObj = array( 'Destination' => $phone,IP=>$_SERVER['REMOTE_ADDR'],'CompanyID '=>'143','ProjectID'=>'4909','Password'=>'pwd@4909' ,'Token'=>'7276dd1bdb78020059d8e2f9aeda4523');
+            try {
+    
+                    $ch = curl_init();
+    
+                    curl_setopt($ch, CURLOPT_URL,"http://noname.bmby.com/Asterisk/Calling.php");
+                    curl_setopt($ch, CURLOPT_POST, 1);
+                    curl_setopt($ch, CURLOPT_POSTFIELDS,http_build_query($sendObj));
+    
+                    // receive server response ...
+                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    
+                    $server_output = curl_exec ($ch);
+    
+                    curl_close ($ch);
+    
+                    // further processing ....
+                    if (strpos($server_output,"Response=1")>-1) { 
+                          $ret['sent']	= true;
+                          $ret['message']	="send";
+                          //$ret['redirect']=home_url()."?page_id=1199";
+                         // mail(  "treut@cambium.co.il", "contact work","1") ;  
+                         //  wp_redirect( home_url()."?page_id=1199" );
+                           //header("Location:". home_url( '/' )."?page_id=1199");
+                           //exit();
+                     } else {  
+                        //  echo $server_output;
+                        mail(  "treut@cambium.co.il", "contact not work","0") ;  
+                          $ret['message']	="שליחת ההודעה נכשלה, אנא נסו שנית";
+                     }
+    
+    
+                } catch (Exception $e) {    
+                     mail(  "treut@cambium.co.il", "contact not work","0") ;  
+                    $ret['message']	= "שליחת ההודעה נכשלה, אנא נסו שנית";
+    
+                }
+    
+                echo json_encode( $ret );
+            die;
+        }
+        }
+        // Register widget
+        register_widget( 'Ef_Contact_Widget' );

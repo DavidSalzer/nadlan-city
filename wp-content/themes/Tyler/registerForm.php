@@ -22,6 +22,12 @@
         $signupWithPayment="641";
         $signupPaymentError="643";
     }
+
+//      1.      Facebook    MediaID=36433
+//      2.      Google        MediaID=33703
+//      3.      Gmail          MediaID=47906 
+//      4.      Linkedin      MediaID=47905
+//      5.      Calcalist      MediaID=32276
 ?>
 <script>
     var domain = "<?php echo home_url( '/' ); ?>";

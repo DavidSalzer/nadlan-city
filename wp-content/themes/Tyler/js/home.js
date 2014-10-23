@@ -1,6 +1,6 @@
-function initGallery(){
+function initGallery() {
     // init gallery
-    if(!isIE() || isIE() > 8) {
+    if (!isIE() || isIE() > 8) {
         var mediaboxLinks = jQuery('.mediabox a.post');
         mediaboxLinks.click(function (event) {
             event.preventDefault();
@@ -13,8 +13,8 @@ function initGallery(){
         });
     }
     else {
-        jQuery('.mediabox a.post').attr('target','_blank');
-    }   
+        jQuery('.mediabox a.post').attr('target', '_blank');
+    }
 }
 
 jQuery(function () {
@@ -90,6 +90,17 @@ jQuery(function () {
                 }
             }
         });
+       
+        if (location.search.indexOf("media=") > -1) {           
+            jQuery("#mediaIdInput").val(window.location.search.split("media=")[1]);
+        }
+        else {
+            if (localStorage && localStorage.getItem("media")) {
+                jQuery("#mediaIdInput").val(localStorage.getItem("media"));
+            }
+        }
+
+
         if (!hasError) {
             jQuery('#tile_contact .alert, #tile_contact .info').remove();
             jQuery.ajax({
