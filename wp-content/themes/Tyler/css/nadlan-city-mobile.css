@@ -24,6 +24,10 @@
         width: 100px;
         height: 100px;
     }
+
+    #contact-phone-btn {
+        top: 320px;
+    }
 }
 
 /*
@@ -42,6 +46,19 @@
 
     .sessions.single .session > span {
         float: right;
+    }
+
+    header ul li {
+        text-align: right;
+    }
+
+    header #menu-primary > .menu-item-has-children:after {
+        left: 15px;
+        right: auto;
+    }
+
+    #contact-phone-btn {
+        top: 277px;
     }
 }
 
@@ -119,6 +136,10 @@
     #nadlan-register-form button {
         padding-right: 5px;
         padding-left: 5px;
+    }
+
+    #contact-phone-btn {
+        top: 179px;
     }
 }
 

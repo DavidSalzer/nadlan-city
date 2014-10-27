@@ -56,10 +56,15 @@ function stickyTitles(stickies) {
     }
 }
 
+// expand menu on click
+jQuery('.schedule > ul li a').click(function (event) {
+    event.preventDefault();
+    jQuery(this).toggleClass('expand');
+});
 
 
 function updateSchedule(timestamp, location, track) {
-    
+
     jQuery.ajax({
         type: "POST",
         dataType: "json",
@@ -148,17 +153,47 @@ jQuery(document).ready(function () {
     jQuery(window).on("resize", newStickies.load);
     jQuery(window).on("scroll", newStickies.scroll);
 
-    jQuery(document).on('click', '.schedule a[data-timestamp], .schedule a[data-location], .schedule a[data-track]', function (e) {
-        e.preventDefault();
-        updateSchedule(jQuery(this).attr('data-timestamp'), jQuery(this).attr('data-location'), jQuery(this).attr('data-track'));
+    //jQuery(document).on('click', '.schedule a[data-timestamp], .schedule a[data-location], .schedule a[data-track]', function (e) {
+    //    e.preventDefault();
+    //    updateSchedule(jQuery(this).attr('data-timestamp'), jQuery(this).attr('data-location'), jQuery(this).attr('data-track'));
+
+    //    if ($('.schedule li').children('ul').hasClass('hover')) {
+    //        $('.schedule li').children('ul').removeClass('hover');
+    //    }
+    //});
+
+    $('body').on('click', '.schedule li', function (e) {
+        e.stopPropagation();
+        if ($('.schedule li').children('ul').hasClass('hover')) {
+            $('.schedule li').children('ul').removeClass('hover');
+        }
+        $(this).children('ul').addClass("hover");
     });
 
-    // expand menu on click
-jQuery('.schedule > ul li a').click(function (event) {
-    event.preventDefault();
-    jQuery(this).toggleClass('expand');
-});
-   
+    $('body').on('click', '.schedule li ul li a', function (e) {
+        e.stopPropagation();
+        e.preventDefault();
+        updateSchedule(jQuery(this).attr('data-timestamp'), jQuery(this).attr('data-location'), jQuery(this).attr('data-track'));
+        if ($('.schedule li').children('ul').hasClass('hover')) {
+            $('.schedule li').children('ul').removeClass('hover');
+        }
+    });
+
+    $('body').on('click', function (e) {
+        if ($('.schedule li').children('ul').hasClass('hover')) {
+            $('.schedule li').children('ul').removeClass('hover');
+        }
+    })
+    //$('.schedule li').hover(
+    //	function () {
+    //	    $(this).children('ul').addClass("hover");
+    //	}, function () {
+    //	    $(this).children('ul').removeClass("hover");
+    //	}
+    //);
+
+
+
     //for filter by days
     if (window.location.hash && window.location.hash != 0) {
         var hash = window.location.hash.split("/");

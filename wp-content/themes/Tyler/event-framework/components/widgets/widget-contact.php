@@ -96,7 +96,7 @@
     <a href="<?php echo home_url( '/' ); ?>?page_id=48" class="btn btn-lg btn-secondary sign-up-btn">הירשם און ליין</a>
 </div>
 
-<div id="contact-phone-btn"></div>
+
 <div id="contact-popup">
     <span class="triangle"></span>
     <div id="contact-popup-title">להרשמה טלפונית</div>

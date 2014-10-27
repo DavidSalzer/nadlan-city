@@ -5,22 +5,29 @@
     body {
         padding-top: 101px;
     }
+
     body.header-menu-open {
         padding-top: 0;
     }
-    header,header.sticky {
+
+    header, header.sticky {
         position: fixed;
-        top:0; left: 0;
+        top: 0;
+        left: 0;
         width: 100%;
-        height: auto; max-height: 100%;
+        height: auto;
+        max-height: 100%;
         z-index: 1000;
     }
+
     body.header-menu-open header {
         position: relative !important;
     }
+
     body.header-menu-open #backdrop {
         display: block;
     }
+
     header.transition, header .transition {
         -webkit-transition: none;
         -moz-transition: none;
@@ -28,18 +35,22 @@
         -o-transition: none;
         transition: none;
     }
+
     header #logo, header.sticky #logo {
         display: block;
         float: left;
         position: relative;
-        max-width: 50%; max-height: 100%;
+        max-width: 50%;
+        max-height: 100%;
         margin: 21px 23px;
         text-align: left;
         overflow: visible;
     }
+
     header .navbar {
         margin-bottom: 0;
     }
+
     header .navbar-header > * {
         padding: 11px 14px;
         margin: 26px 22px 0 0;
@@ -54,6 +65,7 @@
         margin: 0;
         height: auto;
     }
+
     header #tyler-navigation.text-fit {
         max-height: none;
     }
@@ -66,6 +78,7 @@
         color: #fff;
         text-align: left;
     }
+
     header > ul li.expand {
         background-color: #5c5c5c;
     }
@@ -73,9 +86,11 @@
     header ul ul {
         position: relative;
     }
+
     header ul ul ul {
         display: block;
     }
+
     header ul ul li {
         background-color: #818181;
         border: none;
@@ -85,10 +100,12 @@
         content: "+";
         font-size: 2em;
         position: absolute;
-        top: -1px; right: 15px;
+        top: -1px;
+        right: 15px;
         font-weight: 300;
     }
-    header #menu-primary >.menu-item-has-children.expand:after {
+
+    header #menu-primary > .menu-item-has-children.expand:after {
         content: "-";
     }
 
@@ -102,17 +119,18 @@
         font-size: 30px;
         white-space: nowrap;
     }
+
     .heading .nav a {
         color: #fff;
         margin: 0 8px;
     }
 
-    .row.row-sm,.row.row-xs {
+    .row.row-sm, .row.row-xs {
         margin-top: -15px;
         margin-bottom: -15px;
     }
-    .row.row-sm > *[class^=col-md], .row.row-sm > *[class^=col-lg],
-    .row.row-xs > *[class^=col-sm], .row.row-xs > *[class^=col-md], .row.row-xs > *[class^=col-lg]{
+
+    .row.row-sm > *[class^=col-md], .row.row-sm > *[class^=col-lg], .row.row-xs > *[class^=col-sm], .row.row-xs > *[class^=col-md], .row.row-xs > *[class^=col-lg] {
         padding-top: 15px;
         padding-bottom: 15px;
     }
@@ -125,22 +143,29 @@
     .landing, .landing .bg {
         height: 922px;
     }
+
     .landing h1 {
-        font-size: 60px; font-weight: normal;
+        font-size: 60px;
+        font-weight: normal;
         padding-top: 68px;
     }
+
     .landing .lead {
-        font-size: 22px; font-weight: normal;
+        font-size: 22px;
+        font-weight: normal;
         height: 60px;
     }
+
     .landing .box {
         position: relative;
         max-width: 474px;
         margin: 30px auto;
     }
+
     .landing i[class^=icon] {
         left: 34px;
     }
+
     .landing i.icon-map-marker {
         left: 36px;
     }
@@ -150,19 +175,24 @@
         position: relative;
         border-radius: 6px;
         color: #fff;
-        font-size: 34px; font-weight: 300;
+        font-size: 34px;
+        font-weight: 300;
         padding: 21px 32px;
         overflow: auto;
         background-color: #e83a56;
     }
+
     .timecounter:before {
         display: none;
         content: "";
     }
-    .timecounter>div {
+
+    .timecounter > div {
         display: block;
-        width: 100%; height: 100%;
+        width: 100%;
+        height: 100%;
     }
+
     .timecounter .title, .timecounter .time {
         display: block;
         vertical-align: middle;
@@ -170,6 +200,7 @@
         padding: 0;
         text-align: center;
     }
+
     .timecounter .title {
         margin-bottom: 15px;
     }
@@ -180,29 +211,36 @@
         height: 282px;
         line-height: 24px;
     }
+
     .speakers .speaker.featured .speaker-inner:after {
         top: 10px;
         right: 10px;
         font-size: 32px;
         background-size: 317px auto;
         background-position: -277px 0;
-        width: 35px; height: 35px;
+        width: 35px;
+        height: 35px;
     }
+
     .speakers .photo {
         width: 149px;
         margin-bottom: 5px;
     }
+
     .speakers .name {
         font-size: 18px;
         height: 48px;
         margin: 0 0 10px;
     }
-    .speakers .name>span {
+
+    .speakers .name > span {
         max-height: 48px;
     }
+
     .speaker .description {
         font-size: 11px;
     }
+
     .speakers .speaker .view {
         line-height: 36px;
         font-size: 12px;
@@ -212,22 +250,29 @@
     .connect {
         padding: 20px;
     }
+
     .connect:before {
         display: none;
         content: "";
         padding: 0 40px;
     }
+
     .connect .connect-inner {
         display: block;
-        width: 100%; min-height: 0;
+        width: 100%;
+        min-height: 0;
     }
+
     .connect .connect-inner > span, .connect .connect-inner .links {
         display: block;
-        width: 100%; height: auto;
-        padding: 10px 0; margin: 0;
+        width: 100%;
+        height: auto;
+        padding: 10px 0;
+        margin: 0;
         text-align: center;
         vertical-align: middle;
     }
+
     .connect .connect-inner .links {
         margin-top: 10px;
     }
@@ -238,24 +283,29 @@
         padding: 18px 18px 47px;
         font-size: 12px;
     }
+
     .sessions .session .title {
         font-size: 14px;
         line-height: 1;
         margin-bottom: 8px;
         height: 66px;
     }
-    .sessions .session .title>span {
+
+    .sessions .session .title > span {
         max-height: 66px;
     }
+
     .sessions .session .speakers-thumbs {
         margin: 12px -4px;
         height: 92px;
     }
+
     .sessions .session .speaker {
         width: 42px;
         height: 42px;
         margin: 2px 0;
     }
+
     .sessions .session .more {
         line-height: 36px;
         font-size: 12px;
@@ -266,13 +316,16 @@
     .sessions.list .time {
         padding-right: 5%;
     }
+
     .sessions.list .session-inner {
         padding: 0;
         height: auto;
     }
+
     .sessions.list .session .speaker {
         width: 33.3%;
     }
+
     .sessions.list .day-floating.fixed {
         top: 101px;
     }
@@ -281,14 +334,18 @@
     .sessions.single {
         margin: 40px 0 0;
     }
+
     .sessions.single .session > span {
         float: left;
         width: 33.3%;
     }
+
     .sessions.single .session .speakers-thumbs {
         width: 100%;
-        margin: 40px -1em 0; height: auto;
+        margin: 40px -1em 0;
+        height: auto;
     }
+
     .sessions.single .session .speaker {
         width: 25%;
     }
@@ -303,26 +360,33 @@
         margin-top: -15px;
         margin-bottom: -15px;
     }
+
     .facebook.row > div[class^=col] {
-        padding-top: 15px; padding-bottom: 15px;
+        padding-top: 15px;
+        padding-bottom: 15px;
     }
+
     .facebook .fb-event {
         height: auto;
         overflow: auto;
         font-size: 18px;
-        font-weight: 500;;
+        font-weight: 500;
+        ;
         line-height: 2em;
         padding: 41px 0;
     }
+
     .facebook .fb-event:after {
         content: " ";
         clear: both;
     }
+
     .facebook .fb-view {
         height: auto;
         padding: 46px 32px;
         text-align: right;
     }
+
     .facebook .fb-view .icon-facebook-alt {
         top: 32px;
     }
@@ -332,30 +396,37 @@
         margin-top: 0;
         margin-bottom: 0;
     }
+
     .twitter .view {
         height: auto;
         padding: 27px 32px;
         overflow: auto;
     }
+
     .twitter .view-inner {
         display: inline-block;
         text-align: left;
         float: right;
     }
+
     .twitter .view .icon-twitter-alt {
         top: 32px;
     }
+
     .twitter .tweet {
         height: 246px;
         padding: 19px;
     }
+
     .twitter .tweet.featured {
         height: 291px;
     }
+
     .twitter .tweet .text {
         font-size: 14px;
         max-height: 120px;
     }
+
     .twitter .tweet.featured .text {
         max-height: 135px;
     }
@@ -370,24 +441,29 @@
         margin-left: -15px;
         margin-right: -15px;
     }
+
     .articles:after {
         content: " ";
         clear: both;
     }
+
     .articles article {
         width: 50%;
         padding: 15px;
         float: left;
     }
+
     .articles article .image {
         float: none;
         width: 100%;
         height: 216px;
         margin-bottom: 28px;
     }
+
     .articles article .post-content {
         margin-left: 0;
     }
+
     .articles article .post-content a {
         padding: 15px 21px;
         height: 290px;
@@ -403,6 +479,7 @@
         height: 320px;
         margin-bottom: 30px;
     }
+
     .location .explore .scrollable {
         height: 240px;
     }
@@ -411,9 +488,18 @@
     .sponsor {
         margin-left: -1%;
     }
-    .sponsors-lg .sponsor { width: 50%; }
-    .sponsors-md .sponsor { width: 33.3%; }
-    .sponsors-sm .sponsor { width: 25%; }
+
+    .sponsors-lg .sponsor {
+        width: 50%;
+    }
+
+    .sponsors-md .sponsor {
+        width: 33.3%;
+    }
+
+    .sponsors-sm .sponsor {
+        width: 25%;
+    }
 
     /* contact us */
     form.contact-us button {
@@ -425,41 +511,59 @@
         padding-top: 15px;
         padding-bottom: 15px;
     }
+
     footer .col > div {
         border-radius: 4px;
         padding: 0;
     }
+
     footer .col h4 {
         padding: 26px;
         cursor: pointer;
         margin: 0;
     }
+
     footer .col.expand h4 {
         background: #5c5c5c;
     }
+
     footer .col h4:before {
         float: right;
         content: "+";
-        font-size: 2em; font-weight: 300;
+        font-size: 2em;
+        font-weight: 300;
         margin-top: -0.3em;
     }
+
     footer .col.expand h4:before {
         content: "-";
     }
+
     footer .col ul {
         display: none;
     }
+
     footer .col.expand ul {
         display: block;
     }
+
     footer .col ul a {
         display: block;
         padding: 16px 26px;
         background: #818181;
         text-decoration: none;
     }
+
     footer .col ul a:hover {
         background: #35aadc;
+    }
+
+.schedule ul li:hover > ul {
+    display: auto;
+}
+
+    .schedule .hover {
+        display: block;
     }
 }
 
@@ -474,6 +578,7 @@
     .btn {
         max-width: 100%;
     }
+
     .btn.btn-lg {
         font-size: 21px;
         padding: 17px 30px;
@@ -482,12 +587,15 @@
     h2 {
         font-size: 30px;
     }
+
     h3 {
         font-size: 20px;
     }
+
     .row h3 {
         font-size: 22px;
     }
+
     h5 {
         font-size: 16px;
     }
@@ -495,16 +603,20 @@
     body {
         padding-top: 65px;
     }
+
     header #logo, header.sticky #logo {
         margin: 16px 0 0 9px;
     }
+
     header #logo img, header.sticky #logo img {
         max-height: 33px;
     }
+
     header .navbar-header > * {
         padding: 11px 14px;
         margin: 10px;
     }
+
     header .navbar-toggle [class^=icon] {
         margin-top: 3px;
         margin-bottom: -3px;
@@ -518,21 +630,26 @@
         margin: -15px auto 10px;
         display: block;
     }
+
     .heading .container {
         display: block;
     }
+
     .heading h1 {
         display: block;
         font-size: 36px;
-        min-height: 0; height: auto;
+        min-height: 0;
+        height: auto;
         text-align: center;
     }
+
     .heading .nav {
         display: block;
         width: 100%;
         text-align: center;
         padding: 0 0 27px;
     }
+
     .heading .nav a {
         color: #fff;
         margin: 0 8px;
@@ -543,11 +660,14 @@
         width: 100%;
         margin-bottom: -1px;
     }
-    .nav-tabs>li {
+
+    .nav-tabs > li {
         float: none;
         display: block;
-        margin: 0; padding: 0;
+        margin: 0;
+        padding: 0;
     }
+
     .nav-tabs.pull-right > li > a {
         margin: 3px 0 0;
         text-align: right;
@@ -558,43 +678,58 @@
     .landing, .landing .bg {
         height: 641px;
     }
+
     .landing h1 {
         display: block;
-        font-size: 40px; font-weight: normal;
-        margin:0 0 15px; padding: 35px 0 0;
+        font-size: 40px;
+        font-weight: normal;
+        margin: 0 0 15px;
+        padding: 35px 0 0;
         height: 190px;
     }
+
     .landing h1 > span {
         display: block;
         height: 160px;
         max-height: 160px;
     }
+
     .landing .lead {
-        font-size: 20px; font-weight: normal;
-        height: 80px; max-height: 80px;
+        font-size: 20px;
+        font-weight: normal;
+        height: 80px;
+        max-height: 80px;
         margin: 0;
     }
+
     .landing .box {
         position: relative;
         /*max-width: 305px;*/
-        margin: 15px auto; padding: 5px 0 0 70px;
+        margin: 15px auto;
+        padding: 5px 0 0 70px;
         height: 105px;
     }
+
     .landing .box .sub {
         font-size: 12px;
     }
+
     .landing .box .title {
         font-size: 22px;
     }
+
     .landing .box .desc {
         font-size: 14px;
     }
+
     .landing .btn {
         margin: 16px 0;
     }
+
     .landing i[class^=icon] {
         left: 20px;
     }
+
     .landing i.icon-map-marker {
         left: 22px;
     }
@@ -604,10 +739,12 @@
         font-size: 28px;
         padding: 20px 5px;
     }
+
     .timecounter .time span.days {
         display: block;
         margin-bottom: 16px;
     }
+
     .timecounter .time span span {
         font-size: 16px;
     }
@@ -616,19 +753,23 @@
     .speakers.carousel {
         white-space: normal;
     }
+
     .speakers .speaker {
         width: 100%;
         /*max-width: 307px;*/
     }
+
     .speakers .speaker .speaker-inner {
         padding: 40px 12px;
         height: 393px;
         line-height: 24px;
     }
+
     .speakers .photo {
         width: 200px;
         margin-bottom: 17px;
     }
+
     .speakers .speaker .speaker-inner .name {
         font-size: 24px;
         height: 55px;
@@ -636,12 +777,15 @@
         position: relative;
         z-index: 20;
     }
-    .speakers .name>span {
+
+    .speakers .name > span {
         max-height: 55px;
     }
+
     .speaker .description {
         display: none;
     }
+
     .speakers .speaker .view {
         display: block;
         line-height: 61px;
@@ -652,6 +796,7 @@
     .connect .connect-inner {
         font-size: 28px;
     }
+
     .connect .connect-inner .links {
         margin-top: 0;
     }
@@ -660,37 +805,45 @@
     .sessions.carousel {
         white-space: normal;
     }
+
     .sessions .session {
         width: 100%;
         /*max-width: 307px;*/
     }
+
     .sessions .session .session-inner {
         height: 402px;
         padding: 18px 18px 47px;
         font-size: 16px;
     }
+
     .sessions.condensed .session .session-inner {
         padding-bottom: 18px;
         font-size: 16px;
         text-align: left;
         padding-bottom: 60px;
     }
+
     .sessions .session .title {
         font-size: 20px;
         margin-bottom: 8px;
         height: 90px;
     }
-    .sessions .session .title>span {
+
+    .sessions .session .title > span {
         max-height: 90px;
     }
+
     .sessions .session .speakers-thumbs {
         margin: 20px -10px;
         height: 132px;
     }
+
     .sessions .session .speaker {
         width: 62px;
         height: 62px;
     }
+
     .sessions .session .more {
         line-height: 50px;
         font-size: 16px;
@@ -702,19 +855,24 @@
         font-size: 12px;
         width: 25%;
     }
+
     .sessions.list .session-inner {
         padding: 0;
         height: auto;
     }
+
     .sessions.list .session .speaker {
         width: 100%;
     }
+
     .sessions.list .session .title {
         padding: 0;
     }
+
     .sessions.list .day-floating.fixed {
         top: 66px;
     }
+
     .sessions.list .day-floating .nav-tabs, .sessions.list .session .more {
         display: none;
     }
@@ -723,18 +881,23 @@
     .sessions.single {
         margin: 30px 0 0;
     }
+
     .sessions.single .session > span {
         float: none;
         width: 100%;
     }
+
     .sessions.single .session .speakers-thumbs {
         width: 100%;
-        margin: 30px -1em 0; height: auto;
+        margin: 30px -1em 0;
+        height: auto;
     }
+
     .sessions.single .session .speaker {
         width: 100%;
         padding: 0 1em;
     }
+
     .sessions.single .session .speaker .name > span {
         max-width: none;
     }
@@ -745,6 +908,7 @@
         font-size: 36px;
         margin: 0 0 19px;
     }
+
     .jumbotron .lead {
         color: #5b5959;
         font-size: 22px;
@@ -757,12 +921,15 @@
         padding: 46px 20px;
         font-size: 17px;
     }
+
     .facebook .fb-view .icon-facebook-alt {
         left: 10px;
     }
+
     .facebook .fb-event .num {
         font-size: 36px;
     }
+
     .facebook .fb-event {
         font-size: 14px;
     }
@@ -772,21 +939,26 @@
         padding: 27px 20px;
         font-size: 17px;
     }
+
     .twitter .view .icon-twitter-alt {
         left: 10px;
     }
+
     .twitter .tweet.featured {
         height: auto;
         padding: 35px 18px;
     }
+
     .twitter .tweet.featured .avatar {
         float: none;
     }
+
     .twitter .tweet.featured .text {
         max-height: none;
         margin: 12px 0 0;
         font-size: 24px;
     }
+
     .twitter .tweet.featured .date {
         font-size: 18px;
         margin: 1em 0 0 0;
@@ -796,6 +968,7 @@
     .mediabox a.post {
         width: 100%;
     }
+
     .mediabox-wrapper .btn-group-header {
         top: 66px;
         margin-bottom: -66px;
@@ -803,10 +976,14 @@
         float: none;
         width: 100%;
     }
+
     .mediabox-wrapper .btn-group-header .btn {
-        padding: 6px; margin: 0;
-        min-width: 0; width: 32%;
+        padding: 6px;
+        margin: 0;
+        min-width: 0;
+        width: 32%;
     }
+
     .mediabox {
         margin-top: 90px;
     }
@@ -815,20 +992,33 @@
     .articles {
         margin-bottom: 20px;
     }
+
     .articles article {
         width: 100%;
         padding: 15px;
         float: none;
     }
+
     .articles.vertical article {
         width: 100%;
     }
 
     /* sponsors */
-    .sponsors .sponsor { text-align: center; }
-    .sponsors-lg .sponsor { width: 100%; }
-    .sponsors-md .sponsor { width: 75%; }
-    .sponsors-sm .sponsor { width: 50%; }
+    .sponsors .sponsor {
+        text-align: center;
+    }
+
+    .sponsors-lg .sponsor {
+        width: 100%;
+    }
+
+    .sponsors-md .sponsor {
+        width: 75%;
+    }
+
+    .sponsors-sm .sponsor {
+        width: 50%;
+    }
 
     /* contact us */
     form.contact-us button {
@@ -846,17 +1036,18 @@
     /*
  EVENT ESPRESSO
  ------- */
-    .tkt-slctr-tbl thead th:nth-child(2){width:auto;}
+    .tkt-slctr-tbl thead th:nth-child(2) {
+        width: auto;
+    }
 }
 
 @media only screen and (max-width: 500px) {
 
-	/*.landing .bg {
+    /*.landing .bg {
 		background: #5e5e5e !important;
 	}*/
-	
-	.landing h1 {
-		height: auto;
-	}
-	
+
+    .landing h1 {
+        height: auto;
+    }
 }

@@ -497,6 +497,10 @@ function saveUser() {
             if (isPayment1 || (paymentTypeVal == "0")) {
                 var invoiceN1 = isValid($("#invoiceN1"));
                 var registrationNo = isNumeric($("#registrationNo1"));
+                if(registrationNo&&registrationNo.length!=9){
+                    registrationNo = null;
+                    $("#registrationNo1").addClass("alert");
+                }
                 var registrationAddressCity = isValid($("#registrationAddressCity1"));
                 var registrationAddressStreet = isValid($("#registrationAddressStreet1"));
                 var registrationAddressZip = isNumeric($("#registrationAddressZip1"));

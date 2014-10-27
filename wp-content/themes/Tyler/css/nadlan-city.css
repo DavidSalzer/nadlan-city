@@ -410,21 +410,22 @@ form.contact-us {
 
 #contact-phone-btn {
     cursor: pointer;
-    position: fixed;
-    top: 420px;
-    left: 0;
-    background-color: #ffffff;
-    width: 63px;
-    height: 65px;
-    background-image: url("../images/phone.png");
-    z-index: 16;
-    border-radius: 0px 31px 31px 0px;
-    display: none;
+position: fixed;
+top: 277px;
+left: 0;
+width: 129px;
+height: 41px;
+text-align: center;
+z-index: 16;
+border-radius: 0px 31px 31px 0px;
+font-weight: bold;
+background-color: #ffda00;
+color: #6d6d6d;
 }
 
-#contact-phone-btn:hover, #contact-phone-btn.selected {
+/*#contact-phone-btn:hover, #contact-phone-btn.selected {
     background-color: #ffda00;
-}
+}*/
 
 #contact-popup {
     display: none;

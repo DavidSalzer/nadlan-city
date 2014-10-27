@@ -41,11 +41,12 @@
     </div>
 </div>
 <div class="container" style="position: relative;">
-    <div>לעזרה בהרשמה 074-7290200</div><br>
+    <!--<div>לעזרה בהרשמה 074-7290200</div><br>-->
     <?php
         
         //echo do_shortcode('[pelecard_pay_button value="2" item_name=" כניסה לועידה - עיר הנדלן " button_class="my-class" button_text="Pay Now"]'); 
     ?>
+    <div id="contact-phone-btn">לעזרה בהרשמה<br>074-7290200</div>
     <div id="nadlan-mask"><div id="nadlan-loader"></div></div>
     <form id="nadlan-register-form">
         <div class="register-step" id="step-1">
