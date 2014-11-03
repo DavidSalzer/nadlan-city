@@ -211,6 +211,9 @@
            add_action( 'wp_ajax_payInPelecard', 'payInPelecard' );
            add_action( 'wp_ajax_nopriv_payInPelecard', 'payInPelecard' ); 
     
+           add_action( 'wp_ajax_addImageToUser', 'addImageToUser' );
+           add_action( 'wp_ajax_nopriv_addImageToUser', 'addImageToUser' ); 
+    
     
     
            // ******************* Misc ****************** //
@@ -837,7 +840,7 @@
     
                      // print_r($arrParticipants);
                   }                 
-                    
+    
                    $MediaID=$dataObj->mediaID;
     
                    $token = $client->fnAuthenticate('4909','test1234');
@@ -896,13 +899,13 @@
                        $_SESSION['contract_post_id'] = $contract_post_id;
                        $_SESSION['contractID'] = $contractID;
                        //$_SESSION['price'] = $dataObj->price;
-                       
+    
                        //user details
                        $_SESSION['Fname'] = $clientArray['Fname'];
                        $_SESSION['Lname'] = $clientArray['Lname'];
                        $_SESSION['Phone_Mobile'] = $clientArray['Phone_Mobile'];
                        $_SESSION['Email'] = $clientArray['Email'];
-
+    
                     $result=array("success"=>true,"data"=>$contractID);
     
                   //if not paying in site
@@ -913,7 +916,7 @@
                            "PriceIncVat"=>$dataObj->price,
                            "Price"=>$dataObj->price/1.18                    
                        );
-                               
+    
                        try {   
                            $fnUpdatePayment = $client->fnUpdatePayment($token,$contractID,$arrTotalPayment,0); 
                            //echo $result;
@@ -961,47 +964,39 @@
     
            }
     
-         //  function updateBmbyNotPay($Fname,$Lname, $phone,$email){
-    
-   //      //        $sendObj = array( 'Fname' => $Fname, 'Lname' => $Lname, 'Phone' => $phone,'Email'=>$email,'Comments'=>'יש לבצע סליקה ידנית','AllowedMail'=>'0',IP=>$_SERVER['REMOTE_ADDR'],'ProjectID'=>'4909','Password'=>'pwd@4909s' );
-         //         mail(  "treut@cambium.co.il", " הפונקציה נקראה","") ; 
-    
-   //      // // echo json_encode($sendObj);
-         //    try {
-    
-   //      //        $ch = curl_init();
-    
-   //      //        curl_setopt($ch, CURLOPT_URL,"http://www.bmby.com/shared/AddClient/index.php");
-         //        curl_setopt($ch, CURLOPT_POST, 1);
-         //        curl_setopt($ch, CURLOPT_POSTFIELDS,http_build_query($sendObj));
-    
-   //      //        // receive server response ...
-         //        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    
-   //      //        $server_output = curl_exec ($ch);
-    
-   //      //        curl_close ($ch);
-    
-   //      //        // further processing ....
-         //        if (strpos($server_output,"Response=1")>-1) { 
-         //              $ret['sent']	= true;
-         //              $ret['message']	="ההודעה נשלחה";
-    
-   //      //              mail(  "treut@cambium.co.il", " במבי עודכנו שאין תשלום","") ;  
-         //         } else {  
-         //            //  echo $server_output;
-         //              $ret['message']	= __( 'Error submitting the form', 'dxef' );
-         //         }
-    
-   // 
-   //      //    } catch (Exception $e) {    
-         //        $ret['message']	= "שליחת ההודעה נכשלה, אנא נסו שנית";
-         //        mail(  "treut@cambium.co.il", " במבי לא עודכנו שאין תשלום","לא עודכנו") ;  
-    
-   //      //    }
-         //}
-    
-    
-    
-    
-    
+       function addImageToUser(){
+            $data =  $_REQUEST['data'];   
+            $dataObj = json_decode(stripslashes($data));
+            $phone = $dataObj[0];
+            $email = $dataObj[1];
+            $id = $dataObj[2];
+            $image = $dataObj[3];
+    echo $image;
+            //$post=get_page_by_title( $dataObj[1], OBJECT, "system-user" );
+            $post_ids=get_multiple_posts_by_title($email);
+            foreach ($post_ids as $post_id) {
+                $post = get_post($post_id);
+                setup_postdata($post);
+                $content = $post->post_content;
+                echo $content;
+                if((strrpos($content, $phone)>-1)&&(strrpos($content,$id)>-1)){
+                     update_post_meta($post->ID,'wpcf-picture',$image);
+                }
+            }
+       }
+  
+       /**
+ * Retrieve posts ids given their title.
+ * Use this function if there are more than one post with the same title.
+ */
+function get_multiple_posts_by_title($title="") {
+    global $wpdb;
+    $posts_ids = array();
+ 
+    $posts = $wpdb->get_results( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE post_title = %s AND     post_type='system-user'", $title), OBJECT );
+    foreach ($posts as $post) {
+         $posts_ids[] = $post->ID;
+    }
+ 
+    return $posts_ids;
+}

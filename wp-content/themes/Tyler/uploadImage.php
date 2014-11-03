@@ -24,13 +24,16 @@
         //echo "Type: " . $file["type"] . "<br>";
         //echo "Size: " . ($file["size"] / 1024) . " kB<br>";
         //echo "Temp file: " . $file["tmp_name"] . "<br>";
-        if (file_exists("upload/" . $file["name"])) {
-          echo "upload/" . $file["name"];
-        } else {
-          move_uploaded_file($file["tmp_name"],
-          "upload/" . $file["name"]);
-          echo "upload/" . $file["name"];
-        }
+        
+        //if (file_exists("upload/" . $file["name"])) {
+        //  echo "upload/" . $file["name"];
+        //} else {
+            $saveName=time().rand(1, 1000);
+            $suffix = pathinfo( $file["name"], PATHINFO_EXTENSION);
+            move_uploaded_file($file["tmp_name"],
+            "upload/" . $saveName.".".$suffix);
+          echo "upload/" . $saveName.".".$suffix;
+        //}echo ;
       }
     } else {
       echo "Invalid file";

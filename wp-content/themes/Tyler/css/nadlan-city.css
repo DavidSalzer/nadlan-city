@@ -665,6 +665,7 @@ select, input[type=number] {
 .sessions.list .session .speaker {
     float: right;
     padding: 0 1px 0 16px;
+    width: 30%;
 }
 
 .sessions.list .session .speaker img {
@@ -676,6 +677,7 @@ filter: gray; filter: grayscale(100%);
 
 .sessions.list .session .speaker .name {
     margin: 0 62px 0 0px;
+    text-align: right;
 }
 
 .sessions .session .more i {
